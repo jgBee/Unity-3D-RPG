@@ -124,4 +124,10 @@ public class QuestManager : SingleTon<QuestManager>
 	{
 		questListData[_questNumber].SetRewardImage(ref _rewardImage, ref _text);
 	}
+
+
+	public void RewardGivePlayer(int _questNumber)
+	{
+		questListData[_questNumber].RewardGivePlayer(_questNumber);
+	}
 }

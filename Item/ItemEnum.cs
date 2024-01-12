@@ -15,7 +15,7 @@ public class ItemEnum
 	};
 
 
-	public enum WEAPONINDEX : int
+	public enum WEAPONITEMINDEX : int
 	{
 	//	Start_1_ItemBase = 0,
 	
@@ -90,7 +90,7 @@ public class ItemEnum
 
 	}
 
-	public enum FOODINDEX : int
+	public enum FOODITEMINDEX : int
 	{
 		//Start_1_lItemBase = 0,
 		Star1_BaseMeat = 0,
@@ -136,7 +136,7 @@ public class ItemEnum
 		//Start_3_lItemBase = 4000000,
 	};
 
-	public enum GOODSINDEX : int
+	public enum GOODSITEMINDEX : int
 	{
 		//Start_1_lItemBase = 0,
 		//Start_2_lItemBase = 1000000,
@@ -149,12 +149,12 @@ public class ItemEnum
 		Weapon_LevelUp_Item_Base,
 	};
 
-	public enum READINDEX : int
+	public enum READITEMINDEX : int
 	{
 		Star1_1_OldPage = 0,
 	};
 
-	public enum SPECIALINDEX : int
+	public enum SPECIALITEMINDEX : int
 	{
 		Star5_TutorialClear = 5000000,
 	};

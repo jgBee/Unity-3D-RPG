@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using static ItemEnum;
 
-public class ContentsQuest : MonoBehaviour
+public class ContentsGoods : MonoBehaviour
 {
 	public GameObject prefabItem;
 
-	public List<ItemQuest> itemList;
+	public List<ItemGoods> itemList;
 
 
 	private int slotMax;
@@ -20,21 +20,21 @@ public class ContentsQuest : MonoBehaviour
 	{
 		slotMax = _maxSlot;
 		if (itemList == null)
-			itemList = new List<ItemQuest>();
+			itemList = new List<ItemGoods>();
 
 	}
 
-	public bool AddItem(SPECIALITEMINDEX _index)
+	public bool AddItem(GOODSITEMINDEX _index)
 	{
 		if (itemList == null) return false;
 
 		// 장비는 조건없이 추가
 		if (itemList.Count < slotMax)
 		{
-			ItemQuest obj = Instantiate(prefabItem).GetComponent<ItemQuest>();
+			ItemGoods obj = Instantiate(prefabItem).GetComponent<ItemGoods>();
 			obj.transform.parent = transform;
 			obj.Init(_index, createCount, delegate ()
-			{ selectNumber = obj.SlotNumber; if (info != null) info.ItemQuestView(ref obj); });
+			{ selectNumber = obj.SlotNumber; if (info != null) info.ItemGoodsView(ref obj); });
 			createCount++;
 			obj.transform.localScale = new Vector3(1, 1, 1);
 			itemList.Add(obj);
@@ -59,5 +59,4 @@ public class ContentsQuest : MonoBehaviour
 		//if (selectNumber == -1) return;
 		//_inData = itemList[selectNumber];
 	}
-
 }

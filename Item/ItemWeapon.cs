@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using TMPro;
 
 using static ItemEnum;
-using Unity.Burst.CompilerServices;
+
 
 public class ItemWeapon : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class ItemWeapon : MonoBehaviour
 	{
 		private int star;
 
-		private WEAPONINDEX index;
+		private WEAPONITEMINDEX index;
 
 		private int Level;
 		private int maxLevel;
@@ -37,7 +37,7 @@ public class ItemWeapon : MonoBehaviour
 
 	private int star;
 
-	[SerializeField]private WEAPONINDEX index;
+	[SerializeField]private WEAPONITEMINDEX index;
 
 	private int Level;
 	private int maxLevel;
@@ -89,7 +89,7 @@ public class ItemWeapon : MonoBehaviour
 	public bool Favorit { get { return bFavorit; } set { bFavorit = value; iconFavorit.gameObject.SetActive(bFavorit); } }
 
 	// 생성할 때
-	public void Init(WEAPONINDEX _index,int _slotNumber, UnityAction _selectAction)
+	public void Init(WEAPONITEMINDEX _index,int _slotNumber, UnityAction _selectAction)
 	{
 		index = _index;
 		slotNumber = _slotNumber;
@@ -98,7 +98,7 @@ public class ItemWeapon : MonoBehaviour
 
 		switch (_index)
 		{
-			case WEAPONINDEX.Star1_1_ItemSword:
+			case WEAPONITEMINDEX.Star1_1_ItemSword:
 				BaseDataInit(1);
 				mainName = "녹슨 검";
 				mainExplan = "정말 기본적인 검입니다.";
@@ -106,7 +106,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.None;
 				subOptionValue = 1;
 				break;
-			case WEAPONINDEX.Star1_2_ItemGreatSword:
+			case WEAPONITEMINDEX.Star1_2_ItemGreatSword:
 				BaseDataInit(1);
 				mainName = "녹슨 대검";
 				mainExplan = "정말 기본적인 대검입니다.";
@@ -114,7 +114,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.None;
 				subOptionValue = 1;
 				break;
-			case WEAPONINDEX.Star1_3_ItemSpear:
+			case WEAPONITEMINDEX.Star1_3_ItemSpear:
 				BaseDataInit(1);
 				mainName = "녹슨 창";
 				mainExplan = "정말 기본적인 창입니다.";
@@ -122,7 +122,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.None;
 				subOptionValue = 1;
 				break;
-			case WEAPONINDEX.Star1_4_ItemBow:
+			case WEAPONITEMINDEX.Star1_4_ItemBow:
 				BaseDataInit(1);
 				mainName = "녹슨 활";
 				mainExplan = "정말 기본적인 활입니다.";
@@ -131,7 +131,7 @@ public class ItemWeapon : MonoBehaviour
 				subOptionValue = 1;
 
 				break;
-			case WEAPONINDEX.Star1_5_ItemCatalyst:
+			case WEAPONITEMINDEX.Star1_5_ItemCatalyst:
 				BaseDataInit(1);
 				mainName = "녹슨 법구";
 				mainExplan = "정말 기본적인 법구입니다.";
@@ -140,7 +140,7 @@ public class ItemWeapon : MonoBehaviour
 				subOptionValue = 1;
 				
 				break;
-			case WEAPONINDEX.Star2_1_ItemSword:
+			case WEAPONITEMINDEX.Star2_1_ItemSword:
 				BaseDataInit(2);
 				mainName = "일반 검";
 				mainExplan = "기본 데미지가 1 추가됩니다.";
@@ -148,7 +148,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddDamage;
 				subOptionValue = 10;
 				break;
-			case WEAPONINDEX.Star2_2_ItemGreatSword:
+			case WEAPONITEMINDEX.Star2_2_ItemGreatSword:
 				BaseDataInit(2);
 				mainName = "일반 대검";
 				mainExplan = "기본 데미지가 1 추가됩니다.";
@@ -156,7 +156,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddDamage;
 				subOptionValue = 10;
 				break;
-			case WEAPONINDEX.Star2_3_ItemSpear:
+			case WEAPONITEMINDEX.Star2_3_ItemSpear:
 				BaseDataInit(2);
 				mainName = "일반 창";
 				mainExplan = "기본 데미지가 1 추가됩니다.";
@@ -164,7 +164,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddDamage;
 				subOptionValue = 10;
 				break;
-			case WEAPONINDEX.Star2_4_ItemBow:
+			case WEAPONITEMINDEX.Star2_4_ItemBow:
 				BaseDataInit(2);
 				mainName = "일반 활";
 				mainExplan = "기본 데미지가 1 추가됩니다.";
@@ -172,7 +172,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddDamage;
 				subOptionValue = 10;
 				break;
-			case WEAPONINDEX.Star2_5_ItemCatalyst:
+			case WEAPONITEMINDEX.Star2_5_ItemCatalyst:
 				BaseDataInit(2);
 				mainName = "일반 법구";
 				mainExplan = "기본 데미지가 1 추가됩니다.";
@@ -180,7 +180,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddDamage;
 				subOptionValue = 10;
 				break;
-			case WEAPONINDEX.Star3_1_ItemSword:
+			case WEAPONITEMINDEX.Star3_1_ItemSword:
 				BaseDataInit(3);
 				mainName = "멋진 검";
 				mainExplan = "무기의 공격력이 10 추가로 올라갑니다.";
@@ -188,7 +188,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackValue;
 				subOptionValue = 10 + Level;
 				break;
-			case WEAPONINDEX.Star3_2_ItemGreatSword:
+			case WEAPONITEMINDEX.Star3_2_ItemGreatSword:
 				BaseDataInit(3);
 				mainName = "멋진 대검";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -196,7 +196,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackValue;
 				subOptionValue = 10 + Level;
 				break;
-			case WEAPONINDEX.Star3_3_ItemSpear:
+			case WEAPONITEMINDEX.Star3_3_ItemSpear:
 				BaseDataInit(3);
 				mainName = "멋진 창";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -204,7 +204,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackValue;
 				subOptionValue = 10 + Level;
 				break;
-			case WEAPONINDEX.Star3_4_ItemBow:
+			case WEAPONITEMINDEX.Star3_4_ItemBow:
 				BaseDataInit(3);
 				mainName = "멋진 활";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -212,7 +212,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackValue;
 				subOptionValue = 10 + Level;
 				break;
-			case WEAPONINDEX.Star3_5_ItemCatalyst:
+			case WEAPONITEMINDEX.Star3_5_ItemCatalyst:
 				BaseDataInit(3);
 				mainName = "멋진 법구";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -220,7 +220,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackValue;
 				subOptionValue = 10 + Level;
 				break;
-			case WEAPONINDEX.Star4_1_ItemSword:
+			case WEAPONITEMINDEX.Star4_1_ItemSword:
 				BaseDataInit(4);
 				mainName = "멋진 검";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -228,7 +228,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackPercent;
 				subOptionValue = Level;
 				break;
-			case WEAPONINDEX.Star4_2_ItemGreatSword:
+			case WEAPONITEMINDEX.Star4_2_ItemGreatSword:
 				BaseDataInit(4);
 				mainName = "멋진 대검";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -236,7 +236,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackPercent;
 				subOptionValue = Level;
 				break;
-			case WEAPONINDEX.Star4_3_ItemSpear:
+			case WEAPONITEMINDEX.Star4_3_ItemSpear:
 				BaseDataInit(4);
 				mainName = "멋진 창";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -244,7 +244,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackPercent;
 				subOptionValue = Level;
 				break;
-			case WEAPONINDEX.Star4_4_ItemBow:
+			case WEAPONITEMINDEX.Star4_4_ItemBow:
 				BaseDataInit(4);
 				mainName = "멋진 활";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -252,7 +252,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.AddWeaponAttackPercent;
 				subOptionValue = Level;
 				break;
-			case WEAPONINDEX.Star4_5_ItemCatalyst:
+			case WEAPONITEMINDEX.Star4_5_ItemCatalyst:
 				BaseDataInit(4);
 				mainName = "멋진 법구";
 				mainExplan = "무기의 공격력의 % 추가 공격력을 얻습니다.";
@@ -261,7 +261,7 @@ public class ItemWeapon : MonoBehaviour
 				subOptionValue = Level;
 
 				break;
-			case WEAPONINDEX.Star5_1_ItemSword:
+			case WEAPONITEMINDEX.Star5_1_ItemSword:
 				BaseDataInit(5);
 				mainName = "화염 검";
 				mainExplan = "화속성 공격이 추가됩니다.";
@@ -269,7 +269,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.FireAttack;
 				subOptionValue = Level;
 				break;
-			case WEAPONINDEX.Star5_2_ItemGreatSword:
+			case WEAPONITEMINDEX.Star5_2_ItemGreatSword:
 				BaseDataInit(5);
 				mainName = "물 대검";
 				mainExplan = "수속성 공격이 추가됩니다.";
@@ -278,7 +278,7 @@ public class ItemWeapon : MonoBehaviour
 				subOptionValue = Level;
 
 				break;
-			case WEAPONINDEX.Star5_3_ItemSpear:
+			case WEAPONITEMINDEX.Star5_3_ItemSpear:
 				BaseDataInit(5);
 				mainName = "번개 창";
 				mainExplan = "번개속성 공격이 추가됩니다.";
@@ -286,7 +286,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.LightingAttack;
 				subOptionValue = Level;
 				break;
-			case WEAPONINDEX.Star5_4_ItemBow:
+			case WEAPONITEMINDEX.Star5_4_ItemBow:
 				BaseDataInit(5);
 				mainName = "풀 활";
 				mainExplan = "풀속성 공격이 추가됩니다.";
@@ -294,7 +294,7 @@ public class ItemWeapon : MonoBehaviour
 				subOption = WEAPON_OPTION.GrassAttack;
 				subOptionValue = Level;
 				break;
-			case WEAPONINDEX.Star5_5_ItemCatalyst:
+			case WEAPONITEMINDEX.Star5_5_ItemCatalyst:
 				BaseDataInit(5);
 				mainName = "얼음 법구";
 				mainExplan = "얼음속성 공격이 추가됩니다.";
@@ -464,32 +464,32 @@ public class ItemWeapon : MonoBehaviour
 	//	_expGauge = ExpPercent;
 	//}
 
-	public static WEAPONINDEX GetItemIndex(int _value)
+	public static WEAPONITEMINDEX GetItemIndex(int _value)
 	{
-		WEAPONINDEX index = WEAPONINDEX.Star1_1_ItemSword;
+		WEAPONITEMINDEX index = WEAPONITEMINDEX.Star1_1_ItemSword;
 		switch(_value)
 		{
 			case 0:
-				index = WEAPONINDEX.Star1_1_ItemSword;
+				index = WEAPONITEMINDEX.Star1_1_ItemSword;
 				break;
 			case 1:
-				index = WEAPONINDEX.Star1_2_ItemGreatSword;
+				index = WEAPONITEMINDEX.Star1_2_ItemGreatSword;
 				break;
 		}
 		return index;
 	}
 
-	public static WEAPONINDEX GetItemRandomIndex()
+	public static WEAPONITEMINDEX GetItemRandomIndex()
 	{
 		int min = 0;
 		int max = 2;
 		int randValue = UnityEngine.Random.Range(min, max);
 		switch (randValue)
 		{
-			case 0: return WEAPONINDEX.Star1_1_ItemSword;
-			case 1: return WEAPONINDEX.Star1_2_ItemGreatSword;
+			case 0: return WEAPONITEMINDEX.Star1_1_ItemSword;
+			case 1: return WEAPONITEMINDEX.Star1_2_ItemGreatSword;
 			default:
-				return WEAPONINDEX.Star1_1_ItemSword;
+				return WEAPONITEMINDEX.Star1_1_ItemSword;
 		}
 	}
 }

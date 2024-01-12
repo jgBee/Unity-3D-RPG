@@ -7,7 +7,7 @@ public class ContentsEquiptment : MonoBehaviour
 {
 	public GameObject prefabItem;
 
-	public List<ItemEquipment> equiptList;
+	public List<ItemEquipment> itemList;
 
 
 	private int slotMax;
@@ -19,17 +19,17 @@ public class ContentsEquiptment : MonoBehaviour
 	public void Init(int _maxSlot)
 	{
 		slotMax = _maxSlot;
-		if (equiptList == null)
-			equiptList = new List<ItemEquipment>();
+		if (itemList == null)
+			itemList = new List<ItemEquipment>();
 
 	}
 
 	public bool AddItem(EQUIPTMENTINDEX _index)
 	{
-		if (equiptList == null) return false;
+		if (itemList == null) return false;
 
 		// 장비는 조건없이 추가
-		if (equiptList.Count < slotMax)
+		if (itemList.Count < slotMax)
 		{
 			ItemEquipment obj = Instantiate(prefabItem).GetComponent<ItemEquipment>();
 			obj.transform.parent = transform;
@@ -37,7 +37,7 @@ public class ContentsEquiptment : MonoBehaviour
 			{ selectNumber = obj.SlotNumber; if (info != null) info.ItemEquiptView(ref obj); });
 			createCount++;
 			obj.transform.localScale = new Vector3(1, 1, 1);
-			equiptList.Add(obj);
+			itemList.Add(obj);
 
 			return true;
 		}
@@ -47,10 +47,6 @@ public class ContentsEquiptment : MonoBehaviour
 		}
 	}
 
-	private void ItemChange(int _select, int _slotNumber)
-	{
-		
-	}
 
 	public void SelectNull()
 	{
@@ -61,7 +57,7 @@ public class ContentsEquiptment : MonoBehaviour
 	{
 		Debug.Log(_inData.NameText + "\t" + _inData.SlotNumber);
 		if (selectNumber == -1) return;
-		_inData = equiptList[selectNumber];
+		_inData = itemList[selectNumber];
 	}
 
 }

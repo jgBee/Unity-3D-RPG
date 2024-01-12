@@ -69,6 +69,65 @@ public class ItemInfo : MonoBehaviour
 		subExplanDetail.text = _item.SubExplan;
 	}
 
+	public void ItemQuestView(ref ItemQuest _item)
+	{
+		if (gameObject.activeSelf == false)
+			Active(true);
+
+		if (_item == null) return;
+
+		//itemImage.sprite = _item.ItemSprite;
+		//starNumber.text = _item.Star.ToString();
+		//itemName.text = _item.NameText;
+		//mainExplanDetail.text = _item.MainExplan;
+		//subExplanDetail.text = _item.SubExplan;
+	}
+
+	public void ItemGoodsView(ref ItemGoods _item)
+	{
+		if (gameObject.activeSelf == false)
+			Active(true);
+
+		if (_item == null) return;
+
+
+
+		//itemImage.sprite = _item.ItemSprite;
+		//starNumber.text = _item.Star.ToString();
+		//itemName.text = _item.NameText;
+		//mainExplanDetail.text = _item.MainExplan;
+		//subExplanDetail.text = _item.SubExplan;
+
+	}
+
+	public void ItemReadView(ref ItemRead _item)
+	{
+		if (gameObject.activeSelf == false)
+			Active(true);
+
+		if (_item == null) return;
+
+		//itemImage.sprite = _item.ItemSprite;
+		//starNumber.text = _item.Star.ToString();
+		//itemName.text = _item.NameText;
+		//mainExplanDetail.text = _item.MainExplan;
+		//subExplanDetail.text = _item.SubExplan;
+	}
+
+	public void ItemSpecialView(ref ItemSpecial _item)
+	{
+		if (gameObject.activeSelf == false)
+			Active(true);
+
+		if (_item == null) return;
+
+		//itemImage.sprite = _item.ItemSprite;
+		//starNumber.text = _item.Star.ToString();
+		//itemName.text = _item.NameText;
+		//mainExplanDetail.text = _item.MainExplan;
+		//subExplanDetail.text = _item.SubExplan;
+	}
+
 	public void Close()
 	{
 		Active(false);

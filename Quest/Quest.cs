@@ -50,9 +50,9 @@ public class Quest : ScriptableObject
 	public int rewardGold;
 	public int rewardExp;
 
-	public List<ItemEnum.WEAPONINDEX> weaponList;
+	public List<ItemEnum.WEAPONITEMINDEX> weaponList;
 	public List<ItemEnum.EQUIPTMENTINDEX> equiptList;
-	public List<ItemEnum.FOODINDEX> foodList;
+	public List<ItemEnum.FOODITEMINDEX> foodList;
 
 	public void QuestStart()
 	{
@@ -179,5 +179,41 @@ public class Quest : ScriptableObject
 				currCount++;
 			}
 		}
+	}
+
+	public void RewardGivePlayer(int _questNumber)
+	{
+		// 플레이어 정보를 싱글톤으로 만든다면 수정해야함
+
+		Inventory.Instance.Jewel += rewardJewel;
+//		Inventory.Instance.Gold += rewardGold;
+		GameObject.Find("PlayerObject").GetComponent<MainGirlScrpit>().GetExpGold(rewardExp,rewardGold);
+
+		if (weaponList != null)
+		{
+			foreach (var item in weaponList)
+			{
+				Inventory.Instance.WeaponItemIn(item);
+			}
+		}
+
+		// 3-2 방어구
+		if (equiptList != null)
+		{
+			foreach (var item in equiptList)
+			{
+				Inventory.Instance.EquiptItemIn(item);
+			}
+		}
+
+		// 3-3 먹을 것들
+		if (foodList != null)
+		{
+			foreach (var item in foodList)
+			{
+				Inventory.Instance.FoodItemIn(item);
+			}
+		}
+
 	}
 }

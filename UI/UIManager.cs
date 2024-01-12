@@ -204,7 +204,7 @@ public class UIManager : SingleTon<UIManager>
 	public void QuestInfoOkOnly(int _questNumber, UnityAction _okAction)
 	{
 		bUIOn = true;
-		questInfoPanel.Init(_questNumber, true, delegate () { QuestManager.Instance.QuestClear(_questNumber); if (_okAction != null) _okAction(); bUIOn = false; fieldButtonQuest.OnNotify(); }, delegate () { bUIOn = false; }, delegate () { bUIOn = false; });
+		questInfoPanel.Init(_questNumber, true, delegate () { if (_okAction != null) _okAction(); bUIOn = false; fieldButtonQuest.OnNotify(); }, delegate () { bUIOn = false; }, delegate () { bUIOn = false; });
 	}
 	#endregion
 

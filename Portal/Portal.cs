@@ -50,7 +50,7 @@ public class Portal : MonoBehaviour
 
 					target.transform.position = moveTR.position;
 					Camera.main.transform.position = moveTR.position;
-
+					SoundManager.Instance.PlayPortalSoundEffect();
 					state = 0;
 				}
 

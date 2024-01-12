@@ -45,58 +45,58 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetWeapon(WEAPONINDEX _index)
+	public Sprite GetWeapon(WEAPONITEMINDEX _index)
 	{
 		switch (_index)
 		{
-			case WEAPONINDEX.Star1_1_ItemSword: return WeaponItem[0];
-			case WEAPONINDEX.Star1_2_ItemGreatSword: return WeaponItem[1];
+			case WEAPONITEMINDEX.Star1_1_ItemSword: return WeaponItem[0];
+			case WEAPONITEMINDEX.Star1_2_ItemGreatSword: return WeaponItem[1];
 
-				//case WEAPONINDEX.Star1_3_ItemSpear:
+				//case WEAPONITEMINDEX.Star1_3_ItemSpear:
 				//	break;
-				//case WEAPONINDEX.Star1_4_ItemBow:
+				//case WEAPONITEMINDEX.Star1_4_ItemBow:
 				//	break;
-				//case WEAPONINDEX.Star1_5_ItemCatalyst:
+				//case WEAPONITEMINDEX.Star1_5_ItemCatalyst:
 				//	break;
-				//case WEAPONINDEX.Star2_1_ItemSword:
+				//case WEAPONITEMINDEX.Star2_1_ItemSword:
 				//	break;
-				//case WEAPONINDEX.Star2_2_ItemGreatSword:
+				//case WEAPONITEMINDEX.Star2_2_ItemGreatSword:
 				//	break;
-				//case WEAPONINDEX.Star2_3_ItemSpear:
+				//case WEAPONITEMINDEX.Star2_3_ItemSpear:
 				//	break;
-				//case WEAPONINDEX.Star2_4_ItemBow:
+				//case WEAPONITEMINDEX.Star2_4_ItemBow:
 				//	break;
-				//case WEAPONINDEX.Star2_5_ItemCatalyst:
+				//case WEAPONITEMINDEX.Star2_5_ItemCatalyst:
 				//	break;
-				//case WEAPONINDEX.Star3_1_ItemSword:
+				//case WEAPONITEMINDEX.Star3_1_ItemSword:
 				//	break;
-				//case WEAPONINDEX.Star3_2_ItemGreatSword:
+				//case WEAPONITEMINDEX.Star3_2_ItemGreatSword:
 				//	break;
-				//case WEAPONINDEX.Star3_3_ItemSpear:
+				//case WEAPONITEMINDEX.Star3_3_ItemSpear:
 				//	break;
-				//case WEAPONINDEX.Star3_4_ItemBow:
+				//case WEAPONITEMINDEX.Star3_4_ItemBow:
 				//	break;
-				//case WEAPONINDEX.Star3_5_ItemCatalyst:
+				//case WEAPONITEMINDEX.Star3_5_ItemCatalyst:
 				//	break;
-				//case WEAPONINDEX.Star4_1_ItemSword:
+				//case WEAPONITEMINDEX.Star4_1_ItemSword:
 				//	break;
-				//case WEAPONINDEX.Star4_2_ItemGreatSword:
+				//case WEAPONITEMINDEX.Star4_2_ItemGreatSword:
 				//	break;
-				//case WEAPONINDEX.Star4_3_ItemSpear:
+				//case WEAPONITEMINDEX.Star4_3_ItemSpear:
 				//	break;
-				//case WEAPONINDEX.Star4_4_ItemBow:
+				//case WEAPONITEMINDEX.Star4_4_ItemBow:
 				//	break;
-				//case WEAPONINDEX.Star4_5_ItemCatalyst:
+				//case WEAPONITEMINDEX.Star4_5_ItemCatalyst:
 				//	break;
-				//case WEAPONINDEX.Star5_1_ItemSword:
+				//case WEAPONITEMINDEX.Star5_1_ItemSword:
 				//	break;
-				//case WEAPONINDEX.Star5_2_ItemGreatSword:
+				//case WEAPONITEMINDEX.Star5_2_ItemGreatSword:
 				//	break;
-				//case WEAPONINDEX.Star5_3_ItemSpear:
+				//case WEAPONITEMINDEX.Star5_3_ItemSpear:
 				//	break;
-				//case WEAPONINDEX.Star5_4_ItemBow:
+				//case WEAPONITEMINDEX.Star5_4_ItemBow:
 				//	break;
-				//case WEAPONINDEX.Star5_5_ItemCatalyst:
+				//case WEAPONITEMINDEX.Star5_5_ItemCatalyst:
 				//	break;
 		}
 		return null;
@@ -118,21 +118,21 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetFood(FOODINDEX _index)
+	public Sprite GetFood(FOODITEMINDEX _index)
 	{
 		switch (_index)
 		{
-			case FOODINDEX.Star1_BaseMeat: return foodItem[0];
-			case FOODINDEX.Star1_BaseWater: return foodItem[1];
-				//case FOODINDEX.Star1_H_CookMeat:
+			case FOODITEMINDEX.Star1_BaseMeat: return foodItem[0];
+			case FOODITEMINDEX.Star1_BaseWater: return foodItem[1];
+				//case FOODITEMINDEX.Star1_H_CookMeat:
 				//	break;
-				//case FOODINDEX.Star1_R_CornSoup:
+				//case FOODITEMINDEX.Star1_R_CornSoup:
 				//	break;
-				//case FOODINDEX.Star1_AB_EnergyBar:
+				//case FOODITEMINDEX.Star1_AB_EnergyBar:
 				//	break;
-				//case FOODINDEX.Star1_SB_CanFood:
+				//case FOODITEMINDEX.Star1_SB_CanFood:
 				//	break;
-				//case FOODINDEX.Star1_LB_S_SportDrink:
+				//case FOODITEMINDEX.Star1_LB_S_SportDrink:
 				//	break;
 				//default:
 				//	break;
@@ -152,19 +152,19 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetGoods(GOODSINDEX _index)
+	public Sprite GetGoods(GOODSITEMINDEX _index)
 	{
 		switch (_index)
 		{
-			case GOODSINDEX.Crystal: 
+			case GOODSITEMINDEX.Crystal: 
 				return goodsItem[0];
-			case GOODSINDEX.Special_Ticket:
+			case GOODSITEMINDEX.Special_Ticket:
 				return goodsItem[1];
-			case GOODSINDEX.Normal_Ticket:
+			case GOODSITEMINDEX.Normal_Ticket:
 				return goodsItem[2];
-			case GOODSINDEX.Character_LevelUp_Item_Base:
+			case GOODSITEMINDEX.Character_LevelUp_Item_Base:
 				break;
-			case GOODSINDEX.Weapon_LevelUp_Item_Base:
+			case GOODSITEMINDEX.Weapon_LevelUp_Item_Base:
 				break;
 			default:
 				break;
@@ -173,11 +173,11 @@ public class ItemImage : SingleTon<ItemImage>
 	}
 
 
-	public Sprite GetRead(READINDEX _index)
+	public Sprite GetRead(READITEMINDEX _index)
 	{
 		switch (_index)
 		{
-			case READINDEX.Star1_1_OldPage:
+			case READITEMINDEX.Star1_1_OldPage:
 				return readItem[0];
 
 			default:
@@ -186,11 +186,11 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetSpecial(SPECIALINDEX _index)
+	public Sprite GetSpecial(SPECIALITEMINDEX _index)
 	{
 		switch (_index)
 		{
-			case SPECIALINDEX.Star5_TutorialClear: 
+			case SPECIALITEMINDEX.Star5_TutorialClear: 
 				return specialItem[0];
 
 			default:

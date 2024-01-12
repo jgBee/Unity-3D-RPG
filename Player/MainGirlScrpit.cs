@@ -206,8 +206,6 @@ public class MainGirlScrpit : MonoBehaviour
 
 	private void Update()
 	{
-		//if( state == STATE.DrawWeaponIn || state == STATE.DrawWeaponUpdate || state == STATE.DrawWeaponOut ||
-		//state == STATE.SheathIn ||  state == STATE.SheathUpdate ||  state == STATE.SheathOut ) return;
 		if (bBarUpdate)
 		{
 			bBarUpdate = false;
@@ -215,6 +213,14 @@ public class MainGirlScrpit : MonoBehaviour
 			UIManager.Instance.SetGold(Inventory.Instance.Gold);
 			UIManager.Instance.SetJewel(Inventory.Instance.Jewel);
 		}
+
+
+
+		if(AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact1]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact2]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.eSkill_Kick]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.qSkill_Casting]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.TwoSlash]) )
+		{
+			return;
+		}
+		
 		if (data.IsDead() == true) return;
 
 		data.ESkillUpdate();
@@ -231,6 +237,23 @@ public class MainGirlScrpit : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
 			UIManager.Instance.TestActiveJoystickAndActionButton(false);
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			Inventory.Instance.TestWeapon1();
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+		{
+			Inventory.Instance.TestEquip1();
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha5))
+		{
+			Inventory.Instance.TestFood1();
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha6))
+		{
+			Inventory.Instance.TestFood2();
 		}
 
 		if (Input.GetKeyDown(KeyCode.I))

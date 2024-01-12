@@ -9,62 +9,62 @@ public class ItemUI : MonoBehaviour
 	[SerializeField] private Image image;
 	[SerializeField] private TextMeshProUGUI itemName;
 
-	public void Init(WEAPONINDEX _index)
+	public void Init(WEAPONITEMINDEX _index)
 	{
 		image.sprite = ItemImage.Instance.GetWeapon(_index);
 		switch (_index)
 		{
-			case WEAPONINDEX.Star1_1_ItemSword:
+			case WEAPONITEMINDEX.Star1_1_ItemSword:
 				itemName.text = "≥ÏΩº ∞À";
 				break;
-			case WEAPONINDEX.Star1_2_ItemGreatSword:
+			case WEAPONITEMINDEX.Star1_2_ItemGreatSword:
 				itemName.text = "≥ÏΩº ¥Î∞À";
 				break;
-			//case WEAPONINDEX.Star1_3_ItemSpear:
+			//case WEAPONITEMINDEX.Star1_3_ItemSpear:
 			//	break;
-			//case WEAPONINDEX.Star1_4_ItemBow:
+			//case WEAPONITEMINDEX.Star1_4_ItemBow:
 			//	break;
-			//case WEAPONINDEX.Star1_5_ItemCatalyst:
+			//case WEAPONITEMINDEX.Star1_5_ItemCatalyst:
 			//	break;
-			//case WEAPONINDEX.Star2_1_ItemSword:
+			//case WEAPONITEMINDEX.Star2_1_ItemSword:
 			//	break;
-			//case WEAPONINDEX.Star2_2_ItemGreatSword:
+			//case WEAPONITEMINDEX.Star2_2_ItemGreatSword:
 			//	break;
-			//case WEAPONINDEX.Star2_3_ItemSpear:
+			//case WEAPONITEMINDEX.Star2_3_ItemSpear:
 			//	break;
-			//case WEAPONINDEX.Star2_4_ItemBow:
+			//case WEAPONITEMINDEX.Star2_4_ItemBow:
 			//	break;
-			//case WEAPONINDEX.Star2_5_ItemCatalyst:
+			//case WEAPONITEMINDEX.Star2_5_ItemCatalyst:
 			//	break;
-			//case WEAPONINDEX.Star3_1_ItemSword:
+			//case WEAPONITEMINDEX.Star3_1_ItemSword:
 			//	break;
-			//case WEAPONINDEX.Star3_2_ItemGreatSword:
+			//case WEAPONITEMINDEX.Star3_2_ItemGreatSword:
 			//	break;
-			//case WEAPONINDEX.Star3_3_ItemSpear:
+			//case WEAPONITEMINDEX.Star3_3_ItemSpear:
 			//	break;
-			//case WEAPONINDEX.Star3_4_ItemBow:
+			//case WEAPONITEMINDEX.Star3_4_ItemBow:
 			//	break;
-			//case WEAPONINDEX.Star3_5_ItemCatalyst:
+			//case WEAPONITEMINDEX.Star3_5_ItemCatalyst:
 			//	break;
-			//case WEAPONINDEX.Star4_1_ItemSword:
+			//case WEAPONITEMINDEX.Star4_1_ItemSword:
 			//	break;
-			//case WEAPONINDEX.Star4_2_ItemGreatSword:
+			//case WEAPONITEMINDEX.Star4_2_ItemGreatSword:
 			//	break;
-			//case WEAPONINDEX.Star4_3_ItemSpear:
+			//case WEAPONITEMINDEX.Star4_3_ItemSpear:
 			//	break;
-			//case WEAPONINDEX.Star4_4_ItemBow:
+			//case WEAPONITEMINDEX.Star4_4_ItemBow:
 			//	break;
-			//case WEAPONINDEX.Star4_5_ItemCatalyst:
+			//case WEAPONITEMINDEX.Star4_5_ItemCatalyst:
 			//	break;
-			//case WEAPONINDEX.Star5_1_ItemSword:
+			//case WEAPONITEMINDEX.Star5_1_ItemSword:
 			//	break;
-			//case WEAPONINDEX.Star5_2_ItemGreatSword:
+			//case WEAPONITEMINDEX.Star5_2_ItemGreatSword:
 			//	break;
-			//case WEAPONINDEX.Star5_3_ItemSpear:
+			//case WEAPONITEMINDEX.Star5_3_ItemSpear:
 			//	break;
-			//case WEAPONINDEX.Star5_4_ItemBow:
+			//case WEAPONITEMINDEX.Star5_4_ItemBow:
 			//	break;
-			//case WEAPONINDEX.Star5_5_ItemCatalyst:
+			//case WEAPONITEMINDEX.Star5_5_ItemCatalyst:
 			//	break;
 			default:
 				break;
@@ -93,26 +93,26 @@ public class ItemUI : MonoBehaviour
 		}
 	}
 
-	public void Init(FOODINDEX _index)
+	public void Init(FOODITEMINDEX _index)
 	{
 		image.sprite = ItemImage.Instance.GetFood(_index);
 		switch (_index)
 		{
-			case FOODINDEX.Star1_BaseMeat:
+			case FOODITEMINDEX.Star1_BaseMeat:
 				itemName.text = "∞Ì±‚¡∂∞¢";
 				break;
-			case FOODINDEX.Star1_BaseWater:
+			case FOODITEMINDEX.Star1_BaseWater:
 				itemName.text = "π∞";
 				break;
-			//case FOODINDEX.Star1_H_CookMeat:
+			//case FOODITEMINDEX.Star1_H_CookMeat:
 			//	break;
-			//case FOODINDEX.Star1_R_CornSoup:
+			//case FOODITEMINDEX.Star1_R_CornSoup:
 			//	break;
-			//case FOODINDEX.Star1_AB_EnergyBar:
+			//case FOODITEMINDEX.Star1_AB_EnergyBar:
 			//	break;
-			//case FOODINDEX.Star1_SB_CanFood:
+			//case FOODITEMINDEX.Star1_SB_CanFood:
 			//	break;
-			//case FOODINDEX.Star1_LB_S_SportDrink:
+			//case FOODITEMINDEX.Star1_LB_S_SportDrink:
 			//	break;
 			default:
 				break;

@@ -7,7 +7,7 @@ public class ContentsWeapon : MonoBehaviour
 {
 	public GameObject prefabItemWeapon;
 
-	public List<ItemWeapon> weaponList;
+	public List<ItemWeapon> itemList;
 
 	public ItemInfo info;
 
@@ -20,24 +20,24 @@ public class ContentsWeapon : MonoBehaviour
 	public void Init(int _maxSlot)
 	{
 		slotMax = _maxSlot;
-		if (weaponList == null)
-			weaponList = new List<ItemWeapon>();
+		if (itemList == null)
+			itemList = new List<ItemWeapon>();
 
 	}
 
-	public bool AddItem(WEAPONINDEX _index)
+	public bool AddItem(WEAPONITEMINDEX _index)
 	{
-		if (weaponList == null) return false;
+		if (itemList == null) return false;
 
 		// 장비는 조건없이 추가
-		if (weaponList.Count < slotMax)
+		if (itemList.Count < slotMax)
 		{
 			ItemWeapon obj = Instantiate(prefabItemWeapon).GetComponent<ItemWeapon>();
 			obj.transform.parent = transform;
 			obj.Init(_index, createCount, delegate () { selectNumber = obj.SlotNumber; if (info != null) info.ItemWeaponView(ref obj); });
 			createCount++;
 			obj.transform.localScale = new Vector3(1, 1, 1);
-			weaponList.Add(obj);
+			itemList.Add(obj);
 
 			return true;
 		}

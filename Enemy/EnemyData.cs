@@ -51,6 +51,12 @@ public class EnemyData : MonoBehaviour
 		ChangeEnemy(ENEMYCHARINDEX.Char_B_SpearMan, 1);
 	}
 
+	public void HPReset()
+	{
+		HP = HPMax;
+	}
+
+
 	public void ChangeEnemy(ENEMYCHARINDEX _index, int _level)
 	{
 		switch (_index)

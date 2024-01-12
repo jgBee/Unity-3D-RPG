@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static ItemEnum;
 
-public class ContentsQuest : MonoBehaviour
+public class ContentsSpecial : MonoBehaviour
 {
 	public GameObject prefabItem;
 
@@ -59,5 +59,4 @@ public class ContentsQuest : MonoBehaviour
 		//if (selectNumber == -1) return;
 		//_inData = itemList[selectNumber];
 	}
-
 }

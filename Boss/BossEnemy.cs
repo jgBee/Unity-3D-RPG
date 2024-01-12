@@ -77,8 +77,6 @@ public class BossEnemy : MonoBehaviour
 
 	[SerializeField] private int attackCount;
 	[SerializeField] private float currentTime, stateMaxTime;
-	[SerializeField] private float currentSkillTime1, maxSkillTime1;
-	[SerializeField] private float currentSkillTime2, maxSkillTime2;
 	[SerializeField] private float finalSpeed;
 
 	[SerializeField] private GameObject targetObject;
@@ -91,6 +89,10 @@ public class BossEnemy : MonoBehaviour
 	[SerializeField] private float skill2Delay;
 
 	private bool bGroggy = false;
+
+	[SerializeField] private int bossAttackDmg;
+	[SerializeField] private int bossSkill1Dmg;
+	[SerializeField] private int bossSkill2Dmg;
 
 	public void SetTarget(GameObject _obj) { targetObject = _obj; }
 
@@ -128,7 +130,6 @@ public class BossEnemy : MonoBehaviour
 
 		state = ANISTATE.IdleIn;
 
-		currentSkillTime1 = currentSkillTime2 = 0.0f;
 
 	}
 
@@ -148,16 +149,6 @@ public class BossEnemy : MonoBehaviour
 			}
 		}
 
-		if (currentSkillTime1 >= 0.0f)
-		{
-			currentSkillTime1 -= Time.deltaTime;
-		}
-
-
-		if (currentSkillTime2 >= 0.0f)
-		{
-			currentSkillTime2 -= Time.deltaTime;
-		}
 
 		switch (state)
 		{
@@ -317,6 +308,7 @@ public class BossEnemy : MonoBehaviour
 				}
 				else
 				{
+				SoundManager.Instance.PlayBossSoundEffect(1);
 					state = ANISTATE.AttackUpdate;
 
 					currentTime = 0.0f;
@@ -332,7 +324,7 @@ public class BossEnemy : MonoBehaviour
 
 					if (targetObject)
 					{
-						weapon.CreateBullet(5, bulletPos.position, targetObject.transform.position);
+						weapon.CreateBullet(bossAttackDmg, bulletPos.position, targetObject.transform.position);
 						//Destroy(Instantiate(prefabAttack, targetObject.transform.position, Quaternion.identity), 1.0f);
 					}
 				}
@@ -346,14 +338,10 @@ public class BossEnemy : MonoBehaviour
 				}
 				break;
 			case ANISTATE.Skill1In:
-				if( currentSkillTime1 >= 0.0f)
-				{
-					state = ANISTATE.IdleIn;
-					return;
-				}
 
 				ani.Play("Magic Area Attack 01", 0, 0);
-		
+				SoundManager.Instance.PlayBossSoundEffect(2);
+
 				currentTime = 0;
 				stateMaxTime = skill1Delay;
 				state = ANISTATE.Skill1Update;
@@ -365,9 +353,8 @@ public class BossEnemy : MonoBehaviour
 
 					if (targetObject)
 					{
-						currentSkillTime1 = maxSkillTime1;
 						//Destroy(Instantiate(prefabSkill1, targetObject.transform.position, Quaternion.identity), 1.0f);
-						Instantiate(prefabSkill1, targetObject.transform.position, Quaternion.identity).GetComponent<BossSkill1AreaCollider>().StartSkill(10,4,1.0f);
+						Instantiate(prefabSkill1, targetObject.transform.position, Quaternion.identity).GetComponent<BossSkill1AreaCollider>().StartSkill(bossSkill1Dmg, 4,1.0f);
 					}
 				}
 				else
@@ -381,19 +368,12 @@ public class BossEnemy : MonoBehaviour
 				break;
 			case ANISTATE.Skill2In:
 
-				if (currentSkillTime2 >= 0.0f)
-				{
-					state = ANISTATE.IdleIn;
-					return;
-				}
-
-				currentSkillTime2 = maxSkillTime2;
-
 
 				ani.Play("Magic Attack 01", 0, 0);
 				currentTime = 0;
 				stateMaxTime = skill2Delay;
 
+				SoundManager.Instance.PlayBossSoundEffect(3);
 				state = ANISTATE.Skill2Update;
 				break;
 			case ANISTATE.Skill2Update:
@@ -404,9 +384,8 @@ public class BossEnemy : MonoBehaviour
 
 					if (targetObject)
 					{
-						currentSkillTime2 = maxSkillTime2;
 						//Destroy(Instantiate(prefabSkill1, targetObject.transform.position, Quaternion.identity), 1.0f);
-						Instantiate(prefabSkill2, targetObject.transform.position, Quaternion.identity).GetComponent<BossSkill1AreaCollider>().StartSkill(5, 8, 0.5f);
+						Instantiate(prefabSkill2, targetObject.transform.position, Quaternion.identity).GetComponent<BossSkill1AreaCollider>().StartSkill(bossSkill2Dmg, 8, 0.5f);
 					}
 				}
 				else
@@ -427,7 +406,8 @@ public class BossEnemy : MonoBehaviour
 				currentTime = 0;
 				stateMaxTime = 5.0f;
 				state = ANISTATE.DieUpdate;
-
+				SoundManager.Instance.PlayBossSoundEffect(0);
+				QuestManager.Instance.AddValue(2, 1);
 				break;
 			case ANISTATE.DieUpdate:
 				if (currentTime >= stateMaxTime)
@@ -438,7 +418,7 @@ public class BossEnemy : MonoBehaviour
 					currentTime += Time.deltaTime;
 				break;
 			case ANISTATE.DieOut:
-				UIManager.Instance.QuestInfoOkOnly(2,null);
+				UIManager.Instance.QuestInfoOkOnly(2, null);
 				Destroy(gameObject);
 				break;
 			case ANISTATE.GroggyIn:
@@ -484,19 +464,12 @@ public class BossEnemy : MonoBehaviour
 	}
 
 
-	private void ResetEndPos()
+	public void ResetEndPos()
 	{
-		Vector3 addPos = Vector3.zero;
-		while (true)
-		{
-			if (Vector3.Distance(startPos + addPos, startPos) < 1.0f)
-			{
-				endPos = transform.position + addPos;
-				moveDir = (endPos - transform.position).normalized;
-				return;
-			}
-			transform.LookAt(endPos);
-		}
+		transform.position = startPos;
+		data.HPReset();
+		UIManager.Instance.SetBossBar(1f, data.HP, data.HPMax);
+		gameObject.SetActive(false);
 	}
 
 	public void ImpactDamage(int _dmg)

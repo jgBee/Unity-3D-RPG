@@ -72,7 +72,7 @@ public class Inventory : SingleTon<Inventory>
 		rightItemList.Init(itemWeaponMax,itemEquiptmentMax,itemFoodMax);
 	}
 
-	public bool WeaponItemIn(WEAPONINDEX _index)
+	public bool WeaponItemIn(WEAPONITEMINDEX _index)
 	{
 		return rightItemList.WeaponItemAdd(_index);
 	}
@@ -82,7 +82,7 @@ public class Inventory : SingleTon<Inventory>
 		return rightItemList.EquiptItemAdd(_index);
 	}
 
-	public bool FoodItemIn(FOODINDEX _index, int _addValue = 1)
+	public bool FoodItemIn(FOODITEMINDEX _index, int _addValue = 1)
 	{
 		return rightItemList.FoodItemAdd(_index, _addValue);
 	}
@@ -92,17 +92,17 @@ public class Inventory : SingleTon<Inventory>
 
 	}
 
-	public void GoodsItemIn(GOODSINDEX _index)
+	public void GoodsItemIn(GOODSITEMINDEX _index)
 	{
 
 	}
 
-	public void ReadItemIn(READINDEX _index)
+	public void ReadItemIn(READITEMINDEX _index)
 	{
 
 	}
 
-	public void SpecialItemIn(SPECIALINDEX _index)
+	public void SpecialItemIn(SPECIALITEMINDEX _index)
 	{
 
 	}
@@ -126,12 +126,12 @@ public class Inventory : SingleTon<Inventory>
 	#region Test
 	public void TestWeapon1()
 	{
-		WEAPONINDEX randIndex = WEAPONINDEX.Star1_1_ItemSword;
+		WEAPONITEMINDEX randIndex = WEAPONITEMINDEX.Star1_1_ItemSword;
 		rightItemList.WeaponItemAdd(randIndex);
 	}
 	public void TestWeapon2()
 	{
-		WEAPONINDEX randIndex = WEAPONINDEX.Star1_2_ItemGreatSword;
+		WEAPONITEMINDEX randIndex = WEAPONITEMINDEX.Star1_2_ItemGreatSword;
 		rightItemList.WeaponItemAdd(randIndex);
 	}
 
@@ -149,14 +149,14 @@ public class Inventory : SingleTon<Inventory>
 
 	public void TestFood1()
 	{
-		FOODINDEX randIndex = FOODINDEX.Star1_BaseMeat;
+		FOODITEMINDEX randIndex = FOODITEMINDEX.Star1_BaseMeat;
 		rightItemList.FoodItemAdd(randIndex,1);
 	}
 
 
 	public void TestFood2()
 	{
-		FOODINDEX randIndex = FOODINDEX.Star1_BaseWater;
+		FOODITEMINDEX randIndex = FOODITEMINDEX.Star1_BaseWater;
 		rightItemList.FoodItemAdd(randIndex,1);
 	}
 	#endregion

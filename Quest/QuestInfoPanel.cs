@@ -23,6 +23,8 @@ public class QuestInfoPanel : MonoBehaviour
 	[SerializeField] private GameObject CancelBtn;
 	[SerializeField] private GameObject CloseBtn;
 
+	private int questNumber;
+
 	private void Awake()
 	{
 		title.text = "";
@@ -36,6 +38,7 @@ public class QuestInfoPanel : MonoBehaviour
 
 	public void Init(int _questNumber, bool _complete, UnityAction _okEvent, UnityAction _cancelEvent, UnityAction _closeEvent)
 	{
+		questNumber = _questNumber;
 		OKAction = _okEvent;
 		CancelAction = _cancelEvent;
 		CloseAction = _closeEvent;
@@ -50,12 +53,14 @@ public class QuestInfoPanel : MonoBehaviour
 			okBtn.text = "Complete";
 			okBtnImage.sprite = buttonSpr[1];
 			detail.text = QuestManager.Instance.GetQuestClearText(_questNumber);
+			SoundManager.Instance.PlayButtonSoundEffect(1);
 		}
 		else
 		{
 			okBtn.text = "Ok";
 			okBtnImage.sprite = buttonSpr[0];
 			detail.text = QuestManager.Instance.GetQuestDetail(_questNumber);
+			SoundManager.Instance.PlayButtonSoundEffect(0);
 		}
 
 		RefeshRewardIconAndText(_questNumber);
@@ -67,6 +72,7 @@ public class QuestInfoPanel : MonoBehaviour
 
 	public void InitOkButtonOnly(int _questNumber, bool _complete, UnityAction _okEvent)
 	{
+		questNumber = _questNumber;
 		OKAction = _okEvent;
 		CancelAction = null;
 		CloseAction = null;
@@ -81,12 +87,14 @@ public class QuestInfoPanel : MonoBehaviour
 			okBtn.text = "Complete";
 			okBtnImage.sprite = buttonSpr[1];
 			detail.text = QuestManager.Instance.GetQuestClearText(_questNumber);
+			SoundManager.Instance.PlayButtonSoundEffect(1);
 		}
 		else
 		{
 			okBtn.text = "Ok";
 			okBtnImage.sprite = buttonSpr[0];
 			detail.text = QuestManager.Instance.GetQuestDetail(_questNumber);
+			SoundManager.Instance.PlayButtonSoundEffect(0);
 		}
 
 		RefeshRewardIconAndText(_questNumber);
@@ -108,8 +116,9 @@ public class QuestInfoPanel : MonoBehaviour
 		if (OKAction != null)
 		{
 			OKAction();
-			Active(false);
 		}
+		QuestManager.Instance.RewardGivePlayer(questNumber);
+		Active(false);
 	}
 
 	public void Cancel()

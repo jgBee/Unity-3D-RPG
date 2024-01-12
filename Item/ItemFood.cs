@@ -4,26 +4,25 @@ using UnityEngine.Events;
 using TMPro;
 
 using static ItemEnum;
-using System;
 
 [System.Serializable]
-public class FoodData
-{
-	public int star;
-	public int value;
-	public string mainName;
-	public FOODINDEX index;
-	public FOODTYPE type;
-	
-	public int count;
-	public int countMax;
 
-	public float foodTimer;
-}
 
 public class ItemFood : MonoBehaviour
 {
+	public class FoodData
+	{
+		public int star;
+		public int value;
+		public string mainName;
+		public FOODITEMINDEX index;
+		public FOODTYPE type;
 
+		public int count;
+		public int countMax;
+
+		public float foodTimer;
+	}
 	[SerializeField]private FoodData data;
 
 	[SerializeField]private string mainExplan;
@@ -49,7 +48,7 @@ public class ItemFood : MonoBehaviour
 
 
 
-	public void Init(FOODINDEX _index, int _slotNumber, UnityAction _selectAction)
+	public void Init(FOODITEMINDEX _index, int _slotNumber, UnityAction _selectAction)
 	{
 		if (data == null) data = new FoodData();
 		data.index = _index;
@@ -58,7 +57,7 @@ public class ItemFood : MonoBehaviour
 		itemImage.sprite = ItemImage.Instance.GetFood(_index);
 		switch (_index)
 		{
-			case FOODINDEX.Star1_BaseMeat:
+			case FOODITEMINDEX.Star1_BaseMeat:
 				data.count = 1;
 				data.countMax = 5;
 				data.star = 1;
@@ -70,7 +69,7 @@ public class ItemFood : MonoBehaviour
 				mainExplan = "체력을 10 회복합니다.";
 				subExplan = "어디에서 떨어진 고기 조각이다";
 				break;
-			case FOODINDEX.Star1_BaseWater:
+			case FOODITEMINDEX.Star1_BaseWater:
 				data.count = 1;
 				data.countMax = 5;
 				data.star = 1;
@@ -81,7 +80,7 @@ public class ItemFood : MonoBehaviour
 				mainExplan = "마력을 10 회복합니다.";
 				subExplan = "있잖아요 그거";
 				break;
-			case FOODINDEX.Star1_H_CookMeat:
+			case FOODITEMINDEX.Star1_H_CookMeat:
 				data.count = 1;
 				data.countMax = 5;
 				data.star = 1;
@@ -93,7 +92,7 @@ public class ItemFood : MonoBehaviour
 				mainExplan = "체력을 30 회복한다";
 				subExplan = "충분히 익힌 고기다";
 				break;
-			case FOODINDEX.Star1_R_CornSoup:
+			case FOODITEMINDEX.Star1_R_CornSoup:
 				data.count = 1;
 				data.countMax = 5;
 				data.star = 1;
@@ -104,7 +103,7 @@ public class ItemFood : MonoBehaviour
 				mainExplan = "죽은 플레이어를 부활시키며, 부활 후 체력을 10 회복한다. \n사용 후 300초 동안 사용할 수 없다.\n 반드시 죽은 플레이어에게만 사용가능";
 				subExplan = "뜨거운 물에 옥수수를 넣어 오랜시간 끓인 스프";
 				break;
-			case FOODINDEX.Star1_AB_EnergyBar:
+			case FOODITEMINDEX.Star1_AB_EnergyBar:
 				data.count = 1;
 				data.countMax = 5;
 				data.star = 1;
@@ -117,7 +116,7 @@ public class ItemFood : MonoBehaviour
 				subExplan = "어디서 누가 만들었을까? 맛있는데 너무 적다";
 
 				break;
-			case FOODINDEX.Star1_SB_CanFood:
+			case FOODITEMINDEX.Star1_SB_CanFood:
 				data.count = 1;
 				data.countMax = 5;
 				data.star = 1;
@@ -130,7 +129,7 @@ public class ItemFood : MonoBehaviour
 				subExplan = "열고 있을 때 누가 안때리겠지?";
 
 				break;
-			case FOODINDEX.Star1_LB_S_SportDrink:
+			case FOODITEMINDEX.Star1_LB_S_SportDrink:
 				data.count = 1;
 				data.countMax = 5;
 				data.star = 1;
@@ -149,32 +148,32 @@ public class ItemFood : MonoBehaviour
 	}
 
 
-	public void ChangeImage(ref Sprite[] _itemImage, FOODINDEX _index)
+	public void ChangeImage(ref Sprite[] _itemImage, FOODITEMINDEX _index)
 	{
 		switch (_index)
 		{
-			case FOODINDEX.Star1_BaseMeat:
+			case FOODITEMINDEX.Star1_BaseMeat:
 				itemImage.sprite = _itemImage[0];
 				break;
-			case FOODINDEX.Star1_BaseWater:
+			case FOODITEMINDEX.Star1_BaseWater:
 				itemImage.sprite = _itemImage[1];
 				break;
-			//case FOODINDEX.Star1_H_CookMeat:
+			//case FOODITEMINDEX.Star1_H_CookMeat:
 			//	break;
-			//case FOODINDEX.Star1_R_CornSoup:
+			//case FOODITEMINDEX.Star1_R_CornSoup:
 			//	break;
-			//case FOODINDEX.Star1_AB_EnergyBar:
+			//case FOODITEMINDEX.Star1_AB_EnergyBar:
 			//	break;
-			//case FOODINDEX.Star1_SB_CanFood:
+			//case FOODITEMINDEX.Star1_SB_CanFood:
 			//	break;
-			//case FOODINDEX.Star1_LB_S_SportDrink:
+			//case FOODITEMINDEX.Star1_LB_S_SportDrink:
 			//	break;
 			//default:
 			//	break;
 		}
 	}
 
-	public FOODINDEX Type { get {return data.index; } }
+	public FOODITEMINDEX Type { get {return data.index; } }
 	public int Count { get { if (data != null) return data.count; else return -1; } 
 		set {
 			if (data != null) data.count = value;
@@ -208,28 +207,28 @@ public class ItemFood : MonoBehaviour
 	}
 
 
-	public static FOODINDEX GetItemIndex(int _value)
+	public static FOODITEMINDEX GetItemIndex(int _value)
 	{
 		switch (_value)
 		{
-			case 0: return FOODINDEX.Star1_BaseMeat;
-			case 1: return FOODINDEX.Star1_BaseWater;
+			case 0: return FOODITEMINDEX.Star1_BaseMeat;
+			case 1: return FOODITEMINDEX.Star1_BaseWater;
 			default:
-				return FOODINDEX.Star1_BaseMeat;
+				return FOODITEMINDEX.Star1_BaseMeat;
 		}
 	}
 
-	public static FOODINDEX GetItemRandomIndex()
+	public static FOODITEMINDEX GetItemRandomIndex()
 	{
 		int min = 0;
 		int max = 2;
 		int randValue = UnityEngine.Random.Range(min, max);
 		switch (randValue)
 		{
-			case 0: return FOODINDEX.Star1_BaseMeat;
-			case 1: return FOODINDEX.Star1_BaseWater;
+			case 0: return FOODITEMINDEX.Star1_BaseMeat;
+			case 1: return FOODITEMINDEX.Star1_BaseWater;
 			default:
-				return FOODINDEX.Star1_BaseMeat;
+				return FOODITEMINDEX.Star1_BaseMeat;
 		}
 	}
 }

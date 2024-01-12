@@ -20,9 +20,9 @@ public class ItemField : MonoBehaviour
 	GameObject canvas;
 
 	[SerializeField]ITEMINDEX itemIndex;
-	WEAPONINDEX weapon;
+	WEAPONITEMINDEX weapon;
 	EQUIPTMENTINDEX equipt;
-	FOODINDEX food;
+	FOODITEMINDEX food;
 
 	bool bDestroy = false;
 

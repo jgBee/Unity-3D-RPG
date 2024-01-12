@@ -61,7 +61,7 @@ public class InventoryRightItemList : MonoBehaviour
 		}
 		contents[1].SetActive(true);
 	}
-	public bool WeaponItemAdd(WEAPONINDEX _index)
+	public bool WeaponItemAdd(WEAPONITEMINDEX _index)
 	{
 		return contents[1].GetComponent<ContentsWeapon>().AddItem(_index);
 	}
@@ -114,7 +114,7 @@ public class InventoryRightItemList : MonoBehaviour
 		contents[3].SetActive(true);
 	}
 
-	public bool FoodItemAdd(FOODINDEX _index, int _addValue)
+	public bool FoodItemAdd(FOODITEMINDEX _index, int _addValue)
 	{
 		return contents[3].GetComponent<ContentsFood>().AddItem(_index, _addValue);
 	}
