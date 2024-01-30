@@ -3,52 +3,73 @@ using System.Collections.Generic;
 
 using static ItemEnum;
 
-public class ContentsWeapon : MonoBehaviour
+public class ContentsRead : MonoBehaviour
 {
-	public GameObject prefabItemWeapon;
+	public GameObject prefabIcon;
 
-	public List<ItemWeapon> itemList;
+	[SerializeField]private List<IconRead> iconList;
+	[SerializeField]private List<ItemRead> itemList;
 
 	public ItemInfo info;
 
 
-	private int slotMax;
-
-	[SerializeField] private int createCount = 0;
-	[SerializeField] private int selectNumber = -1;
-
-	public void Init(int _maxSlot)
+	public void Init(ref List<ItemRead> weaponList)
 	{
-		slotMax = _maxSlot;
-		if (itemList == null)
-			itemList = new List<ItemWeapon>();
+		itemList = weaponList;
+		if (iconList == null)
+			iconList = new List<IconRead>();
 
 	}
 
-	public bool AddItem(WEAPONITEMINDEX _index)
-	{
-		if (itemList == null) return false;
 
-		// 장비는 조건없이 추가
-		if (itemList.Count < slotMax)
+	public void Refresh()
+	{
+		int firstFor, secondFor = 0;
+
+		if (itemList.Count < iconList.Count)
 		{
-			ItemWeapon obj = Instantiate(prefabItemWeapon).GetComponent<ItemWeapon>();
-			obj.transform.parent = transform;
-			obj.Init(_index, createCount, delegate () { selectNumber = obj.SlotNumber; if (info != null) info.ItemWeaponView(ref obj); });
-			createCount++;
-			obj.transform.localScale = new Vector3(1, 1, 1);
-			itemList.Add(obj);
+			firstFor = itemList.Count;
+			secondFor = iconList.Count;
+			for (int i = 0; i < firstFor; i++)
+			{
+				iconList[i].Refresh(itemList[i]);
+			}
 
-			return true;
+			// 아이템 제거
+			for (int i = firstFor; i < secondFor; i++)
+			{
+				Destroy(iconList[i].gameObject);
+				iconList.RemoveAt(i);
+			}
 		}
-		else
+		else if (itemList.Count > iconList.Count)
 		{
-			return false;
+			firstFor = iconList.Count;
+			secondFor = itemList.Count;
+			for (int i = 0; i < firstFor; i++)
+			{
+				iconList[i].Refresh(itemList[i]);
+			}
+
+			// 아이템 생성
+			for (int i = firstFor; i < secondFor; i++)
+			{
+				Debug.Log("44 : " + " "+ (itemList[i] == null));
+				IconRead newicon = Instantiate(prefabIcon, transform).GetComponent<IconRead>();
+				newicon.transform.parent = transform;
+				newicon.Init(i, ref info);
+				newicon.Refresh(itemList[i]);
+				iconList.Add(newicon);
+			}
+		}
+		else //if(itemList.Count == iconList.Count)
+		{
+			firstFor = secondFor = iconList.Count;
+			for (int i = 0; i < firstFor; i++)
+			{
+				iconList[i].Refresh(itemList[i]);
+			}
 		}
 	}
 
-	public void SelectNull()
-	{
-		selectNumber = -1;
-	}
 }

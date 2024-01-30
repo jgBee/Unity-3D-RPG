@@ -1,12 +1,11 @@
-using TMPro;
 using UnityEngine;
 
 using static ItemEnum;
 
 public class ItemImage : SingleTon<ItemImage>
 {
-	[SerializeField] private Sprite[] WeaponItem;
-	[SerializeField] private Sprite[] equiptItem;
+	[SerializeField] private Sprite[] weaponItem;
+	[SerializeField] private Sprite[] equipItem;
 	[SerializeField] private Sprite[] foodItem;
 	[SerializeField] private Sprite[] questItem;
 	[SerializeField] private Sprite[] goodsItem;
@@ -16,14 +15,15 @@ public class ItemImage : SingleTon<ItemImage>
 
 	public Sprite GetItemImage(ITEMINDEX _index, int _subIndex)
 	{
+
 		switch (_index)
 		{
 			case ITEMINDEX.Weapon:
-				if (WeaponItem.Length >= _subIndex) return null;
-				return WeaponItem[_subIndex];
-			case ITEMINDEX.Equiptment:
-				if (equiptItem.Length >= _subIndex) return null;
-				return equiptItem[_subIndex];
+				if (weaponItem.Length >= _subIndex) return null;
+				return weaponItem[_subIndex];
+			case ITEMINDEX.Equipment:
+				if (equipItem.Length >= _subIndex) return null;
+				return equipItem[_subIndex];
 			case ITEMINDEX.Food:
 				if (foodItem.Length >= _subIndex) return null;
 				return foodItem[_subIndex];
@@ -49,8 +49,8 @@ public class ItemImage : SingleTon<ItemImage>
 	{
 		switch (_index)
 		{
-			case WEAPONITEMINDEX.Star1_1_ItemSword: return WeaponItem[0];
-			case WEAPONITEMINDEX.Star1_2_ItemGreatSword: return WeaponItem[1];
+			case WEAPONITEMINDEX.Star1_1_ItemSword: return weaponItem[0];
+			case WEAPONITEMINDEX.Star1_2_ItemGreatSword: return weaponItem[1];
 
 				//case WEAPONITEMINDEX.Star1_3_ItemSpear:
 				//	break;
@@ -102,17 +102,17 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetEquipt(EQUIPTMENTINDEX _index)
+	public Sprite GetEquip(EQUIPMENTINDEX _index)
 	{
 		switch (_index)
 		{
-			case EQUIPTMENTINDEX.Star1_Flower: return equiptItem[0];
-			case EQUIPTMENTINDEX.Star1_Feather:return equiptItem[1];
-				//case EQUIPTMENTINDEX.Star1_Hourglass:
+			case EQUIPMENTINDEX.Star1_Flower: return equipItem[0];
+			case EQUIPMENTINDEX.Star1_Feather:return equipItem[1];
+				//case EQUIPMENTINDEX.Star1_Hourglass:
 				//	break;
-				//case EQUIPTMENTINDEX.Star1_Glass:
+				//case EQUIPMENTINDEX.Star1_Glass:
 				//	break;
-				//case EQUIPTMENTINDEX.Star1_Crown:
+				//case EQUIPMENTINDEX.Star1_Crown:
 				//	break;
 		}
 		return null;
@@ -156,15 +156,17 @@ public class ItemImage : SingleTon<ItemImage>
 	{
 		switch (_index)
 		{
-			case GOODSITEMINDEX.Crystal: 
+			case GOODSITEMINDEX.GameCrystal:
 				return goodsItem[0];
-			case GOODSITEMINDEX.Special_Ticket:
+			case GOODSITEMINDEX.CashCrystal:
 				return goodsItem[1];
-			case GOODSITEMINDEX.Normal_Ticket:
+			case GOODSITEMINDEX.Special_Ticket:
 				return goodsItem[2];
+			case GOODSITEMINDEX.Normal_Ticket:
+				return goodsItem[3];
 			case GOODSITEMINDEX.Character_LevelUp_Item_Base:
 				break;
-			case GOODSITEMINDEX.Weapon_LevelUp_Item_Base:
+			case GOODSITEMINDEX.Read_LevelUp_Item_Base:
 				break;
 			default:
 				break;
@@ -197,5 +199,6 @@ public class ItemImage : SingleTon<ItemImage>
 				break;
 		}
 		return null;
+
 	}
 }

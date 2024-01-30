@@ -47,7 +47,7 @@ public class EnemyMove : MonoBehaviour
 	[SerializeField] private float walkSpeed,runSpeed;
 
 	[SerializeField] private GameObject discover;
-	[SerializeField] private EnemyWeaponCollider weapon;
+	[SerializeField] private EnemyReadCollider weapon;
 
 	[SerializeField] private Animator ani;
 

@@ -5,71 +5,68 @@ using static ItemEnum;
 
 public class ContentsFood : MonoBehaviour
 {
-	public GameObject prefabItem;
+	public GameObject prefabIcon;
 
-	public List<ItemFood> itemList;
+	[SerializeField] private List<IconFood> iconList;
+	[SerializeField] private List<ItemFood> itemList;
 
-	private int slotMax;
-	[SerializeField] private int createCount = 0;
-	[SerializeField] private int selectNumber = -1;
 	public ItemInfo info;
-	public void Init(int _maxSlot)
-	{
-		slotMax = _maxSlot;
-		if (itemList == null)
-			itemList = new List<ItemFood>();
 
+
+	public void Init(ref List<ItemFood> itemList)
+	{
+		this.itemList = itemList;
+		if (iconList == null)
+			iconList = new List<IconFood>();
 	}
 
-	public bool AddItem(FOODITEMINDEX _index, int _addValue)
+
+	public void Refresh()
 	{
-		if (itemList == null) return false;
+		int firstFor, secondFor = 0;
 
-		// 소비
-		// 소비는 아이템이 있으면 카운트만 증가
-
-		for (int i = 0; i < itemList.Count; i++)
+		if (itemList.Count < iconList.Count)
 		{
-			if (itemList[i].Type == _index)
+			firstFor = itemList.Count;
+			secondFor = iconList.Count;
+			for (int i = 0; i < firstFor; i++)
 			{
-				if (itemList[i].CheckItemIn(_addValue))
-				{
-					itemList[i].Count += _addValue;
-					return true;
-				}
-				else
-				{
-					if (itemList.Count < slotMax) continue;
-					else
-					{
-						// 인벤토리 풀
-						return false;
-					}
-				}
+				iconList[i].Refresh(itemList[i]);
+			}
+
+			// 아이템 제거
+			for (int i = firstFor; i < secondFor; i++)
+			{
+				Destroy(iconList[i].gameObject);
+				iconList.RemoveAt(i);
 			}
 		}
-
-		if (itemList.Count< slotMax)
+		else if (itemList.Count > iconList.Count)
 		{
-			ItemFood obj = Instantiate(prefabItem).GetComponent<ItemFood>();
-			obj.transform.parent = transform;
-			obj.Init(_index, createCount, delegate () { selectNumber = obj.SlotNumber; if (info != null) info.ItemFoodView(ref obj); });
-			obj.transform.localScale = new Vector3(1, 1, 1);
-			itemList.Add(obj);
+			firstFor = iconList.Count;
+			secondFor = itemList.Count;
+			for (int i = 0; i < firstFor; i++)
+			{
+				iconList[i].Refresh(itemList[i]);
+			}
 
-			return true;
+			// 아이템 생성
+			for (int i = firstFor; i < secondFor; i++)
+			{
+				IconFood newicon = Instantiate(prefabIcon, transform).GetComponent<IconFood>();
+				newicon.transform.parent = transform;
+				newicon.Init(i, ref info);
+				newicon.Refresh(itemList[i]);
+				iconList.Add(newicon);
+			}
 		}
-		else
+		else //if(itemList.Count == iconList.Count)
 		{
-			return false;
+			firstFor = secondFor = iconList.Count;
+			for (int i = 0; i < firstFor; i++)
+			{
+				iconList[i].Refresh(itemList[i]);
+			}
 		}
-	}
-
-	public bool UseItem()
-	{
-
-
-
-		return false;
 	}
 }

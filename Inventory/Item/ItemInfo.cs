@@ -28,7 +28,7 @@ public class ItemInfo : MonoBehaviour
 		gameObject.SetActive(_active);
 	}
 
-	public void ItemWeaponView(ref ItemWeapon _item)
+	public void OpenWeapon(ref ItemWeapon _item)
 	{
 		if (gameObject.activeSelf == false)
 			Active(true);
@@ -37,12 +37,12 @@ public class ItemInfo : MonoBehaviour
 
 		itemImage.sprite = _item.ItemSprite;
 		starNumber.text = _item.Star.ToString();
-		itemName.text = _item.NameText;
+		itemName.text = _item.MainName;
 		mainExplanDetail.text = _item.MainExplan;
 		subExplanDetail.text = _item.SubExplan;
 	}
 
-	public void ItemEquiptView(ref ItemEquipment _item)
+	public void OpenEquip(ref ItemEquipment _item)
 	{
 		if (gameObject.activeSelf == false)
 			Active(true);
@@ -51,12 +51,12 @@ public class ItemInfo : MonoBehaviour
 
 		itemImage.sprite = _item.ItemSprite;
 		starNumber.text = _item.Star.ToString();
-		itemName.text = _item.NameText;
+		itemName.text = _item.MainName;
 		mainExplanDetail.text = _item.MainExplan;
 		subExplanDetail.text = _item.SubExplan;
 	}
 
-	public void ItemFoodView(ref ItemFood _item)
+	public void OpenFood(ref ItemFood _item)
 	{
 		if (gameObject.activeSelf == false)
 			Active(true);
@@ -64,12 +64,12 @@ public class ItemInfo : MonoBehaviour
 		if (_item == null) return;
 		itemImage.sprite = _item.ItemSprite;
 		starNumber.text = _item.Star.ToString();
-		itemName.text = _item.NameText;
+		itemName.text = _item.MainName;
 		mainExplanDetail.text = _item.MainExplan;
 		subExplanDetail.text = _item.SubExplan;
 	}
 
-	public void ItemQuestView(ref ItemQuest _item)
+	public void OpenQuest(ref ItemQuest _item)
 	{
 		if (gameObject.activeSelf == false)
 			Active(true);
@@ -83,7 +83,7 @@ public class ItemInfo : MonoBehaviour
 		//subExplanDetail.text = _item.SubExplan;
 	}
 
-	public void ItemGoodsView(ref ItemGoods _item)
+	public void OpenGoods(ref ItemGoods _item)
 	{
 		if (gameObject.activeSelf == false)
 			Active(true);
@@ -100,7 +100,7 @@ public class ItemInfo : MonoBehaviour
 
 	}
 
-	public void ItemReadView(ref ItemRead _item)
+	public void OpenRead(ref ItemRead _item)
 	{
 		if (gameObject.activeSelf == false)
 			Active(true);
@@ -114,7 +114,7 @@ public class ItemInfo : MonoBehaviour
 		//subExplanDetail.text = _item.SubExplan;
 	}
 
-	public void ItemSpecialView(ref ItemSpecial _item)
+	public void OpenSpecial(ref ItemSpecial _item)
 	{
 		if (gameObject.activeSelf == false)
 			Active(true);

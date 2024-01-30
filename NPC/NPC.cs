@@ -51,7 +51,7 @@ public class NPC : MonoBehaviour
 
 	public void OpenQuestInfo()
 	{
-		if (UIManager.Instance.ChatWindowGetActive() == true) return;
+		if (UIManager.Instance.UIChatWindowGetActive() == true) return;
 		if(npcAni.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
 		{
 			npcAni.Play("Talk", 0, 0);
@@ -63,7 +63,7 @@ public class NPC : MonoBehaviour
 			case "진행 중":
 				chatLog.Clear();
 				chatLog.Add("맵의 파란색 원 안에 있는 두루마리가 사라지면 \n다시 말을 걸어 줘");
-				UIManager.Instance.OpenChatWindow(ref chatLog, "남행자", "퀘스트를 주는 사람", renderCamera.targetTexture,null);
+				UIManager.Instance.OpenUIChatWindow(ref chatLog, "남행자", "퀘스트를 주는 사람", renderCamera.targetTexture);
 				return;
 			case "완료":
 				break;
@@ -80,14 +80,14 @@ public class NPC : MonoBehaviour
 			case "진행 중":
 				chatLog.Clear();
 				chatLog.Add("경비병 3명을 잡아줬으면 해");
-				UIManager.Instance.OpenChatWindow(ref chatLog, "남행자", "퀘스트를 주는 사람", renderCamera.targetTexture, null );
+				UIManager.Instance.OpenUIChatWindow(ref chatLog, "남행자", "퀘스트를 주는 사람", renderCamera.targetTexture );
 				return;
 			case "완료":
 				chatLog.Clear();
 				chatLog.Add("더 이상 너에게 줄 퀘스트가 없어");
 				chatLog.Add("오른쪽 [!]가 사라졌으니 위로 올라가 봐");
 				chatLog.Add("다음은 마지막 보스존이야");
-				UIManager.Instance.OpenChatWindow(ref chatLog, "남행자", "퀘스트를 주는 사람", renderCamera.targetTexture, null);
+				UIManager.Instance.OpenUIChatWindow(ref chatLog, "남행자", "퀘스트를 주는 사람", renderCamera.targetTexture);
 				return;
 			case "완료 대기 중":
 				UIManager.Instance.RewardQuestInfo(1, delegate () { 

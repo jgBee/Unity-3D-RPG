@@ -61,7 +61,7 @@ public class BossEnemy : MonoBehaviour
 	[SerializeField] private float walkSpeed, runSpeed;
 
 	[SerializeField] private GameObject bulletParent;
-	[SerializeField] private BossWeapon weapon;
+	[SerializeField] private BossRead weapon;
 
 	[SerializeField] private Transform modelTransform;	
 	[SerializeField] private Animator ani;

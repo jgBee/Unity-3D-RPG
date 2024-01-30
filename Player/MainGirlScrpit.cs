@@ -22,29 +22,29 @@ public class MainGirlScrpit : MonoBehaviour
 		RunUpdate,
 		RunOut,
 
-		DrawWeaponIn,
-		DrawWeaponUpdate,
-		DrawWeaponOut,
+		DrawReadIn,
+		DrawReadUpdate,
+		DrawReadOut,
 
-		IdleWeaponIn,
-		IdleWeaponUpdate,
-		IdleWeaponOut,
+		IdleReadIn,
+		IdleReadUpdate,
+		IdleReadOut,
 
 		SheathIn,
 		SheathUpdate,
 		SheathOut,
 
-		WalkWeaponFrontIn,
-		WalkWeaponFrontUpdate,
-		WalkWeaponFrontOut,
+		WalkReadFrontIn,
+		WalkReadFrontUpdate,
+		WalkReadFrontOut,
 
-		WalkWeaponBackIn, 
-		WalkWeaponBackUpdate,
-		WalkWeaponBackOut,
+		WalkReadBackIn, 
+		WalkReadBackUpdate,
+		WalkReadBackOut,
 	
-		RunWeaponIn,
-		RunWeaponUpdate,
-		RunWeaponOut,
+		RunReadIn,
+		RunReadUpdate,
+		RunReadOut,
 
 		AttackIn,
 		AttackUpdate,
@@ -97,8 +97,8 @@ public class MainGirlScrpit : MonoBehaviour
 		Run,
 		impact1,
 		impact2,
-		DrawWeapon2,
-		WeaponIdle,
+		DrawRead2,
+		ReadIdle,
 		SheathSword1,
 		WalkFront,
 		WalkBack,
@@ -125,7 +125,7 @@ public class MainGirlScrpit : MonoBehaviour
 	[SerializeField] GameObject NPCObject;
 
 	private float stateWaitTime, currentTime;
-	private bool bUseWeapon;
+	private bool bUseRead;
 	[SerializeField] private float finalSpeed;
 
 	private Vector3 goalPos, startPos, moveDir;
@@ -157,7 +157,7 @@ public class MainGirlScrpit : MonoBehaviour
 
 
 	private List<string> checkList;
-	[SerializeField]private WeaponControl weaponCon;
+	[SerializeField]private ReadControl weaponCon;
 	[SerializeField] private EnemyCollider ESkillCollider;
 	[SerializeField] private EnemyCollider QSkillCollider;
 	[SerializeField] private GameObject PrefabQSkillOura;
@@ -214,8 +214,6 @@ public class MainGirlScrpit : MonoBehaviour
 			UIManager.Instance.SetJewel(Inventory.Instance.Jewel);
 		}
 
-
-
 		if(AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact1]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact2]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.eSkill_Kick]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.qSkill_Casting]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.TwoSlash]) )
 		{
 			return;
@@ -241,20 +239,13 @@ public class MainGirlScrpit : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			Inventory.Instance.TestWeapon1();
+			Inventory.Instance.WeaponItemIn(ItemEnum.WEAPONITEMINDEX.Star1_1_ItemSword);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
-			Inventory.Instance.TestEquip1();
+			Inventory.Instance.WeaponItemIn(ItemEnum.WEAPONITEMINDEX.Star1_2_ItemGreatSword);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha5))
-		{
-			Inventory.Instance.TestFood1();
-		}
-		if (Input.GetKeyDown(KeyCode.Alpha6))
-		{
-			Inventory.Instance.TestFood2();
-		}
+		
 
 		if (Input.GetKeyDown(KeyCode.I))
 		{
@@ -294,7 +285,7 @@ public class MainGirlScrpit : MonoBehaviour
 					NPCObject.GetComponent<NPC>().OpenQuestInfo();
 					break;
 				case "NPCHeal":
-					NPCObject.GetComponent<NPCHeal>().OpenChatWindow();
+					NPCObject.GetComponent<NPCHeal>().OpenUIChatWindow();
 					data.HPReset();
 					bBarUpdate = true;
 					break;
@@ -327,9 +318,9 @@ public class MainGirlScrpit : MonoBehaviour
 		switch (state)
 		{
 			case STATE.IdleIn:
-				if( bUseWeapon)
+				if( bUseRead)
 				{
-					state = STATE.IdleWeaponIn;
+					state = STATE.IdleReadIn;
 				}
 				else
 				{
@@ -338,16 +329,16 @@ public class MainGirlScrpit : MonoBehaviour
 
 					ani.Play(AniNameList[(int)ANINAMEINDEX.Idle]);
 				}
-				OffWeaponShieldObject();
+				OffReadShieldObject();
 				stateWaitTime = UnityEngine.Random.Range(10.0f, 15.0f);
 				break;
 			case STATE.IdleUpdate:
 				if (MoveControl())
 				{
-					if (bUseWeapon)
+					if (bUseRead)
 					{
-						if (isRun) state = STATE.RunWeaponIn;
-						else state = STATE.WalkWeaponBackIn;
+						if (isRun) state = STATE.RunReadIn;
+						else state = STATE.WalkReadBackIn;
 					}
 					else
 					{
@@ -379,10 +370,10 @@ public class MainGirlScrpit : MonoBehaviour
 			case STATE.YawnUpdate:
 				if (MoveControl())
 				{
-					if (bUseWeapon)
+					if (bUseRead)
 					{
-						if (isRun) state = STATE.RunWeaponIn;
-						else state = STATE.WalkWeaponBackIn;
+						if (isRun) state = STATE.RunReadIn;
+						else state = STATE.WalkReadBackIn;
 					}
 					else
 					{
@@ -402,7 +393,7 @@ public class MainGirlScrpit : MonoBehaviour
 			case STATE.YawnOut:
 				break;
 			case STATE.WalkIn:
-				OffWeaponShieldObject();
+				OffReadShieldObject();
 				finalSpeed = walkSpeed;
 				state = STATE.WalkUpdate;
 				ani.Play(AniNameList[(int)ANINAMEINDEX.Walk], 0, 0);
@@ -416,9 +407,9 @@ public class MainGirlScrpit : MonoBehaviour
 
 				if (isRun)
 				{
-					if (bUseWeapon)
+					if (bUseRead)
 					{
-						state = STATE.RunWeaponIn;
+						state = STATE.RunReadIn;
 					}
 					else
 					{
@@ -432,7 +423,7 @@ public class MainGirlScrpit : MonoBehaviour
 			case STATE.WalkOut:
 				break;
 			case STATE.RunIn:
-				OffWeaponShieldObject();
+				OffReadShieldObject();
 				finalSpeed = runSpeed;
 				ani.Play(AniNameList[(int)ANINAMEINDEX.Run]);
 				state = STATE.RunUpdate;
@@ -446,9 +437,9 @@ public class MainGirlScrpit : MonoBehaviour
 
 				if (isRun == false)
 				{
-					if (bUseWeapon)
+					if (bUseRead)
 					{
-						state = STATE.WalkWeaponFrontIn;
+						state = STATE.WalkReadFrontIn;
 					}
 					else
 					{
@@ -460,40 +451,40 @@ public class MainGirlScrpit : MonoBehaviour
 				break;
 			case STATE.RunOut:
 				break;
-			case STATE.DrawWeaponIn:
-				OnWeaponShieldObject();
+			case STATE.DrawReadIn:
+				OnReadShieldObject();
 
-				ani.SetBool("bUseWeapon", true);
-				ani.Play(AniNameList[(int)ANINAMEINDEX.DrawWeapon2]);
-				state = STATE.DrawWeaponUpdate;
+				ani.SetBool("bUseRead", true);
+				ani.Play(AniNameList[(int)ANINAMEINDEX.DrawRead2]);
+				state = STATE.DrawReadUpdate;
 				break;
-			case STATE.DrawWeaponUpdate:
-				if (AniNameEqual(AniNameList[(int)ANINAMEINDEX.DrawWeapon2]) == false)
-					state = STATE.IdleWeaponIn;
+			case STATE.DrawReadUpdate:
+				if (AniNameEqual(AniNameList[(int)ANINAMEINDEX.DrawRead2]) == false)
+					state = STATE.IdleReadIn;
 
 				break;
-			case STATE.DrawWeaponOut:
+			case STATE.DrawReadOut:
 				break;
-			case STATE.IdleWeaponIn:
-				ani.Play(AniNameList[(int)ANINAMEINDEX.WeaponIdle]);
-				state = STATE.IdleWeaponUpdate;
+			case STATE.IdleReadIn:
+				ani.Play(AniNameList[(int)ANINAMEINDEX.ReadIdle]);
+				state = STATE.IdleReadUpdate;
 				currentTime = 0.0f;
 				break;
-			case STATE.IdleWeaponUpdate:
+			case STATE.IdleReadUpdate:
 				if (MoveControl())
 				{
 					if (isRun)
-						state = STATE.RunWeaponIn;
+						state = STATE.RunReadIn;
 					else
-						state = STATE.WalkWeaponFrontIn;
+						state = STATE.WalkReadFrontIn;
 				}
 
 				break;
-			case STATE.IdleWeaponOut:
+			case STATE.IdleReadOut:
 				break;
 			case STATE.SheathIn:
 				ani.Play(AniNameList[(int)ANINAMEINDEX.SheathSword1]);
-				ani.SetBool("bUseWeapon", false);
+				ani.SetBool("bUseRead", false);
 
 				state = STATE.SheathUpdate;
 				break;
@@ -501,75 +492,75 @@ public class MainGirlScrpit : MonoBehaviour
 				if(AniNameEqual(AniNameList[(int)ANINAMEINDEX.SheathSword1]) == false)
 				{
 					state = STATE.IdleIn;
-					OffWeaponShieldObject();
+					OffReadShieldObject();
 					break;
 				}
 				break;
 			case STATE.SheathOut:
 				break;
-			case STATE.WalkWeaponFrontIn:
+			case STATE.WalkReadFrontIn:
 			
 				ani.Play(AniNameList[(int)ANINAMEINDEX.WalkFront]);
-				state = STATE.WalkWeaponFrontUpdate;
+				state = STATE.WalkReadFrontUpdate;
 				finalSpeed = walkSpeed;
 				break;
-			case STATE.WalkWeaponFrontUpdate:
+			case STATE.WalkReadFrontUpdate:
 				if (MoveControl())
 				{
 					if (isRun)
-						state = STATE.RunWeaponIn;
+						state = STATE.RunReadIn;
 					else
 						Moving();
 				}
-				else state = STATE.IdleWeaponIn;
+				else state = STATE.IdleReadIn;
 
 				
 				break;
-			case STATE.WalkWeaponFrontOut:
+			case STATE.WalkReadFrontOut:
 				break;
-			case STATE.WalkWeaponBackIn:
+			case STATE.WalkReadBackIn:
 				ani.Play(AniNameList[(int)ANINAMEINDEX.WalkBack]);
-				state = STATE.WalkWeaponBackUpdate;
+				state = STATE.WalkReadBackUpdate;
 				finalSpeed = walkSpeed;
 				break;
-			case STATE.WalkWeaponBackUpdate:
+			case STATE.WalkReadBackUpdate:
 				break;
-			case STATE.WalkWeaponBackOut:
+			case STATE.WalkReadBackOut:
 				break;
-			case STATE.RunWeaponIn:
+			case STATE.RunReadIn:
 				ani.Play(AniNameList[(int)ANINAMEINDEX.RunFront]);
-				state = STATE.RunWeaponUpdate;
+				state = STATE.RunReadUpdate;
 				finalSpeed = runSpeed;
 				break;
-			case STATE.RunWeaponUpdate:
+			case STATE.RunReadUpdate:
 				if (MoveControl())
 				{
 					if (isRun == false)
-						state = STATE.WalkWeaponFrontIn;
+						state = STATE.WalkReadFrontIn;
 					else
 						Moving();
 				}
-				else state = STATE.IdleWeaponIn;
+				else state = STATE.IdleReadIn;
 				break;
-			case STATE.RunWeaponOut:
+			case STATE.RunReadOut:
 				break;
 			case STATE.AttackIn:
-				if( bUseWeapon)
+				if( bUseRead)
 				{
 					Attack();
 					state = STATE.AttackUpdate;
 				}
 				else
 				{
-					bUseWeapon = true;
-					state = STATE.DrawWeaponIn;
+					bUseRead = true;
+					state = STATE.DrawReadIn;
 					return;
 				}
 				break;
 			case STATE.AttackUpdate:
 				if(!(AniNameEqual(AniNameList[(int)ANINAMEINDEX.Slash]) == true || AniNameEqual(AniNameList[(int)ANINAMEINDEX.TwoSlash]) == true))
 				{
-					state = STATE.IdleWeaponIn;
+					state = STATE.IdleReadIn;
 					break;
 				}
 					break;
@@ -592,7 +583,7 @@ public class MainGirlScrpit : MonoBehaviour
 			case STATE.ESkillUpdate:
 				if(AniNameEqual(AniNameList[(int)ANINAMEINDEX.eSkill_Kick]) == false)
 				{
-					state = STATE.IdleWeaponIn;
+					state = STATE.IdleReadIn;
 				}
 				break;
 			case STATE.ESkillOut:
@@ -608,7 +599,7 @@ public class MainGirlScrpit : MonoBehaviour
 			case STATE.QSkillUpdate:
 				if (AniNameEqual(AniNameList[(int)ANINAMEINDEX.qSkill_Casting]) == false)
 				{
-					state = STATE.IdleWeaponIn;
+					state = STATE.IdleReadIn;
 				}
 				break;
 			case STATE.QSkillOut:
@@ -672,7 +663,7 @@ public class MainGirlScrpit : MonoBehaviour
 			case "NPC":
 			case "NPCHeal":
 				NPCObject = null;
-				UIManager.Instance.ChatWindow(false);
+				UIManager.Instance.UIChatWindow(false);
 				UIManager.Instance.KeyGuide("");
 				break;
 			default:
@@ -717,8 +708,8 @@ public class MainGirlScrpit : MonoBehaviour
 		bInFightZone = _flag;
 		if (bInFightZone)
 		{
-			state = STATE.DrawWeaponIn;
-			ani.Play(AniNameList[(int)ANINAMEINDEX.DrawWeapon2],0,0);
+			state = STATE.DrawReadIn;
+			ani.Play(AniNameList[(int)ANINAMEINDEX.DrawRead2],0,0);
 		}
 		else
 		{
@@ -828,9 +819,9 @@ public class MainGirlScrpit : MonoBehaviour
 		transform.position = startPos;
 		//isMove = true;
 		state = STATE.IdleIn;
-		OffWeaponShieldObject();
+		OffReadShieldObject();
 		gameObject.tag = "Player";
-		ani.SetBool("bUseWeapon", false);
+		ani.SetBool("bUseRead", false);
 	}
 
 
@@ -839,7 +830,7 @@ public class MainGirlScrpit : MonoBehaviour
 	{
 		checkList.Clear();
 		checkList.Add(AniNameList[(int)ANINAMEINDEX.Slash]);
-		checkList.Add(AniNameList[(int)ANINAMEINDEX.WeaponIdle]);
+		checkList.Add(AniNameList[(int)ANINAMEINDEX.ReadIdle]);
 		checkList.Add(AniNameList[(int)ANINAMEINDEX.WalkFront]);
 		checkList.Add(AniNameList[(int)ANINAMEINDEX.WalkBack]);
 		checkList.Add(AniNameList[(int)ANINAMEINDEX.RunFront]);
@@ -931,7 +922,7 @@ public class MainGirlScrpit : MonoBehaviour
 		if (UIManager.Instance.bUIOn) return;
 		if (bInFightZone == false) return;
 
-		if (state == STATE.DrawWeaponIn || state == STATE.DrawWeaponUpdate || state == STATE.DrawWeaponOut
+		if (state == STATE.DrawReadIn || state == STATE.DrawReadUpdate || state == STATE.DrawReadOut
 			|| state == STATE.SheathIn || state == STATE.SheathUpdate || state == STATE.SheathOut) return;
 		state = STATE.AttackIn;
 		AniAttack();
@@ -945,7 +936,7 @@ public class MainGirlScrpit : MonoBehaviour
 			UIManager.Instance.NotifyGame(2.0f, "마을에선 사용할 수 없습니다.");
 			return;
 		}
-		if (state == STATE.DrawWeaponIn || state == STATE.DrawWeaponUpdate || state == STATE.DrawWeaponOut) return;
+		if (state == STATE.DrawReadIn || state == STATE.DrawReadUpdate || state == STATE.DrawReadOut) return;
 		if (data.EnableESkill())
 			state = STATE.ESkillIn;
 	}
@@ -958,23 +949,23 @@ public class MainGirlScrpit : MonoBehaviour
 			UIManager.Instance.NotifyGame(2.0f, "마을에선 사용할 수 없습니다.");
 			return;
 		}
-		if (state == STATE.DrawWeaponIn || state == STATE.DrawWeaponUpdate || state == STATE.DrawWeaponOut) return;
+		if (state == STATE.DrawReadIn || state == STATE.DrawReadUpdate || state == STATE.DrawReadOut) return;
 		if (data.EnableQSkill())
 			state = STATE.QSkillIn;
 	}
 
 
 
-	private void OnWeaponShieldObject()
+	private void OnReadShieldObject()
 	{
-		bUseWeapon = true;
+		bUseRead = true;
 		if (weaponObject != null) weaponObject.SetActive(true);
 		if (shieldObject != null) shieldObject.SetActive(true);
 	}
 
-	private void OffWeaponShieldObject()
+	private void OffReadShieldObject()
 	{
-		bUseWeapon = false;
+		bUseRead = false;
 		if (weaponObject != null) weaponObject.SetActive(false);
 		if (shieldObject != null) shieldObject.SetActive(false);
 	}

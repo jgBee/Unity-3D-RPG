@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyWeaponCollider : MonoBehaviour
+public class EnemyReadCollider : MonoBehaviour
 {
 	public GameObject PrefabHitEffect;
 	public GameObject PrefabStartEffect;

@@ -102,8 +102,6 @@ public class QuestManager : SingleTon<QuestManager>
 
 	public string GetQuestValue(int _number)
 	{
-		string str = "";
-
 		if (questListData == null) return "";
 		if (questListData[_number] == null) return "";
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NPCHeal : MonoBehaviour
 {
-	[SerializeField] private ChatWindow chatWindow;
+	[SerializeField] private UIChatWindow chatWindow;
 
 	[SerializeField] NPCCollider finder;
 
@@ -52,9 +52,9 @@ public class NPCHeal : MonoBehaviour
 		}
 	}
 
-	public void OpenChatWindow()
+	public void OpenUIChatWindow()
 	{
-		if (UIManager.Instance.ChatWindowGetActive() == true) return;
+		if (UIManager.Instance.UIChatWindowGetActive() == true) return;
 
 
 		if (npcAni.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -62,7 +62,7 @@ public class NPCHeal : MonoBehaviour
 			SoundManager.Instance.PlayNPCSoundEffect(0);
 			npcAni.Play("ThankFul", 0, 0);
 		}
-		UIManager.Instance.OpenChatWindow(ref chatLog, "³ë¿¤", "¸ÞÀÌµå", renderCamera.targetTexture, null);
+		UIManager.Instance.OpenUIChatWindow(ref chatLog, "³ë¿¤", "¸ÞÀÌµå", renderCamera.targetTexture);
 	}
 
 }

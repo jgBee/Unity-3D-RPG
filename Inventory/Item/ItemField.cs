@@ -21,7 +21,7 @@ public class ItemField : MonoBehaviour
 
 	[SerializeField]ITEMINDEX itemIndex;
 	WEAPONITEMINDEX weapon;
-	EQUIPTMENTINDEX equipt;
+	EQUIPMENTINDEX equipt;
 	FOODITEMINDEX food;
 
 	bool bDestroy = false;
@@ -56,7 +56,7 @@ public class ItemField : MonoBehaviour
 					createEffect = Instantiate(InTerrainEffects[0], transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
 					createEffect.transform.parent = transform;
 					break;
-				case ITEMINDEX.Equiptment:
+				case ITEMINDEX.Equipment:
 					createEffect = Instantiate(InTerrainEffects[1], transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
 					createEffect.transform.parent = transform;
 					break;
@@ -96,7 +96,7 @@ public class ItemField : MonoBehaviour
 					case ITEMINDEX.Weapon:
 				createImage.GetComponent<ItemUI>().Init(weapon);
 						break;
-					case ITEMINDEX.Equiptment:
+					case ITEMINDEX.Equipment:
 				createImage.GetComponent<ItemUI>().Init(equipt);
 						break;
 					case ITEMINDEX.Food:
@@ -135,7 +135,7 @@ public class ItemField : MonoBehaviour
 		switch (itemIndex)
 		{
 			case ITEMINDEX.Weapon:		bReturn = Inventory.Instance.WeaponItemIn(weapon);break;
-			case ITEMINDEX.Equiptment:	bReturn = Inventory.Instance.EquiptItemIn(equipt);break;
+			case ITEMINDEX.Equipment:	bReturn = Inventory.Instance.EquiptItemIn(equipt);break;
 			case ITEMINDEX.Food:		bReturn = Inventory.Instance.FoodItemIn(food);	  break;
 
 				//case ITEMINDEX.Quest:
@@ -169,24 +169,20 @@ public class ItemField : MonoBehaviour
 			case ITEMINDEX.Weapon:
 				weapon = ItemWeapon.GetItemRandomIndex();
 				break;
-			case ITEMINDEX.Equiptment:
+			case ITEMINDEX.Equipment:
 				equipt = ItemEquipment.GetItemRandomIndex();
 				break;
 			case ITEMINDEX.Food:
 				food = ItemFood.GetItemRandomIndex();
 				break;
-				//case ITEMINDEX.Quest:
-				//	break;
-				//case ITEMINDEX.Goods:
-				//	break;
-				//case ITEMINDEX.Read:
-				//	break;
-				//case ITEMINDEX.Special:
-				//	break;
-				//case ITEMINDEX.Max:
-				//	break;
-				//case ITEMINDEX.Min:
-				//	break;
+			case ITEMINDEX.Quest:
+				break;
+			case ITEMINDEX.Goods:
+				break;
+			case ITEMINDEX.Read:
+				break;
+			case ITEMINDEX.Special:
+				break;
 				//default:
 				//	break;
 		}

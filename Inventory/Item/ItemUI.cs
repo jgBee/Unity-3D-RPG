@@ -71,22 +71,22 @@ public class ItemUI : MonoBehaviour
 		}
 	}
 
-	public void Init(EQUIPTMENTINDEX _index)
+	public void Init(EQUIPMENTINDEX _index)
 	{
-		image.sprite = ItemImage.Instance.GetEquipt(_index);
+		image.sprite = ItemImage.Instance.GetEquip(_index);
 		switch (_index)
 		{
-			case EQUIPTMENTINDEX.Star1_Flower:
+			case EQUIPMENTINDEX.Star1_Flower:
 				itemName.text = "≥ÏΩº πÊ∆–";
 				break;
-			case EQUIPTMENTINDEX.Star1_Feather:
+			case EQUIPMENTINDEX.Star1_Feather:
 				itemName.text = "πÊ∆–";
 				break;
-			case EQUIPTMENTINDEX.Star1_Hourglass:
+			case EQUIPMENTINDEX.Star1_Hourglass:
 				break;
-			case EQUIPTMENTINDEX.Star1_Glass:
+			case EQUIPMENTINDEX.Star1_Glass:
 				break;
-			case EQUIPTMENTINDEX.Star1_Crown:
+			case EQUIPMENTINDEX.Star1_Crown:
 				break;
 			default:
 				break;

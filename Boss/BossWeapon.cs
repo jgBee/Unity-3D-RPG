@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossWeapon : MonoBehaviour
+public class BossRead : MonoBehaviour
 {
 	public GameObject PrefabBullet;
 	public void CreateBullet(int _dmg,Vector3 _startPos,Vector3 _endPos)

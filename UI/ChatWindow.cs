@@ -1,26 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ChatWindow : MonoBehaviour
+public class UIChatWindow : MonoBehaviour
 {
+	[Header("Inspector Check")]
 	[SerializeField]private TextMeshProUGUI name;
 	[SerializeField]private TextMeshProUGUI job;
 	[SerializeField]private TextMeshProUGUI text;
 
 	private List<string> targetText;
 
-
-	[SerializeField] private int currListCount,currTextCount, maxTextCount;
+	[SerializeField] private int currListCount;
 
 	[SerializeField] private RawImage image;
-
-	private UnityAction EndAction;
-
-	private bool bSkil = false;
 
 
 	private enum STATE
@@ -34,24 +29,20 @@ public class ChatWindow : MonoBehaviour
 
 	Coroutine charReadCoroutine;
 
-	public void Init(ref List<string> _chatList,string _name, string _job, Texture _charImamge, UnityAction _action)
+
+	public void Init(ref List<string> _chatList,string _name, string _job, Texture _charImamge)
 	{
 		if (_chatList == null) return;
 		targetText = _chatList;
-		//textList = _chatList;
 
 		name.text = _name;
 		job.text = _job;
 		text.text = "";
 
 		image.texture = _charImamge;
-		EndAction = _action;
 		state = STATE.StartCoroutine;
 
 		currListCount = 0;
-		currTextCount = 0;
-		maxTextCount = _chatList[0].Length;
-
 	}
 
 	private void Update()
@@ -70,8 +61,7 @@ public class ChatWindow : MonoBehaviour
 
 				break;
 			case STATE.Out:
-				if( EndAction != null) EndAction();
-				UIManager.Instance.ChatWindow(false);
+				UIManager.Instance.UIChatWindow(false);
 				break;
 		}
 	}
@@ -93,10 +83,7 @@ public class ChatWindow : MonoBehaviour
 	public void SkipButton()
 	{
 		StopCoroutine(charReadCoroutine);
-
 		text.text = targetText[currListCount];
-
-		bSkil = true;
 	}
 
 	IEnumerator ChatDelay()

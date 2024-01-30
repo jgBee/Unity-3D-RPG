@@ -23,7 +23,7 @@ public class Quest : ScriptableObject
 {
 	public GameObject prefabPont;
 
-	public GameObject prefabChatWindow;
+	public GameObject prefabUIChatWindow;
 
 	public GameObject prefabQuestInterface;
 
@@ -51,11 +51,14 @@ public class Quest : ScriptableObject
 	public int rewardExp;
 
 	public List<ItemEnum.WEAPONITEMINDEX> weaponList;
-	public List<ItemEnum.EQUIPTMENTINDEX> equiptList;
+	public List<ItemEnum.EQUIPMENTINDEX> equiptList;
 	public List<ItemEnum.FOODITEMINDEX> foodList;
 
 	public void QuestStart()
 	{
+
+		// 특정 포인트에 다가가면 카메라액션이라든가 대화창이라든가 뜨는거
+		// 
 		if (QUESTSTARTTYPE.PointInTalk == type)
 		{
 
@@ -119,10 +122,10 @@ public class Quest : ScriptableObject
 
 	public string GetQuestValue()
 	{
-		
 		return (QuestValueCount + " / " + QuestValueCountMax);
 	}
 
+	// QuestInfo
 	public void SetRewardImage(ref UnityEngine.UI.Image[] _rewardImage, ref TMPro.TextMeshProUGUI[] _rewardText)
 	{
 		int weaponCount ,equiptCount ,foodCount ,currCount = 0;
@@ -162,7 +165,7 @@ public class Quest : ScriptableObject
 			foreach (var item in equiptList)
 			{
 				_rewardImage[currCount].gameObject.SetActive(true);
-				_rewardImage[currCount].sprite = ItemImage.Instance.GetEquipt(item);
+				_rewardImage[currCount].sprite = ItemImage.Instance.GetEquip(item);
 				_rewardText[currCount].text = "1";
 				currCount++;
 			}

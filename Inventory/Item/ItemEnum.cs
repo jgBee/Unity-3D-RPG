@@ -1,9 +1,12 @@
+// 아이템의 Enum을 모두 적은 스크립트입니다.
+
+
 public class ItemEnum 
 {
 	public enum ITEMINDEX : int
 	{
 		Weapon = 0,
-		Equiptment,
+		Equipment,
 		Food,
 		Quest,
 		Goods,
@@ -54,8 +57,8 @@ public class ItemEnum
 	{
 		None,
 		AddDamage,
-		AddWeaponAttackValue,
-		AddWeaponAttackPercent,
+		AddReadAttackValue,
+		AddReadAttackPercent,
 
 		FireAttack,
 		WaterAttack,
@@ -65,7 +68,7 @@ public class ItemEnum
 		LightingAttack,
 	}
 
-	public enum EQUIPTMENTINDEX : int
+	public enum EQUIPMENTINDEX : int
 	{
 		Star1_Flower = 0,
 		Star1_Feather,
@@ -74,7 +77,7 @@ public class ItemEnum
 		Star1_Crown,
 	};
 
-	public enum EQUIPTMENTOPTION : int
+	public enum EQUIPMENTOPTION : int
 	{
 		AttackValue,
 		AttackPercent,
@@ -84,7 +87,7 @@ public class ItemEnum
 		ShieldPercent,
 	};
 
-	public enum EQUIPTMENTSET : int
+	public enum EQUIPMENTSET : int
 	{
 		None,
 
@@ -129,6 +132,7 @@ public class ItemEnum
 	{
 		//Start_1_lItemBase = 0,
 		Star1_SpearManEqupit = 0,
+		Star1_CubeEnterTicket,
 
 		//Start_2_lItemBase = 1000000,
 		//Start_3_lItemBase = 2000000,
@@ -142,11 +146,13 @@ public class ItemEnum
 		//Start_2_lItemBase = 1000000,
 		//Start_3_lItemBase = 2000000,
 
-		Crystal = 0,
+		GameCrystal = 0,
+		CashCrystal,
+
 		Special_Ticket,
 		Normal_Ticket,
 		Character_LevelUp_Item_Base,
-		Weapon_LevelUp_Item_Base,
+		Read_LevelUp_Item_Base,
 	};
 
 	public enum READITEMINDEX : int

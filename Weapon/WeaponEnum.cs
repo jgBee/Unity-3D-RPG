@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WeaponEnum
+public class ReadEnum
 {
 	public enum WEAPONTYPEINDEX : short
 	{

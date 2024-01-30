@@ -31,7 +31,7 @@ public class UIManager : SingleTon<UIManager>
 	[SerializeField] private GameObject shopItemBox;
 	[SerializeField] private GameObject questBoard;
 	[SerializeField] private QuestInfoPanel questInfoPanel;
-	[SerializeField] private ChatWindow chatWindow;
+	[SerializeField] private UIChatWindow chatWindow;
 
 	[SerializeField] private UIPlayerActionButton attackBtn;
 	[SerializeField] private UIPlayerActionButton eSkillBtn;
@@ -107,7 +107,7 @@ public class UIManager : SingleTon<UIManager>
 		questBoard.gameObject.SetActive(_visible);
 	}
 
-	public void ChatWindow(bool _visible)
+	public void UIChatWindow(bool _visible)
 	{
 		bUIOn = _visible;
 		chatWindow.gameObject.SetActive(false);
@@ -127,7 +127,7 @@ public class UIManager : SingleTon<UIManager>
 	{
 		uiWarning.Active(_active, _maxTime);
 	}
-	public bool ChatWindowGetActive() { return chatWindow.gameObject.activeSelf; }
+	public bool UIChatWindowGetActive() { return chatWindow.gameObject.activeSelf; }
 
 	#endregion
 
@@ -177,13 +177,13 @@ public class UIManager : SingleTon<UIManager>
 	}
 
 	//	public void Init(string[] _chatList,string _name, string _job, Sprite _charImamge, UnityAction _action)
-	public void OpenChatWindow(ref List<string> _chatList, string _name, string _job, Texture _charImamge, UnityAction _action)
+	public void OpenUIChatWindow(ref List<string> _chatList, string _name, string _job, Texture _charImamge)
 	{
 		if (chatWindow.gameObject.activeSelf == true) return;
 
 		bUIOn = true;
 		chatWindow.gameObject.SetActive(true);
-		chatWindow.Init(ref _chatList, _name, _job, _charImamge, _action);
+		chatWindow.Init(ref _chatList, _name, _job, _charImamge);
 	}
 
 

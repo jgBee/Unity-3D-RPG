@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-using static WeaponEnum;
+using static ReadEnum;
 
-public class WeaponControl : MonoBehaviour
+public class ReadControl : MonoBehaviour
 {
 	[Header("Inspector_Value")]
 	public int colliderTypeIndex;

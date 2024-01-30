@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static ItemEnum;
 
@@ -9,12 +10,13 @@ public class InventoryRightItemList : MonoBehaviour
 
 	[SerializeField] private GameObject[] contents;
 
+	private enum eSlotIndex : int {All, Weapon, Equipt, Food, Quest, Goods, Read, Special };
 
-	public void SelectNull()
+
+	public void Init(ref List<ItemWeapon> weapon)
 	{
-		contents[1].GetComponent<ContentsWeapon>().SelectNull();
-		contents[2].GetComponent<ContentsEquiptment>().SelectNull();
-
+		int slotNumber = (int)eSlotIndex.Weapon;
+		contents[slotNumber].GetComponent<ContentsWeapon>().Init(ref weapon);
 	}
 
 	#region ALL
@@ -36,36 +38,28 @@ public class InventoryRightItemList : MonoBehaviour
 
 
 	#region Weapon
-
-	public void Init(int _maxWeapon,int _maxEquipt,int _maxFood)
-	{
-		contents[1].GetComponent<ContentsWeapon>().Init(_maxWeapon);
-		contents[2].GetComponent<ContentsEquiptment>().Init(_maxEquipt);
-		contents[3].GetComponent<ContentsFood>().Init(_maxFood);
-
-
-	}
-
 	public void OnWeapon()
 	{
+		int weaponValue = (int)eSlotIndex.Weapon;
 		tapAll.UnSelect();
 		foreach (InventoryTapImage item in tapImages)
 		{
 			item.UnSelect();
 		}
-		tapImages[0].Select();
+		tapImages[weaponValue - 1].Select();
 
 		foreach (GameObject item in contents)
 		{
 			item.SetActive(false);
 		}
-		contents[1].SetActive(true);
-	}
-	public bool WeaponItemAdd(WEAPONITEMINDEX _index)
-	{
-		return contents[1].GetComponent<ContentsWeapon>().AddItem(_index);
+		contents[weaponValue].SetActive(true);
 	}
 
+	public void RefreshWeapon()
+	{
+		int weaponValue = (int)eSlotIndex.Weapon;
+		contents[weaponValue].GetComponent<ContentsRead>().Refresh();
+	}
 
 	#endregion
 
@@ -88,9 +82,10 @@ public class InventoryRightItemList : MonoBehaviour
 	}
 
 
-	public bool EquiptItemAdd(EQUIPTMENTINDEX _index)
+	public void RefreshEquip()
 	{
-		return contents[2].GetComponent<ContentsEquiptment>().AddItem(_index);
+		int value = (int)eSlotIndex.Equipt;
+		contents[value].GetComponent<ContentsEquipment>().Refresh();
 	}
 
 	#endregion
@@ -114,9 +109,10 @@ public class InventoryRightItemList : MonoBehaviour
 		contents[3].SetActive(true);
 	}
 
-	public bool FoodItemAdd(FOODITEMINDEX _index, int _addValue)
+	public void RefreshFood()
 	{
-		return contents[3].GetComponent<ContentsFood>().AddItem(_index, _addValue);
+		int value = (int)eSlotIndex.Food;
+		contents[value].GetComponent<ContentsFood>().Refresh();
 	}
 	#endregion
 
@@ -139,6 +135,12 @@ public class InventoryRightItemList : MonoBehaviour
 		contents[4].SetActive(true);
 	}
 
+	public void RefreshQuest()
+	{
+		int value = (int)eSlotIndex.Quest;
+		contents[value].GetComponent<ContentsFood>().Refresh();
+	}
+
 	#endregion
 
 
@@ -159,7 +161,11 @@ public class InventoryRightItemList : MonoBehaviour
 		}
 		contents[5].SetActive(true);
 	}
-
+	public void RefreshGoods()
+	{
+		int value = (int)eSlotIndex.Goods;
+		contents[value].GetComponent<ContentsGoods>().Refresh();
+	}
 	#endregion
 
 
@@ -178,6 +184,12 @@ public class InventoryRightItemList : MonoBehaviour
 			item.SetActive(false);
 		}
 		contents[6].SetActive(true);
+	}
+
+	public void RefreshRead()
+	{
+		int value = (int)eSlotIndex.Read;
+		contents[value].GetComponent<ContentsRead>().Refresh();
 	}
 
 	#endregion
@@ -199,6 +211,11 @@ public class InventoryRightItemList : MonoBehaviour
 			item.SetActive(false);
 		}
 		contents[7].SetActive(true);
+	}
+	public void RefreshSpecial()
+	{
+		int value = (int)eSlotIndex.Special;
+		contents[value].GetComponent<ContentsSpecial>().Refresh();
 	}
 	#endregion
 }
