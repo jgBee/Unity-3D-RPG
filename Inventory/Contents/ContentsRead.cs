@@ -1,28 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ItemEnum;
 
-public class ContentsWeapon : MonoBehaviour
+public class ContentsRead : MonoBehaviour
 {
 	public GameObject prefabIcon;
 
-	[SerializeField] private List<IconWeapon> iconList;
-	[SerializeField] private List<ItemWeapon> itemList;
+	[SerializeField] private List<IconRead> iconList;
 
-	public ItemInfo info;
-
-
-	public void Init(ref List<ItemWeapon> itemList)
+	private void Awake()
 	{
-		this.itemList = itemList;
-		if (iconList == null)
-			iconList = new List<IconWeapon>();
+		iconList = new List<IconRead>();
 	}
 
-
-	public void Refresh()
+	public void Refresh(ref ItemInfo info)
 	{
+		List<ItemRead> itemList = Inventory.Instance.ItemReadList;
+
 		int firstFor, secondFor = 0;
 
 		if (itemList.Count < iconList.Count)
@@ -53,7 +46,7 @@ public class ContentsWeapon : MonoBehaviour
 			// 아이템 생성
 			for (int i = firstFor; i < secondFor; i++)
 			{
-				IconWeapon newicon = Instantiate(prefabIcon, transform).GetComponent<IconWeapon>();
+				IconRead newicon = Instantiate(prefabIcon, transform).GetComponent<IconRead>();
 				newicon.transform.parent = transform;
 				newicon.Init(i, ref info);
 				newicon.Refresh(itemList[i]);

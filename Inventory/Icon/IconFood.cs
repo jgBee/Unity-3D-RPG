@@ -1,7 +1,8 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
+
+using nsItemFood;
 
 public class IconFood : MonoBehaviour
 {
@@ -10,13 +11,9 @@ public class IconFood : MonoBehaviour
 	[SerializeField] private Image iconImage;
 	[SerializeField] private GameObject[] star;
 	[SerializeField] private Image iconNew;
-	[SerializeField] private Image iconLock;
-	//[SerializeField] private Image iconChar;
 	[SerializeField] private Image iconFavorit;
 	[SerializeField] private GameObject CheckObject;
 	[SerializeField] private TextMeshProUGUI levelText;
-
-	private UnityAction selectAction;
 
 	[SerializeField] private ItemInfo info;
 
@@ -45,11 +42,9 @@ public class IconFood : MonoBehaviour
 	public void Refresh(ItemFood item)
 	{
 		iconImage.sprite = item.ItemSprite;
-		iconNew.gameObject.SetActive(item.New);
-		iconLock.gameObject.SetActive(item.Lock);
+		iconNew.gameObject.SetActive(item.Notifiy);
 
 		iconFavorit.gameObject.SetActive(item.Favorit);
-		levelText.text = item.Level.ToString();
 
 		for (int i = 0; i < star.Length; i++)
 		{

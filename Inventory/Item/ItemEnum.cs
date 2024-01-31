@@ -149,10 +149,11 @@ public class ItemEnum
 		GameCrystal = 0,
 		CashCrystal,
 
-		Special_Ticket,
 		Normal_Ticket,
-		Character_LevelUp_Item_Base,
-		Read_LevelUp_Item_Base,
+		Special_Ticket,
+
+		Character_Exp_Item_Base,
+		Weapon_Exp_Item_Base,
 	};
 
 	public enum READITEMINDEX : int

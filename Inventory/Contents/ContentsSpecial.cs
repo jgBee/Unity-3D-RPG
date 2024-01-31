@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ItemEnum;
@@ -8,21 +7,19 @@ public class ContentsSpecial : MonoBehaviour
 	public GameObject prefabIcon;
 
 	[SerializeField] private List<IconSpecial> iconList;
-	[SerializeField] private List<ItemSpecial> itemList;
 
 	public ItemInfo info;
 
-
-	public void Init(ref List<ItemSpecial> itemList)
+	private void Awake()
 	{
-		this.itemList = itemList;
-		if (iconList == null)
-			iconList = new List<IconSpecial>();
+		iconList = new List<IconSpecial>();
 	}
 
-
-	public void Refresh()
+	public void Refresh(ref ItemInfo info)
 	{
+		List<ItemSpecial> itemList = Inventory.Instance.ItemSpecialList;
+
+
 		int firstFor, secondFor = 0;
 
 		if (itemList.Count < iconList.Count)

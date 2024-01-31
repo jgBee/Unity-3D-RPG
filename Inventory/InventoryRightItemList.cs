@@ -12,13 +12,8 @@ public class InventoryRightItemList : MonoBehaviour
 
 	private enum eSlotIndex : int {All, Weapon, Equipt, Food, Quest, Goods, Read, Special };
 
-
-	public void Init(ref List<ItemWeapon> weapon)
-	{
-		int slotNumber = (int)eSlotIndex.Weapon;
-		contents[slotNumber].GetComponent<ContentsWeapon>().Init(ref weapon);
-	}
-
+	[Header("Inspector")]
+	[SerializeField] private ItemInfo info;
 	#region ALL
 	public void OnAll()
 	{
@@ -58,7 +53,7 @@ public class InventoryRightItemList : MonoBehaviour
 	public void RefreshWeapon()
 	{
 		int weaponValue = (int)eSlotIndex.Weapon;
-		contents[weaponValue].GetComponent<ContentsRead>().Refresh();
+		contents[weaponValue].GetComponent<ContentsWeapon>().Refresh(ref info);
 	}
 
 	#endregion
@@ -85,7 +80,7 @@ public class InventoryRightItemList : MonoBehaviour
 	public void RefreshEquip()
 	{
 		int value = (int)eSlotIndex.Equipt;
-		contents[value].GetComponent<ContentsEquipment>().Refresh();
+		contents[value].GetComponent<ContentsEquipment>().Refresh(ref info);
 	}
 
 	#endregion
@@ -112,7 +107,7 @@ public class InventoryRightItemList : MonoBehaviour
 	public void RefreshFood()
 	{
 		int value = (int)eSlotIndex.Food;
-		contents[value].GetComponent<ContentsFood>().Refresh();
+		contents[value].GetComponent<ContentsFood>().Refresh(ref info);
 	}
 	#endregion
 
@@ -138,7 +133,7 @@ public class InventoryRightItemList : MonoBehaviour
 	public void RefreshQuest()
 	{
 		int value = (int)eSlotIndex.Quest;
-		contents[value].GetComponent<ContentsFood>().Refresh();
+		contents[value].GetComponent<ContentsFood>().Refresh(ref info);
 	}
 
 	#endregion
@@ -164,7 +159,7 @@ public class InventoryRightItemList : MonoBehaviour
 	public void RefreshGoods()
 	{
 		int value = (int)eSlotIndex.Goods;
-		contents[value].GetComponent<ContentsGoods>().Refresh();
+		contents[value].GetComponent<ContentsGoods>().Refresh(ref info);
 	}
 	#endregion
 
@@ -189,7 +184,7 @@ public class InventoryRightItemList : MonoBehaviour
 	public void RefreshRead()
 	{
 		int value = (int)eSlotIndex.Read;
-		contents[value].GetComponent<ContentsRead>().Refresh();
+		contents[value].GetComponent<ContentsRead>().Refresh(ref info);
 	}
 
 	#endregion
@@ -215,7 +210,7 @@ public class InventoryRightItemList : MonoBehaviour
 	public void RefreshSpecial()
 	{
 		int value = (int)eSlotIndex.Special;
-		contents[value].GetComponent<ContentsSpecial>().Refresh();
+		contents[value].GetComponent<ContentsSpecial>().Refresh(ref info);
 	}
 	#endregion
 }

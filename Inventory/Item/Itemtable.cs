@@ -3,6 +3,8 @@ using SimpleJSON;
 
 // 이 스크립트는 아이템의 대한 정보를 모두 갖고 있고
 // GetReadTable(_index, out Item<T> 입니다)
+using nsItemFood;
+using static UnityEditor.Progress;
 
 public class Itemtable : SingleTon<Itemtable>
 {
@@ -20,7 +22,7 @@ public class Itemtable : SingleTon<Itemtable>
 		jsonData = JSON.Parse(json);
 	}
 
-	public void GetWeaponTable(ItemEnum.WEAPONITEMINDEX _index, out ItemWeapon _weapon)
+	public void GetWeaponTable(ItemEnum.WEAPONITEMINDEX _index, out ItemWeapon _item)
 	{
 
 		string findKey = "";
@@ -105,10 +107,10 @@ public class Itemtable : SingleTon<Itemtable>
 				break;
 		}
 
-		_weapon= new ItemWeapon();
+		_item = new ItemWeapon();
 
-		JSONNode targetData = jsonData["Read"][findKey];
-		_weapon.Init(_index, targetData["Star"], findKey, 
+		JSONNode targetData = jsonData["Weapon"][findKey];
+		_item.Init(_index, targetData["Star"], findKey, 
 			targetData["MainExplan"], targetData["SubExplan"],
 			targetData["Attack"].AsInt, targetData["SubType"], 
 			targetData["SubOption"].AsInt, targetData["MaxBreakThrough"].AsInt);
@@ -139,9 +141,12 @@ public class Itemtable : SingleTon<Itemtable>
 			default:
 				break;
 		}
-
-
 		_item = new ItemEquipment();
+
+		JSONNode targetData = jsonData["Equipment"][findKey];
+		_item.Init(_index, targetData["Star"], findKey, targetData["MainOption"], targetData["MainValue"].AsInt,
+			targetData["MainExplan"], targetData["SubExplan"],
+			targetData["MaxBreakThrough"].AsInt, targetData["SetName"]);
 	}
 
 	public void GetFoodTable(ItemEnum.FOODITEMINDEX _index, out ItemFood _item)
@@ -175,6 +180,12 @@ public class Itemtable : SingleTon<Itemtable>
 		}
 
 		_item = new ItemFood();
+		JSONNode targetData = jsonData["Food"][findKey];
+		_item.Init(_index, targetData["Star"], findKey,
+			targetData["MainExplan"], targetData["SubExplan"],
+			targetData["MainValue"].AsInt, targetData["SubValue"].AsInt,
+			targetData["Type"], targetData["MaxCount"].AsInt);
+
 	}
 
 	public void GetQuestTable(ItemEnum.QUESTITEMINDEX _index, out ItemQuest _item)
@@ -193,6 +204,10 @@ public class Itemtable : SingleTon<Itemtable>
 		}
 
 		_item = new ItemQuest();
+		JSONNode targetData = jsonData["Quest"][findKey];
+		_item.Init(_index, targetData["Star"], findKey,
+			targetData["MainExplan"], targetData["SubExplan"],
+			targetData["MaxCount"].AsInt);
 	}
 
 	public void GetGoodsTable(ItemEnum.GOODSITEMINDEX _index, out ItemGoods _item)
@@ -212,10 +227,10 @@ public class Itemtable : SingleTon<Itemtable>
 			case ItemEnum.GOODSITEMINDEX.Normal_Ticket:
 				findKey = "";
 				break;
-			case ItemEnum.GOODSITEMINDEX.Character_LevelUp_Item_Base:
+			case ItemEnum.GOODSITEMINDEX.Character_Exp_Item_Base:
 				findKey = "";
 				break;
-			case ItemEnum.GOODSITEMINDEX.Read_LevelUp_Item_Base:
+			case ItemEnum.GOODSITEMINDEX.Weapon_Exp_Item_Base:
 				findKey = "";
 				break;
 			default:
@@ -223,6 +238,10 @@ public class Itemtable : SingleTon<Itemtable>
 		}
 
 		_item = new ItemGoods();
+		JSONNode targetData = jsonData["Goods"][findKey];
+		_item.Init(_index, targetData["Star"], findKey,
+			targetData["MainExplan"], targetData["SubExplan"],
+			targetData["MaxCount"].AsInt);
 	}
 	public void GetReadTable(ItemEnum.READITEMINDEX _index, out ItemRead _item)
 	{
@@ -236,6 +255,10 @@ public class Itemtable : SingleTon<Itemtable>
 		}
 
 		_item = new ItemRead();
+		JSONNode targetData = jsonData["Read"][findKey];
+		_item.Init(_index, targetData["Star"], findKey,
+			targetData["MainExplan"], targetData["SubExplan"],
+			targetData["MaxCount"].AsInt);
 	}
 	public void GetSpecialTable(ItemEnum.SPECIALITEMINDEX _index, out ItemSpecial _item)
 	{
@@ -249,26 +272,10 @@ public class Itemtable : SingleTon<Itemtable>
 		}
 
 		_item = new ItemSpecial();
+		JSONNode targetData = jsonData["Special"][findKey];
+		_item.Init(_index, targetData["Star"], findKey,
+			targetData["MainExplan"], targetData["SubExplan"],
+			targetData["MaxCount"].AsInt);
 	}
-	//Debug.Log(jsonData["Read"]["녹슨 창"].ToString());
-	//Debug.Log(jsonData["Food"][2]);
-
-
-	//int rnd = Random.Range(1, jsonData.Count);
-
-	//GameObject character = Instantiate(jsonImage); // 만들거야
-
-	//character.GetComponent<JsonChar>().charname = (jsonData[rnd]["Name"]).ToString();
-	//character.transform.name = jsonData[rnd]["Name"].ToString(); // 오브젝트명 정의
-
-	//character.GetComponent<JsonChar>().charHp = (int)(jsonData[rnd]["HP"]);
-	//character.GetComponent<JsonChar>().atk = (int)(jsonData[rnd]["AD"]);
-	//character.GetComponent<JsonChar>().faceImage = (jsonData[rnd]["IMAGE"]);
-
-	//Debug.Log(jsonData[rnd]["Name"]);
-
-
-
-	// character.transform.SetParent(readyCanvas.transform);
-
+	
 }

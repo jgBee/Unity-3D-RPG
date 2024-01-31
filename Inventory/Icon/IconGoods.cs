@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class IconGoods : MonoBehaviour
@@ -10,13 +9,9 @@ public class IconGoods : MonoBehaviour
 	[SerializeField] private Image iconImage;
 	[SerializeField] private GameObject[] star;
 	[SerializeField] private Image iconNew;
-	[SerializeField] private Image iconLock;
-	//[SerializeField] private Image iconChar;
 	[SerializeField] private Image iconFavorit;
 	[SerializeField] private GameObject CheckObject;
 	[SerializeField] private TextMeshProUGUI levelText;
-
-	private UnityAction selectAction;
 
 	[SerializeField] private ItemInfo info;
 
@@ -39,17 +34,12 @@ public class IconGoods : MonoBehaviour
 		{
 			info.gameObject.SetActive(false);
 		}
-
 	}
 
 	public void Refresh(ItemGoods item)
 	{
 		iconImage.sprite = item.ItemSprite;
-		iconNew.gameObject.SetActive(item.New);
-		iconLock.gameObject.SetActive(item.Lock);
-
-		iconFavorit.gameObject.SetActive(item.Favorit);
-		levelText.text = item.Level.ToString();
+		iconNew.gameObject.SetActive(item.Notify);
 
 		for (int i = 0; i < star.Length; i++)
 		{
@@ -62,7 +52,6 @@ public class IconGoods : MonoBehaviour
 				star[i].gameObject.SetActive(false);
 			}
 		}
-
 		select = item;
 	}
 }

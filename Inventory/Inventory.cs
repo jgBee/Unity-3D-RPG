@@ -4,8 +4,9 @@ using UnityEngine.UI;
 
 
 using static ItemEnum;
+using nsItemFood;
+
 using System.Collections.Generic;
-using UnityEditor;
 
 public class Inventory : SingleTon<Inventory>
 {
@@ -47,17 +48,26 @@ public class Inventory : SingleTon<Inventory>
 
 	[Header("ItemData")]
 	[SerializeField]private List<ItemWeapon> itemWeaponList;
-	[SerializeField]private List<ItemEquipment> itemEquiptList;
+	[SerializeField]private List<ItemEquipment> itemEquipList;
 	[SerializeField]private List<ItemFood> itemFoodList;
 	[SerializeField]private List<ItemQuest> itemQuestList;
 	[SerializeField]private List<ItemGoods> itemGoodsList;
 	[SerializeField]private List<ItemRead> itemReadList;
 	[SerializeField]private List<ItemSpecial> itemSpecialList;
 
+	// GetItemList
+	public List<ItemWeapon> ItemWeaponList { get { return itemWeaponList; } }
+	public List<ItemEquipment> ItemEquipList { get { return itemEquipList; } }
+	public List<ItemFood> ItemFoodList { get { return itemFoodList; } }
+	public List<ItemQuest> ItemQuestList { get { return itemQuestList; } }
+	public List<ItemGoods> ItemGoodsList { get { return itemGoodsList; } }
+	public List<ItemRead> ItemReadList { get { return itemReadList; } }
+	public List<ItemSpecial> ItemSpecialList { get { return itemSpecialList; } }
+
 	private void Awake()
 	{
 		itemWeaponList = new List<ItemWeapon>();
-		itemEquiptList = new List<ItemEquipment>();
+		itemEquipList = new List<ItemEquipment>();
 		itemFoodList = new List<ItemFood>();
 		itemQuestList = new List<ItemQuest>();
 		itemGoodsList = new List<ItemGoods>();
@@ -65,11 +75,6 @@ public class Inventory : SingleTon<Inventory>
 		itemSpecialList = new List<ItemSpecial>();
 	}
 
-	private void Start()
-	{
-		// 테스트목적
-		InitRight();
-	}
 
 	public void Active(bool _active)
 	{
@@ -87,10 +92,6 @@ public class Inventory : SingleTon<Inventory>
 		defenceGauge.value = _defenceValue;
 	}
 
-	public void InitRight()
-	{
-		rightItemList.Init(ref itemWeaponList);
-	}
 
 	public bool WeaponItemIn(WEAPONITEMINDEX _index)
 	{
@@ -110,12 +111,12 @@ public class Inventory : SingleTon<Inventory>
 	public bool EquiptItemIn(EQUIPMENTINDEX _index)
 	{
 		// 1. 슬롯 체크
-		if (itemEquiptList.Count >= itemEquiptmentMax) return false;
+		if (itemEquipList.Count >= itemEquiptmentMax) return false;
 
 		// 아이템 생성
 		ItemEquipment itemData = null;
 		Itemtable.Instance.GetEquiptTable(_index, out itemData);
-		itemEquiptList.Add(itemData);
+		itemEquipList.Add(itemData);
 
 		rightItemList.RefreshEquip();
 
@@ -125,12 +126,15 @@ public class Inventory : SingleTon<Inventory>
 	public bool FoodItemIn(FOODITEMINDEX _index, int _addValue = 1)
 	{
 		// 1. 아이템 추가가 가능한지 체크
-		foreach (var item in itemFoodList)
+		foreach (ItemFood item in itemFoodList)
 		{
-			if(true)
+			if(item.Index == _index && item.InItem(_addValue))
 			{
-
+				item.CurrCount += _addValue;
+				return true;
 			}
+			// 하나 더 있을지 모르니 여기서 계속 돌긴해야하는데 특정 개수만 돌 수 없음
+			// Dictionary<index, >가 방법이였을려나?
 		}
 
 		// 2. 슬롯 체크 

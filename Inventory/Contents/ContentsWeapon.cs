@@ -1,29 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-using static ItemEnum;
 
-public class ContentsRead : MonoBehaviour
+public class ContentsWeapon : MonoBehaviour
 {
 	public GameObject prefabIcon;
 
-	[SerializeField]private List<IconRead> iconList;
-	[SerializeField]private List<ItemRead> itemList;
-
-	public ItemInfo info;
+	[SerializeField]private List<IconWeapon> iconList;
 
 
-	public void Init(ref List<ItemRead> weaponList)
+	private void Awake()
 	{
-		itemList = weaponList;
-		if (iconList == null)
-			iconList = new List<IconRead>();
-
+		iconList = new List<IconWeapon>();
 	}
 
-
-	public void Refresh()
+	public void Refresh(ref ItemInfo info)
 	{
+		List<ItemWeapon> itemList = Inventory.Instance.ItemWeaponList;
 		int firstFor, secondFor = 0;
 
 		if (itemList.Count < iconList.Count)
@@ -54,8 +47,7 @@ public class ContentsRead : MonoBehaviour
 			// 아이템 생성
 			for (int i = firstFor; i < secondFor; i++)
 			{
-				Debug.Log("44 : " + " "+ (itemList[i] == null));
-				IconRead newicon = Instantiate(prefabIcon, transform).GetComponent<IconRead>();
+				IconWeapon newicon = Instantiate(prefabIcon, transform).GetComponent<IconWeapon>();
 				newicon.transform.parent = transform;
 				newicon.Init(i, ref info);
 				newicon.Refresh(itemList[i]);

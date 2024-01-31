@@ -2,43 +2,37 @@ using UnityEngine;
 
 using static ItemEnum;
 
-public class EquiptLineData {
-	public EQUIPMENTOPTION optionIndex;
-	public float value;
-	public EQUIPMENTSET set;
-}
-
-
 [System.Serializable]
 public class ItemEquipment
 {
 	private EQUIPMENTINDEX index;
-	EquiptLineData mainOption;
-	private int star;
+	private EQUIPMENTOPTION[] option;
+	private EQUIPMENTSET set;
+	private enum eType {Flower, Feather, Hourglass, Glass, Crown };
+	private eType type;
 
 	private Sprite itemSprite;
+	private int star;
 
 	private int level;
 	private int maxLevel;
 
 	private int mainValue;
-	private int subValue;
+	private string mainName;
+	private string mainExplan;
 
-	private int currBreakThrough;
-	private int maxBreakThrough;
+	private int[] subValue;
+	private string[] subExplan;
 
 	private int exp;
 	private int expMax;
 
-	private string mainName;
-	private string mainExplan;
-	private string subExplan;
+	private int currBreakThrough;
+	private int maxBreakThrough;
 
-	private int subOptionValue;
+	private string setName;
+	private string setExplan;
 
-	private bool bFavorit;
-	private bool bNew;
-	private bool bLock;
 
 
 	// Get
@@ -49,6 +43,7 @@ public class ItemEquipment
 	public int MaxLevel => maxLevel;
 
 	public int MainValue => mainValue;
+	
 
 	public int CurrBreakThrough => currBreakThrough;
 	public int MaxBreakThrough => maxBreakThrough;
@@ -58,65 +53,106 @@ public class ItemEquipment
 	public float ExpPer => (float)exp / (float)expMax;
 
 	public string MainName => mainName;
-	public string MainExplan => GetMainOptionString();
-	public string SubExplan => GetSubOptionString();
+	public string MainExplan => System.String.Format(mainExplan, mainValue);
+	public string SubExplan => "";
+
+	public string SetName => setName;
+	public string SetExplan => setExplan;
 
 	public bool Favorit { get; set; }
 	public bool Lock { get; set; }
-	public bool New { get; set; }
+	public bool Notify { get; set; }
 
-	public void Init(EQUIPMENTINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _mainValue, string _subOptionType, int _subOptionValue, int _maxBreakThrough)
+
+
+	public void Init(EQUIPMENTINDEX _index, int _star, string _mainName, string _mainOption, int _mainValue, string _mainExplan, string _subExplan, int _maxBreakThrough, string _setName)
 	{
 		itemSprite = ItemImage.Instance.GetEquip(_index);
 		index = _index;
 		star = _star;
-		mainExplan = _mainExplan;
-		subExplan = _subExplan;
 
-		bFavorit = false;
-		bNew = false;
-		bLock = false;
 		level = 1;
 		maxLevel = 10;
 
-		star = _star;
-
 		mainValue = _mainValue;
 
-		mainName = _mainName;
-		mainExplan = _mainExplan;
-		subExplan = _subExplan;
+		// 하단부 초기화 subValue;
 
 		currBreakThrough = 1;
 		maxBreakThrough = _maxBreakThrough;
-	}
 
-	private string GetMainOptionString()
-	{
-		switch (mainOption.optionIndex)
+		exp = 0;
+		expMax = 10;
+
+		mainName = _mainName;
+		mainExplan = System.String.Format(mainExplan, mainValue);
+
+		// 1. 타입 실정
+		SettingType();
+
+		// 2. 옵션 설정
+		SettingSubOption();
+
+		// 세트라는 것도 묶어야함
+		// 2옵 4옵이랑 이름이랑 흠...
+		switch (_setName)
 		{
-			case EQUIPMENTOPTION.AttackValue:
-				return "공격력 : " + mainOption.value;
-			case EQUIPMENTOPTION.AttackPercent:
-				return "공격력 퍼센트 : " + mainOption.value + "%";
-			case EQUIPMENTOPTION.HPValue:
-				return "체력 : " + mainOption.value + "%";
-			case EQUIPMENTOPTION.HPPercent:
-				return "체력 퍼센트 : " + mainOption.value + "%";
-			case EQUIPMENTOPTION.ShieldValue:
-				return "방어력 : " + mainOption.value + "%";
-			case EQUIPMENTOPTION.ShieldPercent:
-				return "방어력 퍼센트 : " + mainOption.value + "%";
+			case "base":
+				setName = "기본 세트";
+				setExplan = "2옵 4옵";
+				break;
 		}
-		return "";
+
 	}
 
-	public string GetSubOptionString()
+	private void SettingType()
 	{
-		string str = "";
+		switch (index)
+		{
+			case EQUIPMENTINDEX.Star1_Flower:
 
-		return str;
+
+				type = eType.Flower;
+				break;
+			case EQUIPMENTINDEX.Star1_Feather:
+
+
+				type = eType.Feather;
+				break;
+			case EQUIPMENTINDEX.Star1_Hourglass:
+
+
+				type = eType.Hourglass;
+				break;
+			case EQUIPMENTINDEX.Star1_Glass:
+
+
+				type = eType.Glass;
+				break;
+			case EQUIPMENTINDEX.Star1_Crown:
+
+
+				type = eType.Crown;
+				break;
+		}
 	}
+
+	private void SettingSubOption()
+	{
+		switch (type)
+		{
+			case eType.Hourglass:
+			case eType.Glass:
+			case eType.Crown:
+
+
+
+				break;
+			default:
+				break;
+		}
+	}
+
 
 	public static EQUIPMENTINDEX GetItemIndex(int _value)
 	{

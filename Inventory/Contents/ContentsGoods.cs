@@ -1,28 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ItemEnum;
 
 public class ContentsGoods : MonoBehaviour
 {
 	public GameObject prefabIcon;
 
 	[SerializeField] private List<IconGoods> iconList;
-	[SerializeField] private List<ItemGoods> itemList;
 
 	public ItemInfo info;
-
-
-	public void Init(ref List<ItemGoods> itemList)
+	private void Awake()
 	{
-		this.itemList = itemList;
-		if (iconList == null)
-			iconList = new List<IconGoods>();
+		iconList = new List<IconGoods>();
 	}
 
-
-	public void Refresh()
+	public void Refresh(ref ItemInfo info)
 	{
+		List<ItemGoods> itemList = Inventory.Instance.ItemGoodsList;
+
 		int firstFor, secondFor = 0;
 
 		if (itemList.Count < iconList.Count)

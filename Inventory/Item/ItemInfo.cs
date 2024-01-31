@@ -4,6 +4,8 @@ using TMPro;
 
 using static ItemEnum;
 
+using nsItemFood;
+
 public class ItemInfo : MonoBehaviour
 {
 	public Sprite[] typeSprite;

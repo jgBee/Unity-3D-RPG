@@ -10,75 +10,51 @@ public class ItemSpecial
 
 	private Sprite itemSprite;
 
-	private int level;
-	private int maxLevel;
+	private float mainValue;
+	private float subValue;
 
-	private int mainValue;
-	private int subValue;
-
-	private int currBreakThrough;
-	private int maxBreakThrough;
-
-	private int exp;
-	private int expMax;
+	private int currCount;
+	private int maxCount;
 
 	private string mainName;
 	private string mainExplan;
 	private string subExplan;
 
-	private int subOptionValue;
-
-	private bool bFavorit;
-	private bool bNew;
-	private bool bLock;
-
 
 	// Get
+	public SPECIALITEMINDEX Index { get { return index; } }
 
 	public Sprite ItemSprite { get { return itemSprite; } }
 	public int Star => star;
-	public int Level => level;
-	public int MaxLevel => maxLevel;
-
-	public int MainValue => mainValue;
-
-	public int CurrBreakThrough => currBreakThrough;
-	public int MaxBreakThrough => maxBreakThrough;
-
-	public int Exp => exp;
-	public int ExpMax => expMax;
-	public float ExpPer => (float)exp / (float)expMax;
+	public float MainValue => mainValue;
+	public float SubValue => subValue;
 
 	public string MainName => mainName;
 	public string MainExplan => mainExplan;
 	public string SubExplan => subExplan;
 
-	public bool Favorit { get; set; }
-	public bool Lock { get; set; }
-	public bool New { get; set; }
+	public bool Notify { get; set; }
+	
+	public bool InItem(int addCount)
+	{
+		return currCount + addCount <= maxCount ? true : false;
+	}
 
-
-
-	public void Init(SPECIALITEMINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _mainValue, string _subOptionType, int _subOptionValue, int _maxBreakThrough)
+	public void Init(SPECIALITEMINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
 	{
 		itemSprite = ItemImage.Instance.GetSpecial(_index);
 		index = _index;
 
-		bFavorit = false;
-		bNew = false;
-		bLock = false;
-		level = 1;
-		maxLevel = 10;
-
 		star = _star;
 
-		mainValue = _mainValue;
+
+		Notify = true;
 
 		mainName = _mainName;
 		mainExplan = _mainExplan;
 		subExplan = _subExplan;
 
-		currBreakThrough = 1;
-		maxBreakThrough = _maxBreakThrough;
+		currCount = 1;
+		maxCount = _maxCount;
 	}
 }

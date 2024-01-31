@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using static ItemEnum;
 
+using nsItemFood;
+
 public class ItemField : MonoBehaviour
 {
 	[SerializeField] Rigidbody rigidbody;

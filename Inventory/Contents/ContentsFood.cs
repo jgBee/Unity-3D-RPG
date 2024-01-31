@@ -1,28 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ItemEnum;
+
+using nsItemFood;
 
 public class ContentsFood : MonoBehaviour
 {
 	public GameObject prefabIcon;
 
 	[SerializeField] private List<IconFood> iconList;
-	[SerializeField] private List<ItemFood> itemList;
 
 	public ItemInfo info;
 
-
-	public void Init(ref List<ItemFood> itemList)
+	private void Awake()
 	{
-		this.itemList = itemList;
-		if (iconList == null)
-			iconList = new List<IconFood>();
+		iconList = new List<IconFood>();
 	}
-
-
-	public void Refresh()
+	public void Refresh(ref ItemInfo info)
 	{
+		List<ItemFood> itemList = Inventory.Instance.ItemFoodList;
+
 		int firstFor, secondFor = 0;
 
 		if (itemList.Count < iconList.Count)

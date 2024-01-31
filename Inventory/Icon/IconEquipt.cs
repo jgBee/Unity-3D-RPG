@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class IconEquip : MonoBehaviour
@@ -16,7 +15,6 @@ public class IconEquip : MonoBehaviour
 	[SerializeField] private GameObject CheckObject;
 	[SerializeField] private TextMeshProUGUI levelText;
 
-	private UnityAction selectAction;
 
 	[SerializeField] private ItemInfo info;
 
@@ -45,7 +43,7 @@ public class IconEquip : MonoBehaviour
 	public void Refresh(ItemEquipment item)
 	{
 		iconImage.sprite = item.ItemSprite;
-		iconNew.gameObject.SetActive(item.New);
+		iconNew.gameObject.SetActive(item.Notify);
 		iconLock.gameObject.SetActive(item.Lock);
 
 		iconFavorit.gameObject.SetActive(item.Favorit);
