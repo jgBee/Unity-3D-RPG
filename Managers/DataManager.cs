@@ -12,6 +12,11 @@ using static PlayerEnum;
 [System.Serializable]
 public class PlayerData
 {
+	// 캐릭터 데이터로 사용할 것인가?
+	// 아니면 흠
+
+	public CharacterData NowCharacter { get; private set; }
+
 	public PlayerEnum.ePlayerCharIndex Index { get; private set; }
 
 	public Vector3 Pos { get; set; }
@@ -22,14 +27,24 @@ public class PlayerData
 		Pos = Vector3.zero;
 		Dir = Vector3.zero;
 
-		Index = ePlayerCharIndex.Char_5_0_1_MainGirl;
+		Index = ePlayerCharIndex.Char_0_None;
 	}
 	public void Init()
 	{
 		Pos = Vector3.zero;
 		Dir = Vector3.zero;
 
-		Index = ePlayerCharIndex.Char_5_0_1_MainGirl;
+		Index = ePlayerCharIndex.Char_5_0_1_MainGirlWind;
+	}
+
+	public bool ChangeCharacter(ePlayerCharIndex _index)
+	{
+		if (DataManager.Instance.GetModelNumber(_index) != null) 
+		{
+			NowCharacter = DataManager.Instance.GetModelNumber(_index);
+			return true;
+		}
+		return false;	// 캐릭터 선택 실패 코드오류
 	}
 }
 #endregion
@@ -88,7 +103,7 @@ public class ItemData
 	{
 		if (itemWeaponList.Count >= itemWeaponMax) return false;
 		ItemWeapon item = null;
-		Itemtable.Instance.GetWeaponTable(_index, out item);
+		ItemTable.Instance.GetWeaponTable(_index, out item);
 		itemWeaponList.Add(item);
 
 		return true;
@@ -101,7 +116,7 @@ public class ItemData
 		if (itemEquipList.Count >= itemEquipMax) return false;
 
 		ItemEquipment item = null;
-		Itemtable.Instance.GetEquiptTable(_index,out item);
+		ItemTable.Instance.GetEquiptTable(_index,out item);
 		itemEquipList.Add(item);
 
 
@@ -126,7 +141,7 @@ public class ItemData
 		if (check == false) return false;
 
 		ItemFood item = null;
-		Itemtable.Instance.GetFoodTable(_index, out item);
+		ItemTable.Instance.GetFoodTable(_index, out item);
 		itemFoodList.Add(item);
 
 		return true;
@@ -150,7 +165,7 @@ public class ItemData
 		if (check == false) return false;
 
 		ItemQuest item = null;
-		Itemtable.Instance.GetQuestTable(_index, out item);
+		ItemTable.Instance.GetQuestTable(_index, out item);
 		itemQuestList.Add(item);
 
 		return true;
@@ -173,7 +188,7 @@ public class ItemData
 		if (check == false) return false;
 
 		ItemGoods item = null;
-		Itemtable.Instance.GetGoodsTable(_index, out item);
+		ItemTable.Instance.GetGoodsTable(_index, out item);
 		itemGoodsList.Add(item);
 
 		return true;
@@ -196,7 +211,7 @@ public class ItemData
 		if (check == false) return false;
 
 		ItemRead item = null;
-		Itemtable.Instance.GetReadTable(_index, out item);
+		ItemTable.Instance.GetReadTable(_index, out item);
 		itemReadList.Add(item);
 
 		return true;
@@ -219,7 +234,7 @@ public class ItemData
 		if (check == false) return false;
 
 		ItemSpecial item = null;
-		Itemtable.Instance.GetSpecialTable(_index, out item);
+		ItemTable.Instance.GetSpecialTable(_index, out item);
 		itemSpecialList.Add(item);
 
 		return true;
@@ -234,14 +249,16 @@ public class ItemData
 public class CharacterData
 {
 	public ePlayerCharIndex Index { get; private set; }
+	public WeaponEnum.eWeaponTypeIndex weaponIndex;
 
+
+	public int Star;
 	public bool bDead;
 	public bool bGetChar;
 
 	public int Hp;
 	public int HpMax;
 
-	// 해당 게임에선 MP가 플레이어 UI에 발생하지 않고 스킬 딜레이에 down=>Up으로 차오름
 
 	public int Shield;
 	public int ShieldMax;
@@ -257,15 +274,22 @@ public class CharacterData
 
 	public int Damage;
 
-	public byte ESkillStack;
+	// Max => 0.0s 
+	public ElementEnum.eElement eSkillelement;
+	public int ESkillDamage;
+	public short ESkillStackCurr;
+	public short ESkillStackMax;
 	public float ESkillCurr;
 	public float ESkillMax;
 
 
-	public byte QSkillStack;
+	public ElementEnum.eElement qSkillelement;
+	public int QSkillDamage;
+	public short QSkillStackCurr;
+	public short QSkillStackMax;
 	public float QSkillCurr;
 	public float QSkillMax;
-
+	public int QSkillGauge;
 
 	// 착용 아이템 처리는?
 	
@@ -274,8 +298,8 @@ public class CharacterData
 		bDead = false;
 		bGetChar = false;
 	
-		Hp = HpMax = 0;
-		Stamina = StaminaMax = 0;
+		Hp = HpMax = 100;
+		Stamina = StaminaMax = 100;
 
 		Level = 1;
 		LevelMax = 20;  // 첫 돌파 전까지
@@ -284,44 +308,37 @@ public class CharacterData
 		Shield = 0;
 		ShieldMax = 999999999;
 
-		ESkillStack = 1;
+		ESkillStackCurr = 1;
 		ESkillCurr = ESkillMax = 0;
 
-		QSkillStack = 1;
+		QSkillStackCurr = 1;
 		QSkillCurr = QSkillMax = 0;
 
 
 	}
 
-	public void Init(ePlayerCharIndex _index)
+	public void Init(ePlayerCharIndex _index, int _star, int _hpMax, string _weaponType, int _dmg, int _shild,  
+		string _eElement, int _eDmg, float _eCoolTime, int _eStack,
+		string _qElement, int _qDmg, float _qCoolTime, int _qGauge, int _qStack)
 	{
 		// 캐릭터 테이블에서 가져와야함
 		Index = _index;
-		bDead = false;
-		bGetChar = false;
+		HpMax = Hp = _hpMax;
+		Star = _star;
+		weaponIndex = WeaponEnum.GetWeaponType(_weaponType);
+		Damage = _dmg;
+		Shield = _shild;
 
-		Hp = 0;
-		HpMax = 0;
+		eSkillelement = ElementEnum.GetElement(_eElement);
+		ESkillDamage = _eDmg;
+		ESkillCurr = ESkillMax = _eCoolTime;
+		ESkillStackCurr = ESkillStackMax = (short)_eStack;
 
-
-		Shield = 0;
-		ShieldMax = 999999999;
-
-		Stamina = 0;
-		StaminaMax = 0;
-	}
-
-	public bool InitToLoad(bool _dead, bool _get, Vector3 _pos, Vector3 _dir, int _currHp, int _currExp)
-	{
-		bool result = false;
-
-		bDead = _dead;
-		bGetChar = _get;
-	
-		Hp = _currHp;
-		Exp = _currExp;
-
-		return result;
+		qSkillelement = ElementEnum.GetElement(_qElement);
+		QSkillDamage = _qDmg;
+		QSkillCurr = ESkillMax = _qCoolTime;
+		QSkillStackCurr = ESkillStackMax = (short)_qStack;
+		QSkillGauge = _qGauge;
 	}
 
 
@@ -475,16 +492,17 @@ public class DataManager : SlngleTonMonobehaviour<DataManager>
 			}
 		}
 
-		CharacterData newCharacter = new CharacterData();
-		newCharacter.Init(index);
+		CharacterData newCharacter = null;
+		CharacterTable.Instance.GetCharacterTable(index, out newCharacter);
 		CharacterDataList.Add(newCharacter);
 
+		Debug.Log("AddCharacter = " + index.ToString());
 		return true;
 	}
 
 	
 
-	public int PlayerHP { get { Debug.Log(Player.Index); return GetModelNumber(Player.Index).Hp; } set { GetModelNumber(Player.Index).Hp = value; } }
+	public int PlayerHP { get {  return GetModelNumber(Player.Index).Hp; } set { GetModelNumber(Player.Index).Hp = value; } }
 	public float PlayerHpPercent() { return GetModelNumber(Player.Index).GetHpPercent(); }
 	public void PlayerHpReset() { GetModelNumber(Player.Index).Hp = GetModelNumber(Player.Index).HpMax; }
 

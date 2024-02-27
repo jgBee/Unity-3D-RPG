@@ -192,7 +192,7 @@ public class MainGirlScrpit : MonoBehaviour
 
 		checkList = new List<string>();
 		//isMove = true;
-		//data.ChangeData(PlayerEnum.ePlayerCharIndex.Char_5_0_1_MainGirl,1);
+		//data.ChangeData(PlayerEnum.ePlayerCharIndex.Char_5_0_1_MainGirlWind,1);
 	}
 
 	private void Start()
@@ -209,8 +209,8 @@ public class MainGirlScrpit : MonoBehaviour
 			item.SetActive(false);
 		}
 
-		DataManager.Instance.AddCharacter(ePlayerCharIndex.Char_5_0_1_MainGirl);
-		//DataManager.Instance.Player.Init();
+		DataManager.Instance.AddCharacter(ePlayerCharIndex.Char_5_0_1_MainGirlWind);
+		DataManager.Instance.Player.Init();
 		SoundManager.Instance.PlayBGM(0);
 	}
 

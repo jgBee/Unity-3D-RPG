@@ -40,10 +40,10 @@ public class SubSkill : MonoBehaviour
 			case ePlayerCharIndex.Char_1_Paimon:
 				index = SKILLINDEX.None;
 				break;
-			case ePlayerCharIndex.Char_5_0_MainMan:
+			case ePlayerCharIndex.Char_5_0_MainManWind:
 				index = SKILLINDEX.Main_Wind;
 				break; 
-			case ePlayerCharIndex.Char_5_0_1_MainGirl:
+			case ePlayerCharIndex.Char_5_0_1_MainGirlWind:
 				index = SKILLINDEX.Main_Wind;
 				break;
 			case ePlayerCharIndex.Char_5_1_Jean:
@@ -88,10 +88,10 @@ public class SubSkill : MonoBehaviour
 		{
 			case ePlayerCharIndex.Char_0_None:break;
 			case ePlayerCharIndex.Char_1_Paimon:break;
-			case ePlayerCharIndex.Char_5_0_MainMan:
+			case ePlayerCharIndex.Char_5_0_MainManWind:
 				MainWind();
 				break;
-			case ePlayerCharIndex.Char_5_0_1_MainGirl:
+			case ePlayerCharIndex.Char_5_0_1_MainGirlWind:
 				MainWind();
 				break;
 			case ePlayerCharIndex.Char_5_1_Jean:

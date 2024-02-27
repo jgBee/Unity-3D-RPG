@@ -112,7 +112,6 @@ public class InventoryRightItemList : MonoBehaviour
 	#endregion
 
 
-
 	#region QuestItem
 	public void OnQuest()
 	{
@@ -188,7 +187,6 @@ public class InventoryRightItemList : MonoBehaviour
 	}
 
 	#endregion
-
 
 
 	#region Special

@@ -26,6 +26,16 @@ public class IconWeapon : MonoBehaviour
 	{
 		slotNumber = selectNumber;
 		this.info = info;
+		iconLock.enabled = false;
+		iconNew.enabled = true;
+		iconFavorit.enabled = false;
+		CheckObject.SetActive(false);
+		levelText.text = "Lv.1";
+		foreach (GameObject item in star)
+		{
+			item.SetActive(false);
+		}
+
 	}
 
 	public void OnClick()
@@ -47,9 +57,10 @@ public class IconWeapon : MonoBehaviour
 		iconImage.sprite = item.ItemSprite;
 		iconNew.gameObject.SetActive(item.New);
 		iconLock.gameObject.SetActive(item.Lock);
-		
 		iconFavorit.gameObject.SetActive(item.Favorit);
+
 		levelText.text = item.Level.ToString();
+
 
 		for (int i = 0; i < star.Length; i++)
 		{

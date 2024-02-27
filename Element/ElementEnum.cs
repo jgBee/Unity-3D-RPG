@@ -1,6 +1,6 @@
 public class ElementEnum
 {
-	public enum ELEMENT : byte
+	public enum eElement : byte
 	{
 		Wind = 0,
 		Rock,
@@ -11,7 +11,26 @@ public class ElementEnum
 		Ice,
 	};
 
-	public enum ELEMENTRESULT : int
+
+	public static eElement GetElement(string _str)
+	{
+		switch (_str)
+		{
+			case "Wind":	return eElement.Wind;
+			case "Rock":	return eElement.Rock;
+			case "Thunder":	return eElement.Thunder;
+			case "Grass":	return eElement.Grass;
+			case "Water":	return eElement.Water;
+			case "Fire":	return eElement.Fire;
+			case "Ice":		return eElement.Ice;
+
+			default:
+				UnityEngine.Debug.LogWarning("속성이 정해지지 않았습니다.");
+				return eElement.Wind;
+		}
+	}
+
+	public enum eElementRESULT : int
 	{
 		Wind_Wind = 00,
 		Wind_Rock,

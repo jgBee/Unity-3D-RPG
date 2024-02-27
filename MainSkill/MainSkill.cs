@@ -33,10 +33,10 @@ public class MainSkill : MonoBehaviour
 			case ePlayerCharIndex.Char_1_Paimon:
 				index = SKILLINDEX.None;
 				break;
-			case ePlayerCharIndex.Char_5_0_MainMan:
+			case ePlayerCharIndex.Char_5_0_MainManWind:
 				index = SKILLINDEX.Main_Wind;
 				break;
-			case ePlayerCharIndex.Char_5_0_1_MainGirl:
+			case ePlayerCharIndex.Char_5_0_1_MainGirlWind:
 				index = SKILLINDEX.Main_Wind;
 				break;
 			case ePlayerCharIndex.Char_5_1_Jean:
@@ -83,9 +83,9 @@ public class MainSkill : MonoBehaviour
 				break;
 			case ePlayerCharIndex.Char_1_Paimon:
 				break;
-			case ePlayerCharIndex.Char_5_0_MainMan:
+			case ePlayerCharIndex.Char_5_0_MainManWind:
 				break;
-			case ePlayerCharIndex.Char_5_0_1_MainGirl:
+			case ePlayerCharIndex.Char_5_0_1_MainGirlWind:
 				break;
 			case ePlayerCharIndex.Char_5_1_Jean:
 				break;

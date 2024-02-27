@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-using static ReadEnum;
+using static WeaponEnum;
 
 public class ReadControl : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class ReadControl : MonoBehaviour
 	[SerializeField] private int totalDamage;
 	[SerializeField] private Collider collider;
 
-	[SerializeField] private WEAPONTYPEINDEX index;
+	[SerializeField] private eWeaponTypeIndex index;
 	[SerializeField] private byte Star;
 	public int weaponDmg;
 

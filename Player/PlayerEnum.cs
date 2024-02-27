@@ -7,8 +7,8 @@ public class PlayerEnum
 		Char_1_Paimon = 00001,
 
 		// Player
-		Char_5_0_MainMan = 10000,
-		Char_5_0_1_MainGirl = 10001,
+		Char_5_0_MainManWind = 10000,
+		Char_5_0_1_MainGirlWind = 10001,
 
 		// 5 Star
 		Char_5_1_Jean = 11001,
