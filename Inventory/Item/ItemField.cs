@@ -21,10 +21,10 @@ public class ItemField : MonoBehaviour
 
 	GameObject canvas;
 
-	[SerializeField]ITEMINDEX itemIndex;
-	WEAPONITEMINDEX weapon;
+	[SerializeField]eItemIndex itemIndex;
+	WEAPONeItemIndex weapon;
 	EQUIPMENTINDEX equipt;
-	FOODITEMINDEX food;
+	FOODeItemIndex food;
 
 	bool bDestroy = false;
 
@@ -54,29 +54,29 @@ public class ItemField : MonoBehaviour
 			Destroy(Instantiate(PrefabEffect, transform.position, Quaternion.Euler(new Vector3(-90, 0, 0))), 1.0f);
 			switch (itemIndex)
 			{
-				case ITEMINDEX.Weapon:
+				case eItemIndex.Weapon:
 					createEffect = Instantiate(InTerrainEffects[0], transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
 					createEffect.transform.parent = transform;
 					break;
-				case ITEMINDEX.Equipment:
+				case eItemIndex.Equipment:
 					createEffect = Instantiate(InTerrainEffects[1], transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
 					createEffect.transform.parent = transform;
 					break;
-				case ITEMINDEX.Food:
+				case eItemIndex.Food:
 					createEffect = Instantiate(InTerrainEffects[2], transform.position, Quaternion.Euler(new Vector3(-90, 0, 0)));
 					createEffect.transform.parent = transform;
 					break;
-				//case ITEMINDEX.Quest:
+				//case eItemIndex.Quest:
 				//	break;
-				//case ITEMINDEX.Goods:
+				//case eItemIndex.Goods:
 				//	break;
-				//case ITEMINDEX.Read:
+				//case eItemIndex.Read:
 				//	break;
-				//case ITEMINDEX.Special:
+				//case eItemIndex.Special:
 				//	break;
-				//case ITEMINDEX.Max:
+				//case eItemIndex.Max:
 				//	break;
-				//case ITEMINDEX.Min:
+				//case eItemIndex.Min:
 				//	break;
 				//default:
 				//	break;
@@ -95,22 +95,22 @@ public class ItemField : MonoBehaviour
 				createImage = Instantiate(prefabImage, Vector3.zero, Quaternion.identity);
 				switch (itemIndex)
 				{
-					case ITEMINDEX.Weapon:
+					case eItemIndex.Weapon:
 				createImage.GetComponent<ItemUI>().Init(weapon);
 						break;
-					case ITEMINDEX.Equipment:
+					case eItemIndex.Equipment:
 				createImage.GetComponent<ItemUI>().Init(equipt);
 						break;
-					case ITEMINDEX.Food:
+					case eItemIndex.Food:
 				createImage.GetComponent<ItemUI>().Init(food);
 						break;
-					//case ITEMINDEX.Quest:
+					//case eItemIndex.Quest:
 					//	break;
-					//case ITEMINDEX.Goods:
+					//case eItemIndex.Goods:
 					//	break;
-					//case ITEMINDEX.Read:
+					//case eItemIndex.Read:
 					//	break;
-					//case ITEMINDEX.Special:
+					//case eItemIndex.Special:
 					//	break;
 					default:
 						break;
@@ -136,21 +136,21 @@ public class ItemField : MonoBehaviour
 		bool bReturn = false;
 		switch (itemIndex)
 		{
-			case ITEMINDEX.Weapon:		bReturn = Inventory.Instance.WeaponItemIn(weapon);break;
-			case ITEMINDEX.Equipment:	bReturn = Inventory.Instance.EquiptItemIn(equipt);break;
-			case ITEMINDEX.Food:		bReturn = Inventory.Instance.FoodItemIn(food);	  break;
+			case eItemIndex.Weapon:		bReturn = DataManager.Instance.ItemList.AddWeapon(weapon);break;
+			case eItemIndex.Equipment:	bReturn = DataManager.Instance.ItemList.AddEquipt(equipt);break;
+			case eItemIndex.Food:		bReturn = DataManager.Instance.ItemList.AddFood(food,1);  break;
 
-				//case ITEMINDEX.Quest:
+				//case eItemIndex.Quest:
 				//	break;
-				//case ITEMINDEX.Goods:
+				//case eItemIndex.Goods:
 				//	break;
-				//case ITEMINDEX.Read:
+				//case eItemIndex.Read:
 				//	break;
-				//case ITEMINDEX.Special:
+				//case eItemIndex.Special:
 				//	break;
-				//case ITEMINDEX.Max:
+				//case eItemIndex.Max:
 				//	break;
-				//case ITEMINDEX.Min:
+				//case eItemIndex.Min:
 				//	break;
 				//default:
 				//	break;
@@ -162,28 +162,28 @@ public class ItemField : MonoBehaviour
 
 	private void ItemSetting()
 	{
-		int min = (int)ITEMINDEX.Min;
-		int max = (int)ITEMINDEX.Max;
-		itemIndex = (ITEMINDEX)Random.Range(min,max);
+		int min = (int)eItemIndex.Min;
+		int max = (int)eItemIndex.Max;
+		itemIndex = (eItemIndex)Random.Range(min,max);
 
 		switch (itemIndex)
 		{
-			case ITEMINDEX.Weapon:
+			case eItemIndex.Weapon:
 				weapon = ItemWeapon.GetItemRandomIndex();
 				break;
-			case ITEMINDEX.Equipment:
+			case eItemIndex.Equipment:
 				equipt = ItemEquipment.GetItemRandomIndex();
 				break;
-			case ITEMINDEX.Food:
+			case eItemIndex.Food:
 				food = ItemFood.GetItemRandomIndex();
 				break;
-			case ITEMINDEX.Quest:
+			case eItemIndex.Quest:
 				break;
-			case ITEMINDEX.Goods:
+			case eItemIndex.Goods:
 				break;
-			case ITEMINDEX.Read:
+			case eItemIndex.Read:
 				break;
-			case ITEMINDEX.Special:
+			case eItemIndex.Special:
 				break;
 				//default:
 				//	break;

@@ -8,7 +8,7 @@ public class ContentsSpecial : MonoBehaviour
 
 	[SerializeField] private List<IconSpecial> iconList;
 
-	public ItemInfo info;
+	[SerializeField]private ItemInfo info;
 
 	private void Awake()
 	{
@@ -17,7 +17,7 @@ public class ContentsSpecial : MonoBehaviour
 
 	public void Refresh(ref ItemInfo info)
 	{
-		List<ItemSpecial> itemList = Inventory.Instance.ItemSpecialList;
+		List<ItemSpecial> itemList = DataManager.Instance.ItemList.ItemSpecialList;
 
 
 		int firstFor, secondFor = 0;

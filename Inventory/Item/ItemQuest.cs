@@ -6,7 +6,7 @@ using static nsItemFood.ItemFood;
 [System.Serializable]
 public class ItemQuest
 {
-	[SerializeField] private QUESTITEMINDEX index;
+	[SerializeField] private QUESTeItemIndex index;
 	private int star;
 
 	private Sprite itemSprite;
@@ -22,7 +22,7 @@ public class ItemQuest
 	private string subExplan;
 
 	// Get
-	public QUESTITEMINDEX Index { get { return index; } }
+	public QUESTeItemIndex Index { get { return index; } }
 
 	public Sprite ItemSprite { get { return itemSprite; } }
 	public int Star => star;
@@ -33,17 +33,26 @@ public class ItemQuest
 	public string MainExplan => mainExplan;
 	public string SubExplan => subExplan;
 
-	public int CurrCount { get { return currCount; } set { currCount = value; } }
 
 	public bool Notify { get; set; }
 
-	public bool InItem(int addCount)
+	public bool InItemCount(int _value)
 	{
-		return currCount + addCount <= maxCount ? true : false;
+		if (currCount + _value < 0)
+		{
+			return false;
+		}
+		else if (currCount + _value > maxCount)
+		{
+			return false;
+		}
+
+		currCount += _value;
+		return true;
 	}
 
 
-	public void Init(QUESTITEMINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
+	public void Init(QUESTeItemIndex _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
 	{
 		itemSprite = ItemImage.Instance.GetQuest(_index);
 		index = _index;

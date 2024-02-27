@@ -6,6 +6,7 @@ public class ContentsRead : MonoBehaviour
 	public GameObject prefabIcon;
 
 	[SerializeField] private List<IconRead> iconList;
+	[SerializeField] private ItemInfo info;
 
 	private void Awake()
 	{
@@ -14,7 +15,7 @@ public class ContentsRead : MonoBehaviour
 
 	public void Refresh(ref ItemInfo info)
 	{
-		List<ItemRead> itemList = Inventory.Instance.ItemReadList;
+		List<ItemRead> itemList = DataManager.Instance.ItemList.ItemReadList;
 
 		int firstFor, secondFor = 0;
 

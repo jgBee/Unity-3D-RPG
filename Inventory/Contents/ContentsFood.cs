@@ -9,7 +9,7 @@ public class ContentsFood : MonoBehaviour
 
 	[SerializeField] private List<IconFood> iconList;
 
-	public ItemInfo info;
+	[SerializeField]private ItemInfo info;
 
 	private void Awake()
 	{
@@ -17,7 +17,7 @@ public class ContentsFood : MonoBehaviour
 	}
 	public void Refresh(ref ItemInfo info)
 	{
-		List<ItemFood> itemList = Inventory.Instance.ItemFoodList;
+		List<ItemFood> itemList = DataManager.Instance.ItemList.ItemFoodList;
 
 		int firstFor, secondFor = 0;
 

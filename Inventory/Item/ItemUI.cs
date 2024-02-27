@@ -9,62 +9,62 @@ public class ItemUI : MonoBehaviour
 	[SerializeField] private Image image;
 	[SerializeField] private TextMeshProUGUI itemName;
 
-	public void Init(WEAPONITEMINDEX _index)
+	public void Init(WEAPONeItemIndex _index)
 	{
 		image.sprite = ItemImage.Instance.GetWeapon(_index);
 		switch (_index)
 		{
-			case WEAPONITEMINDEX.Star1_1_ItemSword:
+			case WEAPONeItemIndex.Star1_1_ItemSword:
 				itemName.text = "≥ÏΩº ∞À";
 				break;
-			case WEAPONITEMINDEX.Star1_2_ItemGreatSword:
+			case WEAPONeItemIndex.Star1_2_ItemGreatSword:
 				itemName.text = "≥ÏΩº ¥Î∞À";
 				break;
-			//case WEAPONITEMINDEX.Star1_3_ItemSpear:
+			//case WEAPONeItemIndex.Star1_3_ItemSpear:
 			//	break;
-			//case WEAPONITEMINDEX.Star1_4_ItemBow:
+			//case WEAPONeItemIndex.Star1_4_ItemBow:
 			//	break;
-			//case WEAPONITEMINDEX.Star1_5_ItemCatalyst:
+			//case WEAPONeItemIndex.Star1_5_ItemCatalyst:
 			//	break;
-			//case WEAPONITEMINDEX.Star2_1_ItemSword:
+			//case WEAPONeItemIndex.Star2_1_ItemSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star2_2_ItemGreatSword:
+			//case WEAPONeItemIndex.Star2_2_ItemGreatSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star2_3_ItemSpear:
+			//case WEAPONeItemIndex.Star2_3_ItemSpear:
 			//	break;
-			//case WEAPONITEMINDEX.Star2_4_ItemBow:
+			//case WEAPONeItemIndex.Star2_4_ItemBow:
 			//	break;
-			//case WEAPONITEMINDEX.Star2_5_ItemCatalyst:
+			//case WEAPONeItemIndex.Star2_5_ItemCatalyst:
 			//	break;
-			//case WEAPONITEMINDEX.Star3_1_ItemSword:
+			//case WEAPONeItemIndex.Star3_1_ItemSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star3_2_ItemGreatSword:
+			//case WEAPONeItemIndex.Star3_2_ItemGreatSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star3_3_ItemSpear:
+			//case WEAPONeItemIndex.Star3_3_ItemSpear:
 			//	break;
-			//case WEAPONITEMINDEX.Star3_4_ItemBow:
+			//case WEAPONeItemIndex.Star3_4_ItemBow:
 			//	break;
-			//case WEAPONITEMINDEX.Star3_5_ItemCatalyst:
+			//case WEAPONeItemIndex.Star3_5_ItemCatalyst:
 			//	break;
-			//case WEAPONITEMINDEX.Star4_1_ItemSword:
+			//case WEAPONeItemIndex.Star4_1_ItemSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star4_2_ItemGreatSword:
+			//case WEAPONeItemIndex.Star4_2_ItemGreatSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star4_3_ItemSpear:
+			//case WEAPONeItemIndex.Star4_3_ItemSpear:
 			//	break;
-			//case WEAPONITEMINDEX.Star4_4_ItemBow:
+			//case WEAPONeItemIndex.Star4_4_ItemBow:
 			//	break;
-			//case WEAPONITEMINDEX.Star4_5_ItemCatalyst:
+			//case WEAPONeItemIndex.Star4_5_ItemCatalyst:
 			//	break;
-			//case WEAPONITEMINDEX.Star5_1_ItemSword:
+			//case WEAPONeItemIndex.Star5_1_ItemSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star5_2_ItemGreatSword:
+			//case WEAPONeItemIndex.Star5_2_ItemGreatSword:
 			//	break;
-			//case WEAPONITEMINDEX.Star5_3_ItemSpear:
+			//case WEAPONeItemIndex.Star5_3_ItemSpear:
 			//	break;
-			//case WEAPONITEMINDEX.Star5_4_ItemBow:
+			//case WEAPONeItemIndex.Star5_4_ItemBow:
 			//	break;
-			//case WEAPONITEMINDEX.Star5_5_ItemCatalyst:
+			//case WEAPONeItemIndex.Star5_5_ItemCatalyst:
 			//	break;
 			default:
 				break;
@@ -93,26 +93,26 @@ public class ItemUI : MonoBehaviour
 		}
 	}
 
-	public void Init(FOODITEMINDEX _index)
+	public void Init(FOODeItemIndex _index)
 	{
 		image.sprite = ItemImage.Instance.GetFood(_index);
 		switch (_index)
 		{
-			case FOODITEMINDEX.Star1_BaseMeat:
+			case FOODeItemIndex.Star1_BaseMeat:
 				itemName.text = "∞Ì±‚¡∂∞¢";
 				break;
-			case FOODITEMINDEX.Star1_BaseWater:
+			case FOODeItemIndex.Star1_BaseWater:
 				itemName.text = "π∞";
 				break;
-			//case FOODITEMINDEX.Star1_H_CookMeat:
+			//case FOODeItemIndex.Star1_H_CookMeat:
 			//	break;
-			//case FOODITEMINDEX.Star1_R_CornSoup:
+			//case FOODeItemIndex.Star1_R_CornSoup:
 			//	break;
-			//case FOODITEMINDEX.Star1_AB_EnergyBar:
+			//case FOODeItemIndex.Star1_AB_EnergyBar:
 			//	break;
-			//case FOODITEMINDEX.Star1_SB_CanFood:
+			//case FOODeItemIndex.Star1_SB_CanFood:
 			//	break;
-			//case FOODITEMINDEX.Star1_LB_S_SportDrink:
+			//case FOODeItemIndex.Star1_LB_S_SportDrink:
 			//	break;
 			default:
 				break;

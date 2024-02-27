@@ -1,28 +1,22 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections.Generic;
 
 
 using static ItemEnum;
 using nsItemFood;
 
-using System.Collections.Generic;
 
-public class Inventory : SingleTon<Inventory>
+
+//
+// 02.05 싱글톤 해제 데이터 매니저 클래스로 생성
+public class Inventory : SlngleTonMonobehaviour<Inventory>
 {
 	private int gold = 0;
 	public int Gold { get { return gold; } set { gold = value; if (goldText != null) goldText.text = gold.ToString(); } }
 	private int jewel = 0;
 	public int Jewel { get { return jewel; } set { jewel = value; if (jewelText != null) jewelText.text = jewel.ToString(); } }
-
-
-	public int itemWeaponMax;
-	public int itemFoodMax;
-	public int itemEquiptmentMax;
-	public int itemQuestMax;
-	public int itemGoodsMax;
-	public int itemReadMax;
-	public int itemSpecialMax;
 
 
 	[SerializeField] private GameObject backObject;
@@ -46,33 +40,9 @@ public class Inventory : SingleTon<Inventory>
 	[SerializeField]TextMeshProUGUI jewelText;
 	[SerializeField]TextMeshProUGUI goldText;
 
-	[Header("ItemData")]
-	[SerializeField]private List<ItemWeapon> itemWeaponList;
-	[SerializeField]private List<ItemEquipment> itemEquipList;
-	[SerializeField]private List<ItemFood> itemFoodList;
-	[SerializeField]private List<ItemQuest> itemQuestList;
-	[SerializeField]private List<ItemGoods> itemGoodsList;
-	[SerializeField]private List<ItemRead> itemReadList;
-	[SerializeField]private List<ItemSpecial> itemSpecialList;
-
-	// GetItemList
-	public List<ItemWeapon> ItemWeaponList { get { return itemWeaponList; } }
-	public List<ItemEquipment> ItemEquipList { get { return itemEquipList; } }
-	public List<ItemFood> ItemFoodList { get { return itemFoodList; } }
-	public List<ItemQuest> ItemQuestList { get { return itemQuestList; } }
-	public List<ItemGoods> ItemGoodsList { get { return itemGoodsList; } }
-	public List<ItemRead> ItemReadList { get { return itemReadList; } }
-	public List<ItemSpecial> ItemSpecialList { get { return itemSpecialList; } }
-
 	private void Awake()
 	{
-		itemWeaponList = new List<ItemWeapon>();
-		itemEquipList = new List<ItemEquipment>();
-		itemFoodList = new List<ItemFood>();
-		itemQuestList = new List<ItemQuest>();
-		itemGoodsList = new List<ItemGoods>();
-		itemReadList = new List<ItemRead>();
-		itemSpecialList = new List<ItemSpecial>();
+		
 	}
 
 
@@ -92,124 +62,34 @@ public class Inventory : SingleTon<Inventory>
 		defenceGauge.value = _defenceValue;
 	}
 
-
-	public bool WeaponItemIn(WEAPONITEMINDEX _index)
+	public void Refresh(eItemIndex _index)
 	{
-		// 1. 슬롯 체크
-		if (itemReadList.Count >= itemReadMax) return false;
-
-		// 아이템 생성
-		ItemWeapon itemData = null;
-		Itemtable.Instance.GetWeaponTable(_index, out itemData);
-		itemWeaponList.Add(itemData);
-
-		rightItemList.RefreshWeapon();
-
-		return true;
-	}
-
-	public bool EquiptItemIn(EQUIPMENTINDEX _index)
-	{
-		// 1. 슬롯 체크
-		if (itemEquipList.Count >= itemEquiptmentMax) return false;
-
-		// 아이템 생성
-		ItemEquipment itemData = null;
-		Itemtable.Instance.GetEquiptTable(_index, out itemData);
-		itemEquipList.Add(itemData);
-
-		rightItemList.RefreshEquip();
-
-		return true;
-	}
-
-	public bool FoodItemIn(FOODITEMINDEX _index, int _addValue = 1)
-	{
-		// 1. 아이템 추가가 가능한지 체크
-		foreach (ItemFood item in itemFoodList)
+		switch (_index)
 		{
-			if(item.Index == _index && item.InItem(_addValue))
-			{
-				item.CurrCount += _addValue;
-				return true;
-			}
-			// 하나 더 있을지 모르니 여기서 계속 돌긴해야하는데 특정 개수만 돌 수 없음
-			// Dictionary<index, >가 방법이였을려나?
+			case eItemIndex.Weapon:
+				rightItemList.RefreshWeapon();
+				break;
+			case eItemIndex.Equipment:
+				rightItemList.RefreshEquip();
+				break;
+			case eItemIndex.Food:
+				rightItemList.RefreshFood();
+				break;
+			case eItemIndex.Quest:
+				rightItemList.RefreshQuest();
+				break;
+			case eItemIndex.Goods:
+				rightItemList.RefreshGoods();
+				break;
+			case eItemIndex.Read:
+				rightItemList.RefreshRead();
+				break;
+			case eItemIndex.Special:
+				rightItemList.RefreshSpecial();
+				break;
+			default:
+				break;
 		}
-
-		// 2. 슬롯 체크 
-		if (itemFoodList.Count >= itemFoodMax) return false;
-
-		// 아이템 생성
-		ItemFood itemData = null;
-		Itemtable.Instance.GetFoodTable(_index, out itemData);
-		itemFoodList.Add(itemData);
-
-		rightItemList.RefreshFood();
-
-		return true;
-	}
-
-	public bool QuestItemIn(QUESTITEMINDEX _index)
-	{
-		// 1. 슬롯 체크
-		if (itemQuestList.Count >= itemQuestMax) return false;
-
-		// 아이템 생성
-		ItemQuest itemData = null;
-		Itemtable.Instance.GetQuestTable(_index, out itemData);
-		itemQuestList.Add(itemData);
-
-		rightItemList.RefreshQuest();
-
-		return true;
-	}
-
-	public bool GoodsItemIn(GOODSITEMINDEX _index)
-	{
-		// 1. 슬롯 체크
-		if (itemGoodsList.Count >= itemGoodsMax) return false;
-
-		// 아이템 생성
-		ItemGoods itemData = null;
-		Itemtable.Instance.GetGoodsTable(_index, out itemData);
-		itemGoodsList.Add(itemData);
-
-		rightItemList.RefreshGoods();
-
-		return true;
-	}
-
-	public bool ReadItemIn(READITEMINDEX _index)
-	{
-		// 1. 슬롯 체크
-		if (itemReadList.Count >= itemReadMax) return false;
-
-		// 아이템 생성
-		ItemRead itemData = null;
-		Itemtable.Instance.GetReadTable(_index, out itemData);
-		itemReadList.Add(itemData);
-
-		rightItemList.RefreshRead();
-
-		return true;
-	}
-
-	public bool SpecialItemIn(SPECIALITEMINDEX _index)
-	{
-		// 1. 슬롯 체크
-		if (itemSpecialList.Count >= itemSpecialMax) return false;
-
-		//result = rightItemList.SpecialItemAdd(_index);
-
-		// 아이템 생성
-		ItemSpecial itemData = null;
-		Itemtable.Instance.GetSpecialTable(_index, out itemData);
-		itemSpecialList.Add(itemData);
-
-		rightItemList.RefreshSpecial();
-
-		return true;
 	}
 
 	public void SelectNull()

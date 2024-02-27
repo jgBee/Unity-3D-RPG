@@ -1,7 +1,7 @@
 
 public class PlayerEnum 
 {
-	public enum PLAYERCHARINDEX : uint
+	public enum ePlayerCharIndex : uint
 	{
 		Char_0_None = 00000,
 		Char_1_Paimon = 00001,

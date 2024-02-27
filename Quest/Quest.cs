@@ -50,9 +50,9 @@ public class Quest : ScriptableObject
 	public int rewardGold;
 	public int rewardExp;
 
-	public List<ItemEnum.WEAPONITEMINDEX> weaponList;
+	public List<ItemEnum.WEAPONeItemIndex> weaponList;
 	public List<ItemEnum.EQUIPMENTINDEX> equiptList;
-	public List<ItemEnum.FOODITEMINDEX> foodList;
+	public List<ItemEnum.FOODeItemIndex> foodList;
 
 	public void QuestStart()
 	{
@@ -188,7 +188,7 @@ public class Quest : ScriptableObject
 	{
 		// 플레이어 정보를 싱글톤으로 만든다면 수정해야함
 
-		Inventory.Instance.Jewel += rewardJewel;
+		DataManager.Instance.UserData.SetJewel(rewardJewel,true);
 //		Inventory.Instance.Gold += rewardGold;
 		GameObject.Find("PlayerObject").GetComponent<MainGirlScrpit>().GetExpGold(rewardExp,rewardGold);
 
@@ -196,7 +196,8 @@ public class Quest : ScriptableObject
 		{
 			foreach (var item in weaponList)
 			{
-				Inventory.Instance.WeaponItemIn(item);
+				DataManager.Instance.ItemList.AddWeapon(item);
+				Inventory.Instance.Refresh(ItemEnum.eItemIndex.Weapon);
 			}
 		}
 
@@ -205,7 +206,8 @@ public class Quest : ScriptableObject
 		{
 			foreach (var item in equiptList)
 			{
-				Inventory.Instance.EquiptItemIn(item);
+				DataManager.Instance.ItemList.AddEquipt(item);
+				Inventory.Instance.Refresh(ItemEnum.eItemIndex.Equipment);
 			}
 		}
 
@@ -214,7 +216,8 @@ public class Quest : ScriptableObject
 		{
 			foreach (var item in foodList)
 			{
-				Inventory.Instance.FoodItemIn(item);
+				DataManager.Instance.ItemList.AddFood(item,1);
+				Inventory.Instance.Refresh(ItemEnum.eItemIndex.Food);
 			}
 		}
 

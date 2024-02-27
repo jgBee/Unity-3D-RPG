@@ -15,7 +15,7 @@ public class ContentsQuest : MonoBehaviour
 
 	public void Refresh(ref ItemInfo info)
 	{
-		List<ItemQuest> itemList = Inventory.Instance.ItemQuestList;
+		List<ItemQuest> itemList = DataManager.Instance.ItemList.ItemQuestList;
 
 		int firstFor, secondFor = 0;
 

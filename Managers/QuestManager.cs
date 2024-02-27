@@ -9,7 +9,7 @@ public enum QUESTINDEX
 	Q1_4LastBoss,
 }
 
-public class QuestManager : SingleTon<QuestManager>
+public class QuestManager : SlngleTonMonobehaviour<QuestManager>
 {
 	[SerializeField] private Quest[] prefabQuestList;
 	public List<Quest> questListData;

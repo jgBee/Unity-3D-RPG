@@ -15,7 +15,7 @@ public class ContentsGoods : MonoBehaviour
 
 	public void Refresh(ref ItemInfo info)
 	{
-		List<ItemGoods> itemList = Inventory.Instance.ItemGoodsList;
+		List<ItemGoods> itemList = DataManager.Instance.ItemList.ItemGoodsList;
 
 		int firstFor, secondFor = 0;
 

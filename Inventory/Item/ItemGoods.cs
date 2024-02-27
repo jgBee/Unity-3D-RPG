@@ -5,7 +5,7 @@ using static ItemEnum;
 [System.Serializable]
 public class ItemGoods
 {
-	[SerializeField] private GOODSITEMINDEX index;
+	[SerializeField] private GOODSeItemIndex index;
 	private int star;
 
 	private Sprite itemSprite;
@@ -22,7 +22,7 @@ public class ItemGoods
 
 
 	// Get
-	public GOODSITEMINDEX Index { get { return index; } }
+	public GOODSeItemIndex Index { get { return index; } }
 
 	public Sprite ItemSprite { get { return itemSprite; } }
 	public int Star => star;
@@ -37,12 +37,22 @@ public class ItemGoods
 	public bool Notify { get; set; }
 	public bool Favorit { get; set; }
 
-	public bool InItem(int addCount)
+	public bool InItemCount(int _value)
 	{
-		return currCount + addCount <= maxCount ? true : false;
+		if (currCount + _value < 0)
+		{
+			return false;
+		}
+		else if (currCount + _value > maxCount)
+		{
+			return false;
+		}
+
+		currCount += _value;
+		return true;
 	}
 
-	public void Init(GOODSITEMINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
+	public void Init(GOODSeItemIndex _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
 	{
 		itemSprite = ItemImage.Instance.GetGoods(_index);
 		index = _index;

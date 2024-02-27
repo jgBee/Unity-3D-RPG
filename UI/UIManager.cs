@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 
 
-public class UIManager : SingleTon<UIManager>
+public class UIManager : SlngleTonMonobehaviour<UIManager>
 {
 	public Canvas staticCanvas;
 	public Canvas dynamicCanvas;

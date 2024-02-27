@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundManager : SingleTon<SoundManager>
+public class SoundManager : SlngleTonMonobehaviour<SoundManager>
 {
 	[SerializeField] private AudioSource audioBGM;
 	[SerializeField] private AudioSource audioSEPlayer;

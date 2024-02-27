@@ -6,7 +6,7 @@ namespace nsItemFood
 	[System.Serializable]
 	public class ItemFood
 	{
-		[SerializeField] private FOODITEMINDEX index;
+		[SerializeField] private FOODeItemIndex index;
 
 		public enum eFoodItemType { None, Heal, AttackValue, ShieldValue, LiftRun, Respawn,};
 		private eFoodItemType type;
@@ -28,7 +28,7 @@ namespace nsItemFood
 
 
 		// Get
-		public FOODITEMINDEX Index { get { return index; } }
+		public FOODeItemIndex Index { get { return index; } }
 		public eFoodItemType Type { get { return type; } }
 
 		public Sprite ItemSprite { get { return itemSprite; } }
@@ -40,17 +40,26 @@ namespace nsItemFood
 		public string MainExplan => mainExplan;
 		public string SubExplan => subExplan;
 
-		public int CurrCount { get { return currCount; } set {currCount = value; } }
 
 		public bool Favorit { get; set; }
 		public bool Notifiy { get; set; }
 
-		public bool InItem(int addCount)
+		public bool InItemCount(int _value)
 		{
-			return currCount + addCount <= maxCount ? true : false;
+			if(currCount + _value < 0)
+			{
+				return false;
+			}
+			else if(currCount + _value > maxCount)
+			{
+				return false;
+			}
+
+			currCount += _value;
+			return true;
 		}
 
-		public void Init(FOODITEMINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _mainValue, int _subValue, string _type, int _maxCount)
+		public void Init(FOODeItemIndex _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _mainValue, int _subValue, string _type, int _maxCount)
 		{
 			itemSprite = ItemImage.Instance.GetFood(_index);
 			index = _index;
@@ -82,28 +91,30 @@ namespace nsItemFood
 			}
 		}
 
-		public static FOODITEMINDEX GetItemIndex(int _value)
+		
+
+		public static FOODeItemIndex GetItemIndex(int _value)
 		{
 			switch (_value)
 			{
-				case 0: return FOODITEMINDEX.Star1_BaseMeat;
-				case 1: return FOODITEMINDEX.Star1_BaseWater;
+				case 0: return FOODeItemIndex.Star1_BaseMeat;
+				case 1: return FOODeItemIndex.Star1_BaseWater;
 				default:
-					return FOODITEMINDEX.Star1_BaseMeat;
+					return FOODeItemIndex.Star1_BaseMeat;
 			}
 		}
 
-		public static FOODITEMINDEX GetItemRandomIndex()
+		public static FOODeItemIndex GetItemRandomIndex()
 		{
 			int min = 0;
 			int max = 2;
 			int randValue = UnityEngine.Random.Range(min, max);
 			switch (randValue)
 			{
-				case 0: return FOODITEMINDEX.Star1_BaseMeat;
-				case 1: return FOODITEMINDEX.Star1_BaseWater;
+				case 0: return FOODeItemIndex.Star1_BaseMeat;
+				case 1: return FOODeItemIndex.Star1_BaseWater;
 				default:
-					return FOODITEMINDEX.Star1_BaseMeat;
+					return FOODeItemIndex.Star1_BaseMeat;
 			}
 		}
 	}

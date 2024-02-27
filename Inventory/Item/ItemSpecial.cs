@@ -5,7 +5,7 @@ using static ItemEnum;
 [System.Serializable]
 public class ItemSpecial
 {
-	[SerializeField] private SPECIALITEMINDEX index;
+	[SerializeField] private SPECIALeItemIndex index;
 	private int star;
 
 	private Sprite itemSprite;
@@ -22,7 +22,7 @@ public class ItemSpecial
 
 
 	// Get
-	public SPECIALITEMINDEX Index { get { return index; } }
+	public SPECIALeItemIndex Index { get { return index; } }
 
 	public Sprite ItemSprite { get { return itemSprite; } }
 	public int Star => star;
@@ -34,13 +34,23 @@ public class ItemSpecial
 	public string SubExplan => subExplan;
 
 	public bool Notify { get; set; }
-	
-	public bool InItem(int addCount)
+
+	public bool InItemCount(int _value)
 	{
-		return currCount + addCount <= maxCount ? true : false;
+		if (currCount + _value < 0)
+		{
+			return false;
+		}
+		else if (currCount + _value > maxCount)
+		{
+			return false;
+		}
+
+		currCount += _value;
+		return true;
 	}
 
-	public void Init(SPECIALITEMINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
+	public void Init(SPECIALeItemIndex _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
 	{
 		itemSprite = ItemImage.Instance.GetSpecial(_index);
 		index = _index;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 using static ItemEnum;
 
-public class ItemImage : SingleTon<ItemImage>
+public class ItemImage : SlngleTonMonobehaviour<ItemImage>
 {
 	[SerializeField] private Sprite[] weaponItem;
 	[SerializeField] private Sprite[] equipItem;
@@ -13,36 +13,36 @@ public class ItemImage : SingleTon<ItemImage>
 	[SerializeField] private Sprite[] specialItem;
 
 
-	public Sprite GetItemImage(ITEMINDEX _index, int _subIndex)
+	public Sprite GetItemImage(eItemIndex _index, int _subIndex)
 	{
 
 		switch (_index)
 		{
-			case ITEMINDEX.Weapon:
+			case eItemIndex.Weapon:
 				if (weaponItem.Length >= _subIndex) return null;
 				return weaponItem[_subIndex];
-			case ITEMINDEX.Equipment:
+			case eItemIndex.Equipment:
 				if (equipItem.Length >= _subIndex) return null;
 				return equipItem[_subIndex];
-			case ITEMINDEX.Food:
+			case eItemIndex.Food:
 				if (foodItem.Length >= _subIndex) return null;
 				return foodItem[_subIndex];
-			case ITEMINDEX.Quest:
+			case eItemIndex.Quest:
 				if (questItem.Length >= _subIndex) return null;
 				return questItem[_subIndex];
-			case ITEMINDEX.Goods:
+			case eItemIndex.Goods:
 				if (goodsItem.Length >= _subIndex) return null;
 				return goodsItem[_subIndex];
-			case ITEMINDEX.Read:
+			case eItemIndex.Read:
 				if (readItem.Length >= _subIndex) return null;
 				return readItem[_subIndex];
-			case ITEMINDEX.Special:
+			case eItemIndex.Special:
 				if (specialItem.Length >= _subIndex) return null;
 				return specialItem[_subIndex];
 				break;
-				//case ITEMINDEX.Max:
+				//case eItemIndex.Max:
 				//	break;
-				//case ITEMINDEX.Min:
+				//case eItemIndex.Min:
 				//	break;
 				//default:
 				//	break;
@@ -50,40 +50,40 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetWeapon(WEAPONITEMINDEX _index)
+	public Sprite GetWeapon(WEAPONeItemIndex _index)
 	{
 		switch (_index)
 		{
-			case WEAPONITEMINDEX.Star1_1_ItemSword: return weaponItem[0];
-			case WEAPONITEMINDEX.Star1_2_ItemGreatSword: return weaponItem[1];
-			case WEAPONITEMINDEX.Star1_3_ItemSpear: return weaponItem[2];
-			case WEAPONITEMINDEX.Star1_4_ItemBow: return weaponItem[3];
-			case WEAPONITEMINDEX.Star1_5_ItemCatalyst: return weaponItem[4];
+			case WEAPONeItemIndex.Star1_1_ItemSword: return weaponItem[0];
+			case WEAPONeItemIndex.Star1_2_ItemGreatSword: return weaponItem[1];
+			case WEAPONeItemIndex.Star1_3_ItemSpear: return weaponItem[2];
+			case WEAPONeItemIndex.Star1_4_ItemBow: return weaponItem[3];
+			case WEAPONeItemIndex.Star1_5_ItemCatalyst: return weaponItem[4];
 
 
-			case WEAPONITEMINDEX.Star2_1_ItemSword: return weaponItem[5];
-			case WEAPONITEMINDEX.Star2_2_ItemGreatSword: return weaponItem[6];
-			case WEAPONITEMINDEX.Star2_3_ItemSpear: return weaponItem[7];
-			case WEAPONITEMINDEX.Star2_4_ItemBow: return weaponItem[8];
-			case WEAPONITEMINDEX.Star2_5_ItemCatalyst: return weaponItem[9];
+			case WEAPONeItemIndex.Star2_1_ItemSword: return weaponItem[5];
+			case WEAPONeItemIndex.Star2_2_ItemGreatSword: return weaponItem[6];
+			case WEAPONeItemIndex.Star2_3_ItemSpear: return weaponItem[7];
+			case WEAPONeItemIndex.Star2_4_ItemBow: return weaponItem[8];
+			case WEAPONeItemIndex.Star2_5_ItemCatalyst: return weaponItem[9];
 
-			case WEAPONITEMINDEX.Star3_1_ItemSword: return weaponItem[10];
-			case WEAPONITEMINDEX.Star3_2_ItemGreatSword: return weaponItem[11];
-			case WEAPONITEMINDEX.Star3_3_ItemSpear: return weaponItem[12];
-			case WEAPONITEMINDEX.Star3_4_ItemBow: return weaponItem[13];
-			case WEAPONITEMINDEX.Star3_5_ItemCatalyst: return weaponItem[14];
+			case WEAPONeItemIndex.Star3_1_ItemSword: return weaponItem[10];
+			case WEAPONeItemIndex.Star3_2_ItemGreatSword: return weaponItem[11];
+			case WEAPONeItemIndex.Star3_3_ItemSpear: return weaponItem[12];
+			case WEAPONeItemIndex.Star3_4_ItemBow: return weaponItem[13];
+			case WEAPONeItemIndex.Star3_5_ItemCatalyst: return weaponItem[14];
 
-			case WEAPONITEMINDEX.Star4_1_ItemSword: return weaponItem[15];
-			case WEAPONITEMINDEX.Star4_2_ItemGreatSword: return weaponItem[16];
-			case WEAPONITEMINDEX.Star4_3_ItemSpear: return weaponItem[17];
-			case WEAPONITEMINDEX.Star4_4_ItemBow: return weaponItem[18];
-			case WEAPONITEMINDEX.Star4_5_ItemCatalyst: return weaponItem[18];
+			case WEAPONeItemIndex.Star4_1_ItemSword: return weaponItem[15];
+			case WEAPONeItemIndex.Star4_2_ItemGreatSword: return weaponItem[16];
+			case WEAPONeItemIndex.Star4_3_ItemSpear: return weaponItem[17];
+			case WEAPONeItemIndex.Star4_4_ItemBow: return weaponItem[18];
+			case WEAPONeItemIndex.Star4_5_ItemCatalyst: return weaponItem[18];
 
-			case WEAPONITEMINDEX.Star5_1_ItemSword: return weaponItem[19];
-			case WEAPONITEMINDEX.Star5_2_ItemGreatSword: return weaponItem[20];
-			case WEAPONITEMINDEX.Star5_3_ItemSpear: return weaponItem[21];
-			case WEAPONITEMINDEX.Star5_4_ItemBow: return weaponItem[22];
-			case WEAPONITEMINDEX.Star5_5_ItemCatalyst: return weaponItem[23];
+			case WEAPONeItemIndex.Star5_1_ItemSword: return weaponItem[19];
+			case WEAPONeItemIndex.Star5_2_ItemGreatSword: return weaponItem[20];
+			case WEAPONeItemIndex.Star5_3_ItemSpear: return weaponItem[21];
+			case WEAPONeItemIndex.Star5_4_ItemBow: return weaponItem[22];
+			case WEAPONeItemIndex.Star5_5_ItemCatalyst: return weaponItem[23];
 
 			default:
 				return null;
@@ -104,42 +104,42 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetFood(FOODITEMINDEX _index)
+	public Sprite GetFood(FOODeItemIndex _index)
 	{
 		switch (_index)
 		{
-			case FOODITEMINDEX.Star1_BaseMeat: return foodItem[0];
-			case FOODITEMINDEX.Star1_BaseWater: return foodItem[1];
-			case FOODITEMINDEX.Star1_H_CookMeat: return foodItem[2];
-			case FOODITEMINDEX.Star1_R_CornSoup: return foodItem[3];
-			case FOODITEMINDEX.Star1_AB_EnergyBar: return foodItem[4];
-			case FOODITEMINDEX.Star1_SB_CanFood: return foodItem[5];
-			case FOODITEMINDEX.Star1_LB_S_SportDrink: return foodItem[6];
+			case FOODeItemIndex.Star1_BaseMeat: return foodItem[0];
+			case FOODeItemIndex.Star1_BaseWater: return foodItem[1];
+			case FOODeItemIndex.Star1_H_CookMeat: return foodItem[2];
+			case FOODeItemIndex.Star1_R_CornSoup: return foodItem[3];
+			case FOODeItemIndex.Star1_AB_EnergyBar: return foodItem[4];
+			case FOODeItemIndex.Star1_SB_CanFood: return foodItem[5];
+			case FOODeItemIndex.Star1_LB_S_SportDrink: return foodItem[6];
 		}
 		return null;
 	}
 
-	public Sprite GetQuest(QUESTITEMINDEX _index)
+	public Sprite GetQuest(QUESTeItemIndex _index)
 	{
 		switch (_index)
 		{
-			case QUESTITEMINDEX.Star1_SpearManEqupit: return questItem[0];
+			case QUESTeItemIndex.Star1_SpearManEqupit: return questItem[0];
 			default:
 				break;
 		}
 		return null;
 	}
 
-	public Sprite GetGoods(GOODSITEMINDEX _index)
+	public Sprite GetGoods(GOODSeItemIndex _index)
 	{
 		switch (_index)
 		{
-			case GOODSITEMINDEX.GameCrystal: return goodsItem[0];
-			case GOODSITEMINDEX.CashCrystal: return goodsItem[1];
-			case GOODSITEMINDEX.Special_Ticket: return goodsItem[2];
-			case GOODSITEMINDEX.Normal_Ticket: return goodsItem[3];
-			case GOODSITEMINDEX.Character_Exp_Item_Base: return goodsItem[4];
-			case GOODSITEMINDEX.Weapon_Exp_Item_Base: return goodsItem[5];
+			case GOODSeItemIndex.GameCrystal: return goodsItem[0];
+			case GOODSeItemIndex.CashCrystal: return goodsItem[1];
+			case GOODSeItemIndex.Special_Ticket: return goodsItem[2];
+			case GOODSeItemIndex.Normal_Ticket: return goodsItem[3];
+			case GOODSeItemIndex.Character_Exp_Item_Base: return goodsItem[4];
+			case GOODSeItemIndex.Weapon_Exp_Item_Base: return goodsItem[5];
 			default:
 				break;
 		}
@@ -147,11 +147,11 @@ public class ItemImage : SingleTon<ItemImage>
 	}
 
 
-	public Sprite GetRead(READITEMINDEX _index)
+	public Sprite GetRead(READeItemIndex _index)
 	{
 		switch (_index)
 		{
-			case READITEMINDEX.Star1_1_OldPage: return readItem[0];
+			case READeItemIndex.Star1_1_OldPage: return readItem[0];
 
 			default:
 				break;
@@ -159,11 +159,11 @@ public class ItemImage : SingleTon<ItemImage>
 		return null;
 	}
 
-	public Sprite GetSpecial(SPECIALITEMINDEX _index)
+	public Sprite GetSpecial(SPECIALeItemIndex _index)
 	{
 		switch (_index)
 		{
-			case SPECIALITEMINDEX.Star5_TutorialClear: return specialItem[0];
+			case SPECIALeItemIndex.Star5_TutorialClear: return specialItem[0];
 
 			default:
 				break;

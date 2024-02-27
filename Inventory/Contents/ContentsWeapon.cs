@@ -8,6 +8,7 @@ public class ContentsWeapon : MonoBehaviour
 
 	[SerializeField]private List<IconWeapon> iconList;
 
+	[SerializeField] private ItemInfo info;
 
 	private void Awake()
 	{
@@ -16,7 +17,7 @@ public class ContentsWeapon : MonoBehaviour
 
 	public void Refresh(ref ItemInfo info)
 	{
-		List<ItemWeapon> itemList = Inventory.Instance.ItemWeaponList;
+		List<ItemWeapon> itemList = DataManager.Instance.ItemList.ItemWeaponList;
 		int firstFor, secondFor = 0;
 
 		if (itemList.Count < iconList.Count)
@@ -63,5 +64,4 @@ public class ContentsWeapon : MonoBehaviour
 			}
 		}
 	}
-
 }

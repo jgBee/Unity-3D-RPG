@@ -5,7 +5,7 @@ using static ItemEnum;
 [System.Serializable]
 public class ItemRead
 {
-	[SerializeField] private READITEMINDEX index;
+	[SerializeField] private READeItemIndex index;
 	private int star;
 
 	private Sprite itemSprite;
@@ -13,8 +13,8 @@ public class ItemRead
 	private float mainValue;
 	private float subValue;
 
-	private int currCount;
-	private int maxCount;
+	private int currCount = 0;
+	//private int maxCount;
 
 	private string mainName;
 	private string mainExplan;
@@ -22,7 +22,7 @@ public class ItemRead
 
 
 	// Get
-	public READITEMINDEX Index { get { return index; } }
+	public READeItemIndex Index { get { return index; } }
 
 	public Sprite ItemSprite { get { return itemSprite; } }
 	public int Star => star;
@@ -36,13 +36,17 @@ public class ItemRead
 
 	public bool Notify { get; set; }
 
-	public bool InItem(int addCount)
-	{
-		return currCount + addCount <= maxCount ? true : false;
-	}
+	// 읽을 거리 아이템은 단 1개 Init에서 하는 것으로 설정
+	//public bool InItemCount(int _value)
+	//{
+	//	if (currCount != 0) return false;
+
+	//	currCount = 1;
+	//	return true;
+	//}
 
 
-	public void Init(READITEMINDEX _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
+	public void Init(READeItemIndex _index, int _star, string _mainName, string _mainExplan, string _subExplan, int _maxCount)
 	{
 		itemSprite = ItemImage.Instance.GetRead(_index);
 		index = _index;
@@ -56,6 +60,6 @@ public class ItemRead
 		subExplan = _subExplan;
 
 		currCount = 1;
-		maxCount = _maxCount;
+		//maxCount = _maxCount;
 	}
 }

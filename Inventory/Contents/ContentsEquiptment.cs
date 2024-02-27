@@ -6,6 +6,8 @@ public class ContentsEquipment : MonoBehaviour
 	public GameObject prefabIcon;
 
 	[SerializeField] private List<IconEquip> iconList;
+	[SerializeField]private ItemInfo info;
+
 	private void Awake()
 	{
 		iconList = new List<IconEquip>();
@@ -13,7 +15,7 @@ public class ContentsEquipment : MonoBehaviour
 
 	public void Refresh(ref ItemInfo info)
 	{
-		List<ItemEquipment> itemList = Inventory.Instance.ItemEquipList;
+		List<ItemEquipment> itemList = DataManager.Instance.ItemList.ItemEquipList;
 		int firstFor, secondFor = 0;
 
 		if (itemList.Count < iconList.Count)

@@ -3,7 +3,7 @@
 
 public class ItemEnum 
 {
-	public enum ITEMINDEX : int
+	public enum eItemIndex : int
 	{
 		Weapon = 0,
 		Equipment,
@@ -18,7 +18,7 @@ public class ItemEnum
 	};
 
 
-	public enum WEAPONITEMINDEX : int
+	public enum WEAPONeItemIndex : int
 	{
 	//	Start_1_ItemBase = 0,
 	
@@ -93,7 +93,7 @@ public class ItemEnum
 
 	}
 
-	public enum FOODITEMINDEX : int
+	public enum FOODeItemIndex : int
 	{
 		//Start_1_lItemBase = 0,
 		Star1_BaseMeat = 0,
@@ -128,7 +128,7 @@ public class ItemEnum
 
 
 
-	public enum QUESTITEMINDEX : int
+	public enum QUESTeItemIndex : int
 	{
 		//Start_1_lItemBase = 0,
 		Star1_SpearManEqupit = 0,
@@ -140,7 +140,7 @@ public class ItemEnum
 		//Start_3_lItemBase = 4000000,
 	};
 
-	public enum GOODSITEMINDEX : int
+	public enum GOODSeItemIndex : int
 	{
 		//Start_1_lItemBase = 0,
 		//Start_2_lItemBase = 1000000,
@@ -156,12 +156,12 @@ public class ItemEnum
 		Weapon_Exp_Item_Base,
 	};
 
-	public enum READITEMINDEX : int
+	public enum READeItemIndex : int
 	{
 		Star1_1_OldPage = 0,
 	};
 
-	public enum SPECIALITEMINDEX : int
+	public enum SPECIALeItemIndex : int
 	{
 		Star5_TutorialClear = 5000000,
 	};

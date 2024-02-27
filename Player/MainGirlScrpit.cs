@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static PlayerEnum;
+
 public class MainGirlScrpit : MonoBehaviour
 {
+	// Manager 참조변수
+	DataManager data;
+
+
 	private enum STATE
 	{
 		IdleIn,
@@ -66,14 +72,15 @@ public class MainGirlScrpit : MonoBehaviour
 		DeathUpdate,
 		DeathOut,
 	};
-	[SerializeField]private STATE state;
+	[SerializeField] private STATE state;
 	[SerializeField] private Camera inventoryCam;
+
+	[SerializeField]PlayerEnum.ePlayerCharIndex index;
 
 
 	[Header("Inspector_Value")]
 	public float walkSpeed = 5;
 	public float runSpeed = 10;
-	[SerializeField] private PlayerBaseData data;
 	[SerializeField] private Animator ani;
 
 
@@ -171,6 +178,8 @@ public class MainGirlScrpit : MonoBehaviour
 	#region Awake Start Update
 	private void Awake()
 	{
+		data = DataManager.Instance;
+
 		ray = new Ray();
 		moveLeftUp = new Vector3(-0.7f, 0, 0.7f);
 		moveLeftDown = new Vector3(-0.7f, 0, -0.7f);
@@ -183,15 +192,15 @@ public class MainGirlScrpit : MonoBehaviour
 
 		checkList = new List<string>();
 		//isMove = true;
-		data.ChangeData(PlayerEnum.PLAYERCHARINDEX.Char_5_0_1_MainGirl,1);
+		//data.ChangeData(PlayerEnum.ePlayerCharIndex.Char_5_0_1_MainGirl,1);
 	}
 
 	private void Start()
 	{
 		ResetStartPoint();
 		UIManager.Instance.GoField(true);
-
 		QuestManager.Instance.QuestIn(0);
+		data.Init();
 
 		weaponCon.Active(false);
 
@@ -200,6 +209,8 @@ public class MainGirlScrpit : MonoBehaviour
 			item.SetActive(false);
 		}
 
+		DataManager.Instance.AddCharacter(ePlayerCharIndex.Char_5_0_1_MainGirl);
+		//DataManager.Instance.Player.Init();
 		SoundManager.Instance.PlayBGM(0);
 	}
 
@@ -209,23 +220,24 @@ public class MainGirlScrpit : MonoBehaviour
 		if (bBarUpdate)
 		{
 			bBarUpdate = false;
-			UIManager.Instance.SetPlayerBarInfo("MainGirl", 1, data.HPPercent, data.ExpPercent, data.Level);
-			UIManager.Instance.SetGold(Inventory.Instance.Gold);
-			UIManager.Instance.SetJewel(Inventory.Instance.Jewel);
+			UIManager.Instance.SetPlayerBarInfo("MainGirl", 1, data.PlayerExp, data.PlayerExpPercent(), data.PlayerLevel);
+			
+			UIManager.Instance.SetGold(DataManager.Instance.UserData.Gold);
+			UIManager.Instance.SetJewel(DataManager.Instance.UserData.Jewel);
 		}
-
-		if(AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact1]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact2]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.eSkill_Kick]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.qSkill_Casting]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.TwoSlash]) )
+		
+		if (AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact1]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.impact2]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.eSkill_Kick]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.qSkill_Casting]) || AniNameEqual(AniNameList[(int)ANINAMEINDEX.TwoSlash]) )
 		{
 			return;
 		}
 		
-		if (data.IsDead() == true) return;
+		if (data.PlayerIsDead == true) return;
 
-		data.ESkillUpdate();
-		data.QSkillUpdate();
+		//data.ESkillUpdate();
+		//data.QSkillUpdate();
 
-		UIManager.Instance.SetESkill(data.ESkillValue, data.ESkillPercent);
-		UIManager.Instance.SetQSkill(data.QSkillValue, data.QSkillPercent);
+		//UIManager.Instance.SetESkill(data.ESkillValue, data.ESkillPercent);
+		//UIManager.Instance.SetQSkill(data.QSkillValue, data.QSkillPercent);
 
 
 		if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -239,20 +251,24 @@ public class MainGirlScrpit : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
-			Inventory.Instance.WeaponItemIn(ItemEnum.WEAPONITEMINDEX.Star1_1_ItemSword);
+			DataManager.Instance.ItemList.AddWeapon(ItemEnum.WEAPONeItemIndex.Star1_1_ItemSword);
+			Inventory.Instance.Refresh(ItemEnum.eItemIndex.Weapon);
+
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha4))
 		{
-			Inventory.Instance.WeaponItemIn(ItemEnum.WEAPONITEMINDEX.Star1_2_ItemGreatSword);
+			DataManager.Instance.ItemList.AddWeapon(ItemEnum.WEAPONeItemIndex.Star1_2_ItemGreatSword);
+			Inventory.Instance.Refresh(ItemEnum.eItemIndex.Weapon);
+
 		}
-		
+
 
 		if (Input.GetKeyDown(KeyCode.I))
 		{
 			UIManager.Instance.Inventory(true);
 			UIManager.Instance.GoField(false);
 
-			Inventory.Instance.InitLeft(data.name, inventoryCam.targetTexture, data.Level, data.ExpPercent,data.HPPercent,data.Attack,data.Shild);
+			//Inventory.Instance.InitLeft(data.UserData.UserName, inventoryCam.targetTexture, data.PlayerLevel, data.PlayerExpPercent(),data.PlayerHpPercent(),data.PlayerBaseDamage, data.PlayerShield);
 
 		}
 
@@ -286,7 +302,7 @@ public class MainGirlScrpit : MonoBehaviour
 					break;
 				case "NPCHeal":
 					NPCObject.GetComponent<NPCHeal>().OpenUIChatWindow();
-					data.HPReset();
+					data.PlayerHpReset();
 					bBarUpdate = true;
 					break;
 			}
@@ -359,6 +375,8 @@ public class MainGirlScrpit : MonoBehaviour
 			case STATE.IdleOut:
 				if( isRun) state = STATE.RunIn;
 				else state = STATE.WalkIn;
+				
+				
 
 				break;
 			case STATE.YawnIn:
@@ -576,8 +594,8 @@ public class MainGirlScrpit : MonoBehaviour
 			case STATE.ESkillIn:
 				SoundManager.Instance.PlayPlayerSoundEffect(1);
 				ani.Play(AniNameList[(int)ANINAMEINDEX.eSkill_Kick]);
-				data.ESkillReset();
-				ESkillCollider.Use(data.Attack + 10, 0.2f);
+			//	data.ESkillReset();
+				ESkillCollider.Use(data.PlayerBaseDamage + 10, 0.2f);
 				state = STATE.ESkillUpdate;
 				break;
 			case STATE.ESkillUpdate:
@@ -592,8 +610,8 @@ public class MainGirlScrpit : MonoBehaviour
 				SoundManager.Instance.PlayPlayerSoundEffect(2);
 
 				ani.Play(AniNameList[(int)ANINAMEINDEX.qSkill_Casting]);
-				data.QSkillReset();
-				QSkillCollider.Use(data.Attack + 20, 1.75f);
+				data.PlayerQSkillReset();
+				QSkillCollider.Use(data.PlayerBaseDamage + 20, 1.75f);
 				state = STATE.QSkillUpdate;
 				break;
 			case STATE.QSkillUpdate:
@@ -670,7 +688,6 @@ public class MainGirlScrpit : MonoBehaviour
 				break;
 		}
 	}
-
 
 
 	private bool MoveControl()
@@ -811,7 +828,6 @@ public class MainGirlScrpit : MonoBehaviour
 	{
 		bBarUpdate = true;
 
-		data.ChangeData(PlayerEnum.PLAYERCHARINDEX.Char_5_0_1_MainGirl, 1);
 
 		state = STATE.IdleIn;
 
@@ -862,7 +878,7 @@ public class MainGirlScrpit : MonoBehaviour
 					Invoke("IK_TwoSlashEffectOn", 0.45f);
 					Invoke("IK_TwoSlashEffectOff", 0.9f);
 					//Debug.Log("OnTwoSlash");
-					weaponCon.Slash(data.Attack + 5, 0.5f);
+					weaponCon.Slash(data.PlayerBaseDamage + 5, 0.5f);
 					ani.Play(twoSlash, 0, 0.0f);
 					return 2;
 				}
@@ -879,7 +895,7 @@ public class MainGirlScrpit : MonoBehaviour
 				Invoke("IK_SlashEffectOn", 0.3f);
 				Invoke("IK_SlashEffectOff", 0.6f);
 
-				weaponCon.Slash(data.Attack, 0.3f);
+				weaponCon.Slash(data.PlayerBaseDamage, 0.3f);
 
 				ani.Play(checkList[0], 0, 0.0f);
 				SoundManager.Instance.PlayPlayerSoundEffect(0);
@@ -937,8 +953,8 @@ public class MainGirlScrpit : MonoBehaviour
 			return;
 		}
 		if (state == STATE.DrawReadIn || state == STATE.DrawReadUpdate || state == STATE.DrawReadOut) return;
-		if (data.EnableESkill())
-			state = STATE.ESkillIn;
+		//if (data.EnableESkill())
+		//	state = STATE.ESkillIn;
 	}
 
 	public void QSkill()
@@ -950,8 +966,8 @@ public class MainGirlScrpit : MonoBehaviour
 			return;
 		}
 		if (state == STATE.DrawReadIn || state == STATE.DrawReadUpdate || state == STATE.DrawReadOut) return;
-		if (data.EnableQSkill())
-			state = STATE.QSkillIn;
+		//if (data.EnableQSkill())
+		//	state = STATE.QSkillIn;
 	}
 
 
@@ -981,12 +997,12 @@ public class MainGirlScrpit : MonoBehaviour
 			return;
 		}
 
-		data.HP = -_dmg;
+		data.PlayerHP = -_dmg;
 		bBarUpdate = true;
 		//Debug.Log(data.HP + "\t" + _dmg);
 		weaponCon.StopCoroutine();
 
-		if ( data.IsDead() )
+		if ( data.PlayerIsDead )
 		{
 			if (AniNameEqual(AniNameList[(int)ANINAMEINDEX.Die1]) == true || AniNameEqual(AniNameList[(int)ANINAMEINDEX.Die2])) return;
 
@@ -1004,20 +1020,19 @@ public class MainGirlScrpit : MonoBehaviour
 
 	public void GetExpGold(int _exp,int _gold)
 	{
-		int prevlevel = data.Level;
-		data.Exp += _exp;
+		int prevlevel = data.PlayerLevel;
+		data.PlayerExp += _exp;
 
-		if (prevlevel != data.Level)
+		if (prevlevel != data.PlayerLevel)
 		{
 			effectList[2].SetActive(true);
 			Invoke("IK_LevelUpEffectOff", 2.0f);
 			SoundManager.Instance.PlayLevelUpSoundEffect();
-
 		}
 		bBarUpdate = true;
 
 		
-		Inventory.Instance.Gold += _gold;
+		DataManager.Instance.UserData.SetGold(_gold,true);
 	}
 	#region Invoke Function
 
@@ -1029,4 +1044,7 @@ public class MainGirlScrpit : MonoBehaviour
 
 	private void IK_LevelUpEffectOff()  { effectList[2].SetActive(false); }
 	#endregion
+
+
+
 }

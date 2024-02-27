@@ -5,7 +5,7 @@ using static ItemEnum;
 [System.Serializable]
 public class ItemWeapon
 {
-	[SerializeField]private WEAPONITEMINDEX index;
+	[SerializeField]private WEAPONeItemIndex index;
 	private WEAPON_OPTION subOption;
 	private int star;
 
@@ -71,7 +71,7 @@ public class ItemWeapon
 		return str;
 	}
 
-	public void Init(WEAPONITEMINDEX _index,int _star, string _mainName, string _mainExplan, string _subExplan, int _attack, string _subOptionType, int _subOptionValue, int _maxBreakThrough)
+	public void Init(WEAPONeItemIndex _index,int _star, string _mainName, string _mainExplan, string _subExplan, int _attack, string _subOptionType, int _subOptionValue, int _maxBreakThrough)
 	{
 		itemSprite = ItemImage.Instance.GetWeapon(_index);
 		index = _index;
@@ -157,32 +157,33 @@ public class ItemWeapon
 		return mainExplan;
 	}
 
-	public static WEAPONITEMINDEX GetItemIndex(int _value)
+
+	public static WEAPONeItemIndex GetItemIndex(int _value)
 	{
-		WEAPONITEMINDEX index = WEAPONITEMINDEX.Star1_1_ItemSword;
+		WEAPONeItemIndex index = WEAPONeItemIndex.Star1_1_ItemSword;
 		switch(_value)
 		{
 			case 0:
-				index = WEAPONITEMINDEX.Star1_1_ItemSword;
+				index = WEAPONeItemIndex.Star1_1_ItemSword;
 				break;
 			case 1:
-				index = WEAPONITEMINDEX.Star1_2_ItemGreatSword;
+				index = WEAPONeItemIndex.Star1_2_ItemGreatSword;
 				break;
 		}
 		return index;
 	}
 
-	public static WEAPONITEMINDEX GetItemRandomIndex()
+	public static WEAPONeItemIndex GetItemRandomIndex()
 	{
 		int min = 0;
 		int max = 2;
 		int randValue = UnityEngine.Random.Range(min, max);
 		switch (randValue)
 		{
-			case 0: return WEAPONITEMINDEX.Star1_1_ItemSword;
-			case 1: return WEAPONITEMINDEX.Star1_2_ItemGreatSword;
+			case 0: return WEAPONeItemIndex.Star1_1_ItemSword;
+			case 1: return WEAPONeItemIndex.Star1_2_ItemGreatSword;
 			default:
-				return WEAPONITEMINDEX.Star1_1_ItemSword;
+				return WEAPONeItemIndex.Star1_1_ItemSword;
 		}
 	}
 }
